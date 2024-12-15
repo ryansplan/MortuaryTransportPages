@@ -140,29 +140,46 @@
 
   // Select the form container
   const formContainer = document.querySelector('.form-container');
-  const button = document.querySelector('.exclude-from-pdf'); // Select the button
 
-  // Hide the button temporarily
-  button.style.display = 'none';
+  // Replace input values with plain text temporarily
+  const inputs = formContainer.querySelectorAll('input, textarea, select');
+  const originalValues = [];
 
-  // Use html2canvas to render the form container as an image
-  html2canvas(formContainer).then((canvas) => {
+  inputs.forEach(input => {
+    originalValues.push({ element: input, value: input.value });
+    const parent = input.parentNode;
+    const text = document.createElement('div');
+    text.textContent = input.value || '-';
+    text.style.marginBottom = '15px';
+    text.style.padding = '10px';
+    text.style.border = '1px solid #ccc';
+    text.style.borderRadius = '4px';
+    text.style.backgroundColor = '#fff';
+    text.style.fontSize = '14px';
+    text.className = 'temporary-text';
+    parent.replaceChild(text, input);
+  });
+
+  // Use html2canvas to capture the updated form
+  html2canvas(formContainer).then(canvas => {
     const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF();
 
-    // Add the image to the PDF
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
-
-    // Scale the canvas to fit the page width while maintaining aspect ratio
     const imgWidth = pageWidth;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
     pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
     pdf.save('First_Call_Log.pdf');
-  }).finally(() => {
-    // Show the button again
-    button.style.display = 'block';
+
+    // Restore original input fields
+    const tempTexts = formContainer.querySelectorAll('.temporary-text');
+    tempTexts.forEach((text, index) => {
+      const original = originalValues[index];
+      const parent = text.parentNode;
+      parent.replaceChild(original.element, text);
+    });
   });
 }
   </script>
