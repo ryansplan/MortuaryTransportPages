@@ -132,37 +132,34 @@
     </form>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
     async function generatePDF() {
       const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-
-      const form = document.getElementById("call-log-form");
-      const data = new FormData(form);
-
-      let y = 20;
-      doc.setFont("Helvetica", "bold");
-      doc.setFontSize(16);
-      doc.text("First Call Log", 105, y, { align: "center" });
-
-      y += 10;
-      doc.setFont("Helvetica", "normal");
-      doc.setFontSize(12);
-
-      for (let [key, value] of data.entries()) {
-        if (key === "critical") {
-          const isCritical = document.getElementById("critical").checked ? "Yes" : "No";
-          doc.text(`Critical Case: ${isCritical}`, 10, y);
-        } else {
-          doc.text(`${key.replace(/-/g, ' ')}: ${value}`, 10, y);
-        }
-        y += 10;
-      }
-
-      doc.save("First_Call_Log.pdf");
+  
+      // Select the form container
+      const formContainer = document.querySelector('.form-container');
+  
+      // Use html2canvas to render the form container as an image
+      html2canvas(formContainer).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+  
+        // Add the image to the PDF
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+  
+        // Scale the canvas to fit the page width while maintaining aspect ratio
+        const imgWidth = pageWidth;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  
+        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        pdf.save('First_Call_Log.pdf');
+      });
     }
   </script>
+  
 </body>
 </html>
 
