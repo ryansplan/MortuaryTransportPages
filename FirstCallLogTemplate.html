@@ -136,28 +136,35 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
     async function generatePDF() {
-      const { jsPDF } = window.jspdf;
-  
-      // Select the form container
-      const formContainer = document.querySelector('.form-container');
-  
-      // Use html2canvas to render the form container as an image
-      html2canvas(formContainer).then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF();
-  
-        // Add the image to the PDF
-        const pageWidth = pdf.internal.pageSize.getWidth();
-        const pageHeight = pdf.internal.pageSize.getHeight();
-  
-        // Scale the canvas to fit the page width while maintaining aspect ratio
-        const imgWidth = pageWidth;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-  
-        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-        pdf.save('First_Call_Log.pdf');
-      });
-    }
+  const { jsPDF } = window.jspdf;
+
+  // Select the form container
+  const formContainer = document.querySelector('.form-container');
+  const button = document.querySelector('.exclude-from-pdf'); // Select the button
+
+  // Hide the button temporarily
+  button.style.display = 'none';
+
+  // Use html2canvas to render the form container as an image
+  html2canvas(formContainer).then((canvas) => {
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF();
+
+    // Add the image to the PDF
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    // Scale the canvas to fit the page width while maintaining aspect ratio
+    const imgWidth = pageWidth;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    pdf.save('First_Call_Log.pdf');
+  }).finally(() => {
+    // Show the button again
+    button.style.display = 'block';
+  });
+}
   </script>
   
 </body>
