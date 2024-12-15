@@ -144,85 +144,58 @@ function formatTimeWithAMPM(time) {
   return `${formattedHour}:${minutes} ${period}`;
 }
 
-    async function generatePDF() {
+async function generatePDF() {
   const { jsPDF } = window.jspdf;
 
-  // Select the form container
   const formContainer = document.querySelector('.form-container');
-
-  // Replace input values with plain text temporarily
   const inputs = formContainer.querySelectorAll('input, textarea, select');
   const originalValues = [];
 
   inputs.forEach(input => {
-    // Skip non-checkbox inputs and handle them separately
+    originalValues.push({ element: input, value: input.value });
+
+    const parent = input.parentNode;
+    const text = document.createElement('div');
+
     if (input.type === 'checkbox') {
-      const isChecked = input.checked ? 'Yes' : 'No';
-
-      // Create a text node only for checkboxes
-      const parent = input.parentNode;
-      const tempText = document.createElement('div');
-      tempText.textContent = isChecked;
-
-      tempText.style.marginBottom = '15px';
-      tempText.style.padding = '10px';
-      tempText.style.border = '1px solid #ccc';
-      tempText.style.borderRadius = '4px';
-      tempText.style.backgroundColor = '#fff';
-      tempText.style.fontSize = '14px';
-      tempText.className = 'temporary-text';
-
-      // Replace the checkbox only
-      originalValues.push({ element: input, value: isChecked });
-      parent.replaceChild(tempText, input);
+      text.textContent = input.checked ? 'Yes' : 'No';
+    } else if (input.type === 'time' && input.value) {
+      text.textContent = formatTimeWithAMPM(input.value);
     } else {
-      // Handle normal inputs
-      originalValues.push({ element: input, value: input.value });
-      const parent = input.parentNode;
-
-      const tempText = document.createElement('div');
-      tempText.textContent = input.value || '-';
-
-      tempText.style.marginBottom = '15px';
-      tempText.style.padding = '10px';
-      tempText.style.border = '1px solid #ccc';
-      tempText.style.borderRadius = '4px';
-      tempText.style.backgroundColor = '#fff';
-      tempText.style.fontSize = '14px';
-      tempText.className = 'temporary-text';
-
-      parent.replaceChild(tempText, input);
+      text.textContent = input.value || '-';
     }
+
+    text.style.marginBottom = '15px';
+    text.style.padding = '10px';
+    text.style.border = '1px solid #ccc';
+    text.style.borderRadius = '4px';
+    text.style.backgroundColor = '#fff';
+    text.style.fontSize = '14px';
+    text.className = 'temporary-text';
+    parent.replaceChild(text, input);
   });
 
-  // Hide the Generate PDF button
   const generateButton = document.querySelector('.exclude-from-pdf');
   generateButton.style.display = 'none';
 
-  // Use html2canvas to capture the updated form
-  html2canvas(formContainer, {
-    scale: 2, // Higher resolution
-    useCORS: true
-  }).then(canvas => {
+  html2canvas(formContainer, { scale: 2, useCORS: true }).then(canvas => {
     const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF();
-
     const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
     const imgWidth = pageWidth;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
     pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
     pdf.save('First_Call_Log.pdf');
 
-    // Restore original input fields
     const tempTexts = formContainer.querySelectorAll('.temporary-text');
-    tempTexts.forEach((tempText, index) => {
+    tempTexts.forEach((text, index) => {
       const original = originalValues[index];
-      const parent = tempText.parentNode;
-      parent.replaceChild(original.element, tempText);
+      const parent = text.parentNode;
+      parent.replaceChild(original.element, text);
     });
 
-    // Show the Generate PDF button again
     generateButton.style.display = 'block';
   });
 }
