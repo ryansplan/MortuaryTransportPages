@@ -135,6 +135,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
+
+function formatTimeWithAMPM(time) {
+  const [hours, minutes] = time.split(':');
+  const hour = parseInt(hours, 10);
+  const period = hour >= 12 ? 'PM' : 'AM';
+  const formattedHour = hour % 12 || 12; // Convert 0 or 12 to 12 AM/PM
+  return `${formattedHour}:${minutes} ${period}`;
+}
+
     async function generatePDF() {
   const { jsPDF } = window.jspdf;
 
