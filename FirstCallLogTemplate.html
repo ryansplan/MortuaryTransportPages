@@ -160,6 +160,10 @@
     parent.replaceChild(text, input);
   });
 
+   // Hide the Generate PDF button
+   const generateButton = document.querySelector('.exclude-from-pdf');
+  generateButton.style.display = 'none';
+
   // Use html2canvas to capture the updated form
   html2canvas(formContainer).then(canvas => {
     const imgData = canvas.toDataURL('image/png');
