@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Call Log</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+    label { display: block; margin: 10px 0 5px; }
+    input, textarea, select { width: 100%; padding: 8px; margin-bottom: 10px; }
+    .checkbox { display: inline-block; width: auto; }
+  </style>
+</head>
+<body>
+  <h1>First Call Log</h1>
+  <form id="call-log-form">
+    <h2>Caller Information</h2>
+    <label for="date">Date (MM/DD/YYYY):</label>
+    <input type="date" id="date" name="date">
+    <label for="call-time">Call Time (HH:MM AM/PM):</label>
+    <input type="time" id="call-time" name="call-time">
+    <label for="caller-name">Caller Name:</label>
+    <input type="text" id="caller-name" name="caller-name">
+    <label for="contact-number">Contact Number:</label>
+    <input type="tel" id="contact-number" name="contact-number">
+    <label for="call-type">Call Type:</label>
+    <select id="call-type" name="call-type">
+      <option value="pickup">Pickup</option>
+      <option value="delivery">Delivery</option>
+      <option value="emergency">Emergency</option>
+      <option value="other">Other</option>
+    </select>
+    <h2>Transport Details</h2>
+    <label for="transport-number">Transport #:</label>
+    <input type="text" id="transport-number" name="transport-number">
+    <label for="deceased-name">Name of Deceased:</label>
+    <input type="text" id="deceased-name" name="deceased-name">
+    <label for="weight">Weight (lbs/kg):</label>
+    <input type="number" id="weight" name="weight">
+    <label>Critical Case:</label>
+    <input type="checkbox" id="critical" name="critical" value="Yes" class="checkbox"> Yes
+    <label for="notes">Notes:</label>
+    <textarea id="notes" name="notes"></textarea>
+    <button type="button" onclick="generatePDF()">Download PDF</button>
+  </form>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    async function generatePDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.setFont("Helvetica");
+      doc.setFontSize(12);
+
+      const form = document.getElementById('call-log-form');
+      const data = new FormData(form);
+      let y = 10;
+      for (let [key, value] of data.entries()) {
+        doc.text(`${key}: ${value}`, 10, y);
+        y += 10;
+      }
+
+      doc.save('First_Call_Log.pdf');
+    }
+  </script>
+  <script>
+    async function generatePDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+  
+    const form = document.getElementById("call-log-form");
+    const data = new FormData(form);
+  
+    let y = 10;
+  
+    // Add form data to the PDF
+    for (let [key, value] of data.entries()) {
+      if (key === "critical") {
+        // Handle the Critical Case checkbox
+        const isCritical = document.getElementById("critical").checked ? "Yes" : "No";
+        doc.text(`Critical Case: ${isCritical}`, 10, y);
+      } else {
+        doc.text(`${key}: ${value}`, 10, y);
+      }
+      y += 10;
+    }
+  
+    // Explicitly handle the checkbox if not part of FormData
+    if (!data.has("critical")) {
+      doc.text(`Critical Case: No`, 10, y);
+      y += 10;
+    }
+  
+    doc.save("First_Call_Log.pdf");
+  }
+  </script>
+</body>
+</html>
