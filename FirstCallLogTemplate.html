@@ -146,28 +146,44 @@
   const originalValues = [];
 
   inputs.forEach(input => {
-    originalValues.push({ element: input, value: input.value });
-
-    const parent = input.parentNode;
-    const text = document.createElement('div');
-
-    // Special handling for checkboxes
+    // Skip non-checkbox inputs and handle them separately
     if (input.type === 'checkbox') {
-      text.textContent = input.checked ? 'Yes' : 'No';
+      const isChecked = input.checked ? 'Yes' : 'No';
+
+      // Create a text node only for checkboxes
+      const parent = input.parentNode;
+      const tempText = document.createElement('div');
+      tempText.textContent = isChecked;
+
+      tempText.style.marginBottom = '15px';
+      tempText.style.padding = '10px';
+      tempText.style.border = '1px solid #ccc';
+      tempText.style.borderRadius = '4px';
+      tempText.style.backgroundColor = '#fff';
+      tempText.style.fontSize = '14px';
+      tempText.className = 'temporary-text';
+
+      // Replace the checkbox only
+      originalValues.push({ element: input, value: isChecked });
+      parent.replaceChild(tempText, input);
     } else {
-      text.textContent = input.value || '-';
+      // Handle normal inputs
+      originalValues.push({ element: input, value: input.value });
+      const parent = input.parentNode;
+
+      const tempText = document.createElement('div');
+      tempText.textContent = input.value || '-';
+
+      tempText.style.marginBottom = '15px';
+      tempText.style.padding = '10px';
+      tempText.style.border = '1px solid #ccc';
+      tempText.style.borderRadius = '4px';
+      tempText.style.backgroundColor = '#fff';
+      tempText.style.fontSize = '14px';
+      tempText.className = 'temporary-text';
+
+      parent.replaceChild(tempText, input);
     }
-
-    // Apply styles to mimic input fields
-    text.style.marginBottom = '15px';
-    text.style.padding = '10px';
-    text.style.border = '1px solid #ccc';
-    text.style.borderRadius = '4px';
-    text.style.backgroundColor = '#fff';
-    text.style.fontSize = '14px';
-    text.className = 'temporary-text';
-
-    parent.replaceChild(text, input);
   });
 
   // Hide the Generate PDF button
@@ -177,13 +193,12 @@
   // Use html2canvas to capture the updated form
   html2canvas(formContainer, {
     scale: 2, // Higher resolution
-    useCORS: true // Handle cross-origin images if present
+    useCORS: true
   }).then(canvas => {
     const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF();
 
     const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
     const imgWidth = pageWidth;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
@@ -192,10 +207,10 @@
 
     // Restore original input fields
     const tempTexts = formContainer.querySelectorAll('.temporary-text');
-    tempTexts.forEach((text, index) => {
+    tempTexts.forEach((tempText, index) => {
       const original = originalValues[index];
-      const parent = text.parentNode;
-      parent.replaceChild(original.element, text);
+      const parent = tempText.parentNode;
+      parent.replaceChild(original.element, tempText);
     });
 
     // Show the Generate PDF button again
