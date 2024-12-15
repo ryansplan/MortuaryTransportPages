@@ -160,6 +160,14 @@
     parent.replaceChild(text, input);
   });
 
+
+  // Special handling for checkboxes
+  if (input.type === 'checkbox') {
+      text.textContent = input.checked ? 'Yes' : 'No';
+    } else {
+      text.textContent = input.value || '-';
+    }
+
    // Hide the Generate PDF button
    const generateButton = document.querySelector('.exclude-from-pdf');
   generateButton.style.display = 'none';
