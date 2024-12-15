@@ -145,6 +145,21 @@ function formatTimeWithAMPM(time) {
   return `${formattedHour}:${minutes} ${period}`;
 }
 
+function shareForm() {
+  if (navigator.share) {
+    navigator.share({
+      title: 'First Call Log Form',
+      text: 'Fill out this First Call Log form using the link below:',
+      url: window.location.href, // The current page URL
+    })
+    .then(() => console.log('Form shared successfully'))
+    .catch((error) => console.error('Error sharing form:', error));
+  } else {
+    alert('Web Share API is not supported in this browser.');
+  }
+}
+
+
 async function generatePDF() {
   const { jsPDF } = window.jspdf;
 
