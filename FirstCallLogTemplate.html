@@ -8,7 +8,7 @@
     /* General Styles */
     body {
       font-family: 'Arial', sans-serif;
-      font-size: 10px; /* Small font size for compactness */
+      font-size: 10px;
       margin: 0;
       padding: 0;
       background-color: #f9f9f9;
@@ -19,7 +19,7 @@
       text-align: center;
       color: #0056b3;
       margin: 5px 0;
-      font-size: 14px; /* Smaller font size for the title */
+      font-size: 14px;
     }
 
     .form-container {
@@ -39,20 +39,24 @@
     .section-title {
       font-weight: bold;
       margin-bottom: 5px;
-      font-size: 12px; /* Compact section headers */
+      font-size: 12px;
       color: #0056b3;
       text-decoration: underline;
     }
 
-    .field-label {
+    label {
       font-weight: bold;
-      display: inline-block;
-      width: 40%;
+      display: block;
+      margin-bottom: 3px;
     }
 
-    .field-value {
-      display: inline-block;
-      width: 55%;
+    input, textarea {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      padding: 5px;
+      font-size: 10px;
+      margin-bottom: 5px;
     }
 
     .signature-field {
@@ -69,6 +73,22 @@
     .signature-field input[readonly] {
       cursor: default;
     }
+
+    button {
+      background-color: #0056b3;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+      display: block;
+      margin: 10px auto;
+    }
+
+    button:hover {
+      background-color: #003f7f;
+    }
   </style>
 </head>
 <body>
@@ -77,37 +97,58 @@
     <!-- Caller Information -->
     <div class="section">
       <div class="section-title">Organization/Caller Information</div>
-      <div><span class="field-label">Funeral Home:</span> <span class="field-value">[Funeral Home Name]</span></div>
-      <div><span class="field-label">Address:</span> <span class="field-value">[Funeral Home Address]</span></div>
-      <div><span class="field-label">Contact Number:</span> <span class="field-value">[Contact Number]</span></div>
-      <div><span class="field-label">Date of Call:</span> <span class="field-value">[MM/DD/YYYY]</span></div>
-      <div><span class="field-label">Call Time:</span> <span class="field-value">[HH:MM AM/PM]</span></div>
-      <div><span class="field-label">Caller's Name:</span> <span class="field-value">[Caller's Name]</span></div>
-      <div><span class="field-label">Call Type:</span> <span class="field-value">[Transport Type]</span></div>
+      <label for="funeral-home">Funeral Home:</label>
+      <input type="text" id="funeral-home" placeholder="Enter funeral home name">
+
+      <label for="funeral-home-address">Address:</label>
+      <input type="text" id="funeral-home-address" placeholder="Enter address">
+
+      <label for="contact-number">Contact Number:</label>
+      <input type="tel" id="contact-number" placeholder="Enter contact number">
+
+      <label for="date-of-call">Date of Call:</label>
+      <input type="date" id="date-of-call">
+
+      <label for="call-time">Call Time:</label>
+      <input type="time" id="call-time">
+
+      <label for="callers-name">Caller's Name:</label>
+      <input type="text" id="callers-name" placeholder="Enter caller's name">
+
+      <label for="call-type">Call Type:</label>
+      <input type="text" id="call-type" placeholder="Enter call type">
     </div>
 
     <!-- Deceased Details -->
     <div class="section">
       <div class="section-title">Deceased Details</div>
-      <div><span class="field-label">Name:</span> <span class="field-value">[Deceased's Name]</span></div>
-      <div><span class="field-label">Location:</span> <span class="field-value">[Location of Deceased]</span></div>
-      <div><span class="field-label">Address:</span> <span class="field-value">[Address of Deceased]</span></div>
-      <div><span class="field-label">Date of Death:</span> <span class="field-value">[Date of Death]</span></div>
-      <div><span class="field-label">Weight:</span> <span class="field-value">[Body Size/Weight]</span></div>
-      <div><span class="field-label">Notes:</span> <span class="field-value">[Additional Notes]</span></div>
+      <label for="deceased-name">Name:</label>
+      <input type="text" id="deceased-name" placeholder="Enter deceased's name">
+
+      <label for="deceased-location">Location:</label>
+      <input type="text" id="deceased-location" placeholder="Enter location of deceased">
+
+      <label for="deceased-address">Address:</label>
+      <input type="text" id="deceased-address" placeholder="Enter address of deceased">
+
+      <label for="death-date">Date of Death:</label>
+      <input type="text" id="death-date" placeholder="Enter date of death">
+
+      <label for="weight">Weight:</label>
+      <input type="text" id="weight" placeholder="Enter weight or size">
+
+      <label for="notes">Notes:</label>
+      <textarea id="notes" placeholder="Enter additional notes"></textarea>
     </div>
 
     <!-- Signatures -->
     <div class="section">
       <div class="section-title">Signatures</div>
-      <div class="signature-field">
-        <label for="requester-signature">Requester's Signature:</label>
-        <input type="text" id="requester-signature" readonly placeholder="Sign here">
-      </div>
-      <div class="signature-field">
-        <label for="pickup-signature">Pickup Signature:</label>
-        <input type="text" id="pickup-signature" readonly placeholder="Sign here">
-      </div>
+      <label for="requester-signature">Requester's Signature:</label>
+      <input type="text" id="requester-signature" placeholder="Requester signs here">
+
+      <label for="pickup-signature">Pickup Signature:</label>
+      <input type="text" id="pickup-signature" placeholder="Pickup representative signs here">
     </div>
   </div>
 
@@ -120,6 +161,16 @@
       const { jsPDF } = window.jspdf;
       const pdfContent = document.getElementById("pdf-content");
 
+      // Convert input fields to plain text for the PDF
+      const inputs = pdfContent.querySelectorAll("input, textarea");
+      inputs.forEach((input) => {
+        const parent = input.parentNode;
+        const span = document.createElement("span");
+        span.textContent = input.value || "-";
+        parent.replaceChild(span, input);
+      });
+
+      // Generate PDF
       html2canvas(pdfContent, { scale: 2, useCORS: true }).then((canvas) => {
         const pdf = new jsPDF({
           unit: "mm",
@@ -127,7 +178,7 @@
         });
 
         const imgData = canvas.toDataURL("image/png");
-        const imgWidth = 190; // Fit within A4 width
+        const imgWidth = 190;
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
         pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
@@ -137,6 +188,7 @@
   </script>
 </body>
 </html>
+
 
 
 
