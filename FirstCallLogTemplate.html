@@ -133,11 +133,59 @@
       <label for="deceased-name">Name:</label>
       <input type="text" id="deceased-name" placeholder="Enter deceased's name"><br>
 
-      <label for="deceased-location">Location:</label>
-      <input type="text" id="deceased-location" placeholder="Enter location of deceased (e.g., Hospital, Residence, Nursing Home, Airport)"><br>
+    <!-- Deceased Location -->
+<label for="deceased-location">Deceased's Location:</label>
+<select id="deceased-location" onchange="handleLocationChange()">
+  <option value="" disabled selected>Select location type</option>
+  <option value="residence">Residence</option>
+  <option value="hospital">Hospital</option>
+  <option value="nursing-home">Nursing Home</option>
+  <option value="airport">Airport</option>
+  <option value="other">Other</option>
+</select><br>
 
-      <label for="deceased-address">Address:</label>
-      <input type="text" id="deceased-address" placeholder="Enter address of deceased"><br>
+<div id="additional-fields" style="margin-top: 10px;"></div>
+
+<script>
+  function handleLocationChange() {
+    const locationType = document.getElementById("deceased-location").value;
+    const additionalFields = document.getElementById("additional-fields");
+
+    // Clear previous fields
+    additionalFields.innerHTML = "";
+
+    if (locationType === "residence") {
+      additionalFields.innerHTML = `
+        <label for="residence-address">Residence Address:</label>
+        <input type="text" id="residence-address" placeholder="Enter residence address"><br>
+      `;
+    } else if (locationType === "hospital") {
+      additionalFields.innerHTML = `
+        <label for="hospital-address">Hospital Address:</label>
+        <input type="text" id="hospital-address" placeholder="Enter hospital address"><br>
+        <label for="hospital-room">Room Number:</label>
+        <input type="text" id="hospital-room" placeholder="Enter room number"><br>
+      `;
+    } else if (locationType === "nursing-home") {
+      additionalFields.innerHTML = `
+        <label for="nursing-home-address">Nursing Home Address:</label>
+        <input type="text" id="nursing-home-address" placeholder="Enter nursing home address"><br>
+      `;
+    } else if (locationType === "airport") {
+      additionalFields.innerHTML = `
+        <label for="airport-name">Airport Name:</label>
+        <input type="text" id="airport-name" placeholder="Enter airport name"><br>
+        <label for="airport-terminal">Terminal/Gate:</label>
+        <input type="text" id="airport-terminal" placeholder="Enter terminal or gate"><br>
+      `;
+    } else if (locationType === "other") {
+      additionalFields.innerHTML = `
+        <label for="other-location">Describe Location:</label>
+        <input type="text" id="other-location" placeholder="Enter location details"><br>
+      `;
+    }
+  }
+</script>
 
       <label for="death-date">Date of Death:</label>
       <input type="text" id="death-date" placeholder="Enter date of death"><br>
