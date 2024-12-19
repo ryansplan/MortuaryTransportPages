@@ -182,6 +182,7 @@ async function generatePDF() {
   const inputs = formContainer.querySelectorAll('input, textarea, select');
   const originalValues = [];
 
+  // Temporarily replace input fields with plain text for rendering
   inputs.forEach(input => {
     originalValues.push({ element: input, value: input.value });
 
@@ -209,6 +210,7 @@ async function generatePDF() {
   const generateButton = document.querySelector('.exclude-from-pdf');
   generateButton.style.display = 'none';
 
+  // Use html2canvas to capture the form
   html2canvas(formContainer, { scale: 2, useCORS: true }).then(canvas => {
     const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF();
@@ -217,9 +219,25 @@ async function generatePDF() {
     const imgWidth = pageWidth;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    let position = 0;
+
+    // Handle content that exceeds one page
+    if (imgHeight <= pageHeight) {
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    } else {
+      while (position < imgHeight) {
+        pdf.addImage(imgData, 'PNG', 0, position * -1, imgWidth, imgHeight);
+        position += pageHeight;
+
+        if (position < imgHeight) {
+          pdf.addPage();
+        }
+      }
+    }
+
     pdf.save('First_Call_Log.pdf');
 
+    // Restore original input fields
     const tempTexts = formContainer.querySelectorAll('.temporary-text');
     tempTexts.forEach((text, index) => {
       const original = originalValues[index];
@@ -230,6 +248,7 @@ async function generatePDF() {
     generateButton.style.display = 'block';
   });
 }
+
   </script>
   
 </body>
