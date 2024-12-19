@@ -97,7 +97,7 @@
         <h2>Funeral Home/Caller Information</h2>
         <label for="funeral-home">Funeral Home Requesting Transport:</label>
         <input type="text" id="funeral-home" name="funeral-home">
-        <label for="funeral-home-address">Funeral Home/Morgue Address:</label>
+        <label for="funeral-home-address">Funeral Home Address:</label>
         <input type="text" id="funeral-home-address" name="funeral-home-address">
         <label for="contact-number">Contact Number:</label>
         <input type="tel" id="contact-number" name="contact-number">
@@ -121,17 +121,19 @@
       <div class="section">
         <h2>Deceased Details</h2>
         <label for="deceased-name">Name of Deceased:</label>
-        <input type="text" id="deceased-name" name="deceased-name">
+        <input type="text" id="deceased-name" name="deceased-name" placeholder="The name of the deceased being transported">
         <label for="deceased-location">Location of Deceased:</label>
-        <input type="text" id="deceased-location" name="deceased-location">
+        <input type="text" id="deceased-location" name="deceased-location" placeholder="Pickup location, e.g., Hospital, Residence, Nursing Home, Airport" >
+        <label for="deceased-address">Address of Deceased:</label>
+        <input type="text" id="deceased-address" name="deceased-address" placeholder="Full address for pickup" >
         <label for="death-date">Date of Death:</label>
-        <input type="text" id="death-date" name="death-date">
+        <input type="text" id="death-date" name="death-date" placeholder="Date deceased died" >
         <label for="weight">Body Size or Weight (lbs/kg):</label>
-        <input type="text" id="weight" name="weight">
-        <label for="obstacles-precautions">Obstacles/Precautions:</label>
-        <input type="text" id="obstacles-precautions" name="obstacles-precautions">
-        <label for="poc">Point of Contact with Deceased:</label>
-        <input type="text" id="poc" name="poc">
+        <input type="text" id="weight" name="weight" placeholder="Relevant for transport logistics (type of equipment and personnel needed)" >
+        <label for="obstacles-precautions">Obstacles/Precautions with Deceased:</label>
+        <input type="text" id="obstacles-precautions" name="obstacles-precautions" placeholder="Indicate any obstacles or precautions with deceased (e.g., upstairs, body condition) " >
+        <label for="poc">Point of Contact/Next of Kin with Deceased:</label>
+        <input type="text" id="poc" name="poc" placeholder=" " >
         <label>Critical Case:</label>
         <input type="checkbox" id="critical" name="critical" value="Yes" class="checkbox"> 
         <label>Biohazard:</label>
@@ -139,7 +141,7 @@
         <label>Veteran:</label>
         <input type="checkbox" id="veteran" name="veteran" value="Yes" class="checkbox"> 
         <label for="notes">Notes:</label>
-        <textarea id="notes" name="notes" class="notes"></textarea>
+        <textarea id="notes" name="notes" class="notes"placeholder=" "></textarea>
       </div>
 
       <!-- Submit Button -->
