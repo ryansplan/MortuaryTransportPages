@@ -8,7 +8,7 @@
     /* General Styles */
     body {
       font-family: 'Arial', sans-serif;
-      font-size: 12px; /* Adjust font size for compactness */
+      font-size: 12px;
       margin: 0;
       padding: 0;
       background-color: #f9f9f9;
@@ -18,11 +18,11 @@
     h1, h2 {
       text-align: center;
       color: #0056b3;
-      margin: 10px 0; /* Reduce margin */
+      margin: 10px 0;
     }
 
     h1 {
-      font-size: 18px; /* Smaller font size for the title */
+      font-size: 18px;
     }
 
     h2 {
@@ -31,7 +31,8 @@
 
     /* Form Container */
     .form-container {
-      max-width: 700px; /* Adjust width for better scaling */
+      width: 100%;
+      max-width: 700px;
       background-color: #ffffff;
       margin: 20px auto;
       padding: 15px 20px;
@@ -55,13 +56,7 @@
       font-size: 12px;
     }
 
-    .checkbox {
-      display: inline-block;
-      width: auto;
-      margin-right: 10px;
-    }
-
-    /* Button Styling */
+    /* Buttons */
     button {
       background-color: #0056b3;
       color: #fff;
@@ -80,14 +75,14 @@
 
     /* Additional Styles */
     .section {
-      margin-bottom: 15px; /* Reduced spacing between sections */
+      margin-bottom: 15px;
     }
 
     .notes {
-      height: 80px; /* Adjusted for compactness */
+      height: 80px;
     }
 
-    /* Page Break for PDF */
+    /* Page Breaks for PDF */
     .page-break {
       page-break-before: always;
     }
@@ -123,7 +118,7 @@
       </div>
 
       <!-- Deceased Details -->
-      <div class="section">
+      <div class="section page-break">
         <h2>Deceased Details</h2>
         <label for="deceased-name">Name of Deceased:</label>
         <input type="text" id="deceased-name" name="deceased-name" placeholder="The name of the deceased being transported">
@@ -136,7 +131,7 @@
         <label for="weight">Body Size or Weight (lbs/kg):</label>
         <input type="text" id="weight" name="weight" placeholder="Relevant for type of equipment and personnel needed">
         <label for="notes">Notes:</label>
-        <textarea id="notes" name="notes" class="notes" placeholder="Additional critical instructions (e.g., biohazard concerns, parking restrictions)"></textarea>
+        <textarea id="notes" name="notes" class="notes" placeholder="Additional critical instructions"></textarea>
       </div>
 
       <!-- Signatures -->
@@ -156,92 +151,28 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
-
-function formatTimeWithAMPM(time) {
-  const [hours, minutes] = time.split(':');
-  const hour = parseInt(hours, 10);
-  const period = hour >= 12 ? 'PM' : 'AM';
-  const formattedHour = hour % 12 || 12; // Convert 0 or 12 to 12 AM/PM
-  return `${formattedHour}:${minutes} ${period}`;
-}
-
 async function generatePDF() {
   const { jsPDF } = window.jspdf;
 
   const formContainer = document.querySelector('.form-container');
-  const inputs = formContainer.querySelectorAll('input, textarea, select');
-  const originalValues = [];
 
-  // Replace input fields with plain text for rendering
-  inputs.forEach(input => {
-    originalValues.push({ element: input, value: input.value });
-
-    const parent = input.parentNode;
-    const text = document.createElement('div');
-
-    if (input.type === 'checkbox') {
-      text.textContent = input.checked ? 'Yes' : 'No';
-    } else if (input.type === 'time' && input.value) {
-      text.textContent = formatTimeWithAMPM(input.value);
-    } else {
-      text.textContent = input.value || '-';
-    }
-
-    text.style.marginBottom = '15px';
-    text.style.padding = '5px';
-    text.style.border = '1px solid #ccc';
-    text.style.borderRadius = '4px';
-    text.style.backgroundColor = '#fff';
-    text.style.fontSize = '10px'; // Smaller font size
-    text.className = 'temporary-text';
-    parent.replaceChild(text, input);
-  });
-
-  const generateButton = document.querySelector('.exclude-from-pdf');
-  generateButton.style.display = 'none';
-
-  html2canvas(formContainer, { scale: 1.2, useCORS: true }).then(canvas => {
+  html2canvas(formContainer, { scale: 1.5, useCORS: true }).then((canvas) => {
     const pdf = new jsPDF({
-      orientation: 'portrait',
       unit: 'mm',
       format: 'a4',
     });
 
     const imgData = canvas.toDataURL('image/png');
-    const imgWidth = 190; // Width for A4 with standard margin
+    const imgWidth = 190; // Fit within A4 width
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    const pageHeight = pdf.internal.pageSize.height;
 
-    let heightLeft = imgHeight;
-    let position = 10; // Initial margin-top
-
-    // Split content across multiple pages
-    while (heightLeft > 0) {
-      pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-      if (heightLeft > 0) {
-        pdf.addPage();
-        position = 0; // Reset position for the next page
-      }
-    }
-
+    pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
     pdf.save('First_Call_Log.pdf');
-
-    // Restore original input fields
-    const tempTexts = formContainer.querySelectorAll('.temporary-text');
-    tempTexts.forEach((text, index) => {
-      const original = originalValues[index];
-      const parent = text.parentNode;
-      parent.replaceChild(original.element, text);
-    });
-
-    generateButton.style.display = 'block';
   });
 }
-
   </script>
-  
 </body>
 </html>
+
 
 
