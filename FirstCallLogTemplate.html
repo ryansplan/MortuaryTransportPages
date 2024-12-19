@@ -182,7 +182,7 @@ async function generatePDF() {
   const inputs = formContainer.querySelectorAll('input, textarea, select');
   const originalValues = [];
 
-  // Temporarily replace input fields with plain text for rendering
+  // Replace input fields with plain text for rendering
   inputs.forEach(input => {
     originalValues.push({ element: input, value: input.value });
 
@@ -202,7 +202,7 @@ async function generatePDF() {
     text.style.border = '1px solid #ccc';
     text.style.borderRadius = '4px';
     text.style.backgroundColor = '#fff';
-    text.style.fontSize = '14px';
+    text.style.fontSize = '12px'; // Adjust font size
     text.className = 'temporary-text';
     parent.replaceChild(text, input);
   });
@@ -210,28 +210,29 @@ async function generatePDF() {
   const generateButton = document.querySelector('.exclude-from-pdf');
   generateButton.style.display = 'none';
 
-  // Use html2canvas to capture the form
-  html2canvas(formContainer, { scale: 2, useCORS: true }).then(canvas => {
+  html2canvas(formContainer, { scale: 1.5, useCORS: true }).then(canvas => {
+    const pdf = new jsPDF({
+      unit: 'mm',
+      format: 'a4',
+    });
+
     const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF();
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
-    const imgWidth = pageWidth;
+    const imgWidth = pageWidth - 20; // Add margin
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    const marginTop = 10;
 
-    let position = 0;
+    let position = marginTop;
 
-    // Handle content that exceeds one page
-    if (imgHeight <= pageHeight) {
-      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-    } else {
-      while (position < imgHeight) {
-        pdf.addImage(imgData, 'PNG', 0, position * -1, imgWidth, imgHeight);
-        position += pageHeight;
+    // Split content across multiple pages
+    while (position < imgHeight) {
+      pdf.addImage(imgData, 'PNG', 10, position * -1, imgWidth, imgHeight);
 
-        if (position < imgHeight) {
-          pdf.addPage();
-        }
+      position += pageHeight;
+
+      if (position < imgHeight) {
+        pdf.addPage();
       }
     }
 
