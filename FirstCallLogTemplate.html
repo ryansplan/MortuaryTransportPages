@@ -46,12 +46,13 @@
 
     label {
       font-weight: bold;
-      display: block;
-      margin-bottom: 3px;
+      display: inline-block;
+      width: 40%;
     }
 
     input, textarea {
-      width: 100%;
+      display: inline-block;
+      width: 55%;
       border: 1px solid #ccc;
       border-radius: 3px;
       padding: 5px;
@@ -98,57 +99,57 @@
     <div class="section">
       <div class="section-title">Organization/Caller Information</div>
       <label for="funeral-home">Funeral Home:</label>
-      <input type="text" id="funeral-home" placeholder="Enter funeral home name">
+      <input type="text" id="funeral-home" placeholder="Enter funeral home name"><br>
 
       <label for="funeral-home-address">Address:</label>
-      <input type="text" id="funeral-home-address" placeholder="Enter address">
+      <input type="text" id="funeral-home-address" placeholder="Enter address"><br>
 
       <label for="contact-number">Contact Number:</label>
-      <input type="tel" id="contact-number" placeholder="Enter contact number">
+      <input type="tel" id="contact-number" placeholder="Enter contact number"><br>
 
       <label for="date-of-call">Date of Call:</label>
-      <input type="date" id="date-of-call">
+      <input type="date" id="date-of-call"><br>
 
       <label for="call-time">Call Time:</label>
-      <input type="time" id="call-time">
+      <input type="time" id="call-time"><br>
 
       <label for="callers-name">Caller's Name:</label>
-      <input type="text" id="callers-name" placeholder="Enter caller's name">
+      <input type="text" id="callers-name" placeholder="Enter caller's name"><br>
 
       <label for="call-type">Call Type:</label>
-      <input type="text" id="call-type" placeholder="Enter call type">
+      <input type="text" id="call-type" placeholder="Enter call type"><br>
     </div>
 
     <!-- Deceased Details -->
     <div class="section">
       <div class="section-title">Deceased Details</div>
       <label for="deceased-name">Name:</label>
-      <input type="text" id="deceased-name" placeholder="Enter deceased's name">
+      <input type="text" id="deceased-name" placeholder="Enter deceased's name"><br>
 
       <label for="deceased-location">Location:</label>
-      <input type="text" id="deceased-location" placeholder="Enter location of deceased">
+      <input type="text" id="deceased-location" placeholder="Enter location of deceased"><br>
 
       <label for="deceased-address">Address:</label>
-      <input type="text" id="deceased-address" placeholder="Enter address of deceased">
+      <input type="text" id="deceased-address" placeholder="Enter address of deceased"><br>
 
       <label for="death-date">Date of Death:</label>
-      <input type="text" id="death-date" placeholder="Enter date of death">
+      <input type="text" id="death-date" placeholder="Enter date of death"><br>
 
       <label for="weight">Weight:</label>
-      <input type="text" id="weight" placeholder="Enter weight or size">
+      <input type="text" id="weight" placeholder="Enter weight or size"><br>
 
       <label for="notes">Notes:</label>
-      <textarea id="notes" placeholder="Enter additional notes"></textarea>
+      <textarea id="notes" placeholder="Enter additional notes"></textarea><br>
     </div>
 
     <!-- Signatures -->
     <div class="section">
       <div class="section-title">Signatures</div>
       <label for="requester-signature">Requester's Signature:</label>
-      <input type="text" id="requester-signature" placeholder="Requester signs here">
+      <input type="text" id="requester-signature" placeholder="Requester signs here"><br>
 
       <label for="pickup-signature">Pickup Signature:</label>
-      <input type="text" id="pickup-signature" placeholder="Pickup representative signs here">
+      <input type="text" id="pickup-signature" placeholder="Pickup representative signs here"><br>
     </div>
   </div>
 
@@ -161,7 +162,6 @@
       const { jsPDF } = window.jspdf;
       const pdfContent = document.getElementById("pdf-content");
 
-      // Generate PDF
       html2canvas(pdfContent, { scale: 2, useCORS: true }).then((canvas) => {
         const pdf = new jsPDF({
           unit: "mm",
@@ -169,7 +169,7 @@
         });
 
         const imgData = canvas.toDataURL("image/png");
-        const imgWidth = 190;
+        const imgWidth = 190; // Fit within A4 width
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
         pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
@@ -179,6 +179,7 @@
   </script>
 </body>
 </html>
+
 
 
 
