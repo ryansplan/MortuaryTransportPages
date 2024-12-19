@@ -187,12 +187,12 @@ async function generatePDF() {
       text.textContent = input.value || '-';
     }
 
-    text.style.marginBottom = '15px';
+    text.style.marginBottom = '20px';
     text.style.padding = '10px';
     text.style.border = '1px solid #ccc';
     text.style.borderRadius = '4px';
     text.style.backgroundColor = '#fff';
-    text.style.fontSize = '12px'; // Adjust font size
+    text.style.fontSize = '10px'; // Adjust font size
     text.className = 'temporary-text';
     parent.replaceChild(text, input);
   });
