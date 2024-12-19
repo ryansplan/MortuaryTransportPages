@@ -8,171 +8,136 @@
     /* General Styles */
     body {
       font-family: 'Arial', sans-serif;
-      font-size: 12px;
+      font-size: 10px; /* Small font size for compactness */
       margin: 0;
       padding: 0;
       background-color: #f9f9f9;
       color: #333;
     }
 
-    h1, h2 {
+    h1 {
       text-align: center;
       color: #0056b3;
-      margin: 10px 0;
+      margin: 5px 0;
+      font-size: 14px; /* Smaller font size for the title */
     }
 
-    h1 {
-      font-size: 18px;
-    }
-
-    h2 {
-      font-size: 16px;
-    }
-
-    /* Form Container */
     .form-container {
       width: 100%;
-      max-width: 700px;
-      background-color: #ffffff;
-      margin: 20px auto;
-      padding: 15px 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-    }
-
-    label {
-      font-weight: bold;
-      margin: 5px 0;
-      display: block;
-    }
-
-    input, textarea, select {
-      width: 100%;
-      padding: 8px;
-      margin: 5px 0 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-      font-size: 12px;
-    }
-
-    /* Buttons */
-    button {
-      background-color: #0056b3;
-      color: #fff;
-      border: none;
-      padding: 8px 15px;
+      max-width: 600px;
+      margin: 10px auto;
+      padding: 10px;
+      background-color: #fff;
       border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-      display: block;
-      margin: 20px auto 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    button:hover {
-      background-color: #003f7f;
-    }
-
-    /* Additional Styles */
     .section {
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
-    .notes {
-      height: 80px;
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 12px; /* Compact section headers */
+      color: #0056b3;
+      text-decoration: underline;
     }
 
-    /* Page Breaks for PDF */
-    .page-break {
-      page-break-before: always;
+    .field-label {
+      font-weight: bold;
+      display: inline-block;
+      width: 40%;
+    }
+
+    .field-value {
+      display: inline-block;
+      width: 55%;
+    }
+
+    .signature-field {
+      margin-top: 10px;
+    }
+
+    .signature-field input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      background-color: transparent;
+    }
+
+    .signature-field input[readonly] {
+      cursor: default;
     }
   </style>
 </head>
 <body>
   <h1>First Call Transport Log</h1>
-  <div class="form-container">
-    <form id="call-log-form">
-      <!-- Caller Information -->
-      <div class="section">
-        <h2>Organization/Caller Information</h2>
-        <label for="funeral-home">Funeral Home Requesting Transport:</label>
-        <input type="text" id="funeral-home" name="funeral-home" placeholder="Name of organization requesting transport">
-        <label for="funeral-home-address">Funeral Home Address:</label>
-        <input type="text" id="funeral-home-address" name="funeral-home-address" placeholder="Address of organization requesting transport">
-        <label for="contact-number">Contact Number:</label>
-        <input type="tel" id="contact-number" name="contact-number" placeholder="Phone number of organization">
-        <label for="date">Date of Call (MM/DD/YYYY):</label>
-        <input type="date" id="date" name="date">
-        <label for="call-time">Call Time (HH:MM AM/PM):</label>
-        <input type="time" id="call-time" name="call-time">
-        <label for="caller-name">Caller's Name:</label>
-        <input type="text" id="caller-name" name="caller-name" placeholder="Name of caller">
-        <label for="call-type">Call Type:</label>
-        <select id="call-type" name="call-type">
-          <option value="transport">Transport</option>
-          <option value="emergency transport">Emergency Transport</option>
-          <option value="pickup">Pickup</option>
-          <option value="delivery">Delivery</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
+  <div class="form-container" id="pdf-content">
+    <!-- Caller Information -->
+    <div class="section">
+      <div class="section-title">Organization/Caller Information</div>
+      <div><span class="field-label">Funeral Home:</span> <span class="field-value">[Funeral Home Name]</span></div>
+      <div><span class="field-label">Address:</span> <span class="field-value">[Funeral Home Address]</span></div>
+      <div><span class="field-label">Contact Number:</span> <span class="field-value">[Contact Number]</span></div>
+      <div><span class="field-label">Date of Call:</span> <span class="field-value">[MM/DD/YYYY]</span></div>
+      <div><span class="field-label">Call Time:</span> <span class="field-value">[HH:MM AM/PM]</span></div>
+      <div><span class="field-label">Caller's Name:</span> <span class="field-value">[Caller's Name]</span></div>
+      <div><span class="field-label">Call Type:</span> <span class="field-value">[Transport Type]</span></div>
+    </div>
 
-      <!-- Deceased Details -->
-      <div class="section page-break">
-        <h2>Deceased Details</h2>
-        <label for="deceased-name">Name of Deceased:</label>
-        <input type="text" id="deceased-name" name="deceased-name" placeholder="The name of the deceased being transported">
-        <label for="deceased-location">Location of Deceased:</label>
-        <input type="text" id="deceased-location" name="deceased-location" placeholder="Pickup location, e.g., Hospital, Residence, Nursing Home, Airport">
-        <label for="deceased-address">Address of Deceased:</label>
-        <input type="text" id="deceased-address" name="deceased-address" placeholder="Full address for pickup">
-        <label for="death-date">Date of Death:</label>
-        <input type="text" id="death-date" name="death-date" placeholder="Date deceased died">
-        <label for="weight">Body Size or Weight (lbs/kg):</label>
-        <input type="text" id="weight" name="weight" placeholder="Relevant for type of equipment and personnel needed">
-        <label for="notes">Notes:</label>
-        <textarea id="notes" name="notes" class="notes" placeholder="Additional critical instructions"></textarea>
-      </div>
+    <!-- Deceased Details -->
+    <div class="section">
+      <div class="section-title">Deceased Details</div>
+      <div><span class="field-label">Name:</span> <span class="field-value">[Deceased's Name]</span></div>
+      <div><span class="field-label">Location:</span> <span class="field-value">[Location of Deceased]</span></div>
+      <div><span class="field-label">Address:</span> <span class="field-value">[Address of Deceased]</span></div>
+      <div><span class="field-label">Date of Death:</span> <span class="field-value">[Date of Death]</span></div>
+      <div><span class="field-label">Weight:</span> <span class="field-value">[Body Size/Weight]</span></div>
+      <div><span class="field-label">Notes:</span> <span class="field-value">[Additional Notes]</span></div>
+    </div>
 
-      <!-- Signatures -->
-      <div class="section page-break">
-        <h2>Signatures</h2>
+    <!-- Signatures -->
+    <div class="section">
+      <div class="section-title">Signatures</div>
+      <div class="signature-field">
         <label for="requester-signature">Requester's Signature:</label>
-        <input type="text" id="requester-signature" name="requester-signature" readonly placeholder="Requester signs here" style="border-bottom: 1px solid #ccc; background-color: #f9f9f9;">
-        <label for="pickup-signature">Pickup Signature:</label>
-        <input type="text" id="pickup-signature" name="pickup-signature" readonly placeholder="Pickup location representative signs here" style="border-bottom: 1px solid #ccc; background-color: #f9f9f9;">
+        <input type="text" id="requester-signature" readonly placeholder="Sign here">
       </div>
-
-      <!-- Submit Button -->
-      <button type="button" class="exclude-from-pdf" onclick="generatePDF()">Download PDF</button>
-    </form>
+      <div class="signature-field">
+        <label for="pickup-signature">Pickup Signature:</label>
+        <input type="text" id="pickup-signature" readonly placeholder="Sign here">
+      </div>
+    </div>
   </div>
+
+  <button onclick="generatePDF()">Download PDF</button>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
-async function generatePDF() {
-  const { jsPDF } = window.jspdf;
+    async function generatePDF() {
+      const { jsPDF } = window.jspdf;
+      const pdfContent = document.getElementById("pdf-content");
 
-  const formContainer = document.querySelector('.form-container');
+      html2canvas(pdfContent, { scale: 2, useCORS: true }).then((canvas) => {
+        const pdf = new jsPDF({
+          unit: "mm",
+          format: "a4",
+        });
 
-  html2canvas(formContainer, { scale: 1.5, useCORS: true }).then((canvas) => {
-    const pdf = new jsPDF({
-      unit: 'mm',
-      format: 'a4',
-    });
+        const imgData = canvas.toDataURL("image/png");
+        const imgWidth = 190; // Fit within A4 width
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    const imgData = canvas.toDataURL('image/png');
-    const imgWidth = 190; // Fit within A4 width
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-    pdf.addImage(imgData, 'PNG', 5, 5, imgWidth, imgHeight);
-    pdf.save('First_Call_Log.pdf');
-  });
-}
+        pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+        pdf.save("First_Call_Log.pdf");
+      });
+    }
   </script>
 </body>
 </html>
+
 
 
 
