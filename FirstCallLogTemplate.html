@@ -98,14 +98,14 @@
     <!-- Caller Information -->
     <div class="section">
       <div class="section-title">Organization/Caller Information</div>
-      <label for="funeral-home">Funeral Home:</label>
-      <input type="text" id="funeral-home" placeholder="Enter funeral home name"><br>
+      <label for="funeral-home">Organization:</label>
+      <input type="text" id="funeral-home" placeholder="Enter name of organization requesting transport"><br>
 
       <label for="funeral-home-address">Address:</label>
-      <input type="text" id="funeral-home-address" placeholder="Enter address"><br>
+      <input type="text" id="funeral-home-address" placeholder="Enter organization's address"><br>
 
       <label for="contact-number">Contact Number:</label>
-      <input type="tel" id="contact-number" placeholder="Enter contact number"><br>
+      <input type="tel" id="contact-number" placeholder="Enter organization's contact number"><br>
 
       <label for="date-of-call">Date of Call:</label>
       <input type="date" id="date-of-call"><br>
@@ -117,7 +117,14 @@
       <input type="text" id="callers-name" placeholder="Enter caller's name"><br>
 
       <label for="call-type">Call Type:</label>
-      <input type="text" id="call-type" placeholder="Enter call type"><br>
+      <select id="call-type">
+      <option value="" disabled selected>Select call type</option>
+      <option value="transport">Transport</option>
+      <option value="emergency-transport">Emergency Transport</option>
+      <option value="family-shuttle">Family Shuttle</option>
+      <option value="flower-delivery">Flower Delivery</option>
+      </select><br>
+
     </div>
 
     <!-- Deceased Details -->
@@ -127,7 +134,7 @@
       <input type="text" id="deceased-name" placeholder="Enter deceased's name"><br>
 
       <label for="deceased-location">Location:</label>
-      <input type="text" id="deceased-location" placeholder="Enter location of deceased"><br>
+      <input type="text" id="deceased-location" placeholder="Enter location of deceased (e.g., Hospital, Residence, Nursing Home, Airport)"><br>
 
       <label for="deceased-address">Address:</label>
       <input type="text" id="deceased-address" placeholder="Enter address of deceased"><br>
@@ -136,10 +143,10 @@
       <input type="text" id="death-date" placeholder="Enter date of death"><br>
 
       <label for="weight">Weight:</label>
-      <input type="text" id="weight" placeholder="Enter weight or size"><br>
+      <input type="text" id="weight" placeholder="Enter deceased's weight or size"><br>
 
       <label for="notes">Notes:</label>
-      <textarea id="notes" placeholder="Enter additional notes"></textarea><br>
+      <textarea id="notes" placeholder="Enter additional notes such as potential parking issues"></textarea><br>
     </div>
 
     <!-- Signatures -->
