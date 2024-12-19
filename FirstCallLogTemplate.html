@@ -172,7 +172,7 @@ async function generatePDF() {
   const inputs = formContainer.querySelectorAll('input, textarea, select');
   const originalValues = [];
 
-  // Replace inputs with plain text for rendering
+  // Replace input fields with plain text for rendering
   inputs.forEach(input => {
     originalValues.push({ element: input, value: input.value });
 
@@ -215,7 +215,7 @@ async function generatePDF() {
     let heightLeft = imgHeight;
     let position = 10; // Initial margin-top
 
-    // Add content to the PDF and handle page breaks
+    // Split content across multiple pages
     while (heightLeft > 0) {
       pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
       heightLeft -= pageHeight;
