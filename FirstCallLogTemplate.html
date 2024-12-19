@@ -8,7 +8,7 @@
     /* General Styles */
     body {
       font-family: 'Arial', sans-serif;
-      line-height: 1.6;
+      font-size: 12px; /* Adjust font size for compactness */
       margin: 0;
       padding: 0;
       background-color: #f9f9f9;
@@ -18,41 +18,41 @@
     h1, h2 {
       text-align: center;
       color: #0056b3;
+      margin: 10px 0; /* Reduce margin */
     }
 
     h1 {
-      margin-top: 20px;
+      font-size: 18px; /* Smaller font size for the title */
     }
 
     h2 {
-      margin-top: 30px;
-      margin-bottom: 10px;
+      font-size: 16px;
     }
 
     /* Form Container */
     .form-container {
-      max-width: 800px;
+      max-width: 700px; /* Adjust width for better scaling */
       background-color: #ffffff;
       margin: 20px auto;
-      padding: 20px 30px;
+      padding: 15px 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
     }
 
     label {
       font-weight: bold;
-      margin-top: 10px;
+      margin: 5px 0;
       display: block;
     }
 
     input, textarea, select {
       width: 100%;
-      padding: 10px;
-      margin: 5px 0 15px;
+      padding: 8px;
+      margin: 5px 0 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
-      font-size: 14px;
+      font-size: 12px;
     }
 
     .checkbox {
@@ -66,10 +66,10 @@
       background-color: #0056b3;
       color: #fff;
       border: none;
-      padding: 10px 20px;
+      padding: 8px 15px;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 14px;
       display: block;
       margin: 20px auto 0;
     }
@@ -80,33 +80,38 @@
 
     /* Additional Styles */
     .section {
-      margin-bottom: 20px;
+      margin-bottom: 15px; /* Reduced spacing between sections */
     }
 
     .notes {
-      height: 100px;
+      height: 80px; /* Adjusted for compactness */
+    }
+
+    /* Page Break for PDF */
+    .page-break {
+      page-break-before: always;
     }
   </style>
 </head>
 <body>
-  <h2>First Call Transport Log</h2>
+  <h1>First Call Transport Log</h1>
   <div class="form-container">
     <form id="call-log-form">
       <!-- Caller Information -->
       <div class="section">
         <h2>Organization/Caller Information</h2>
         <label for="funeral-home">Funeral Home Requesting Transport:</label>
-        <input type="text" id="funeral-home" name="funeral-home" placeholder="Name of organization requesting transport" >
+        <input type="text" id="funeral-home" name="funeral-home" placeholder="Name of organization requesting transport">
         <label for="funeral-home-address">Funeral Home Address:</label>
-        <input type="text" id="funeral-home-address" name="funeral-home-address" placeholder="Address of organization requesting transport" >
+        <input type="text" id="funeral-home-address" name="funeral-home-address" placeholder="Address of organization requesting transport">
         <label for="contact-number">Contact Number:</label>
-        <input type="tel" id="contact-number" name="contact-number" placeholder="Phone number of organization" >
+        <input type="tel" id="contact-number" name="contact-number" placeholder="Phone number of organization">
         <label for="date">Date of Call (MM/DD/YYYY):</label>
         <input type="date" id="date" name="date">
         <label for="call-time">Call Time (HH:MM AM/PM):</label>
         <input type="time" id="call-time" name="call-time">
         <label for="caller-name">Caller's Name:</label>
-        <input type="text" id="caller-name" name="caller-name" placeholder="Name of caller" >
+        <input type="text" id="caller-name" name="caller-name" placeholder="Name of caller">
         <label for="call-type">Call Type:</label>
         <select id="call-type" name="call-type">
           <option value="transport">Transport</option>
@@ -123,40 +128,25 @@
         <label for="deceased-name">Name of Deceased:</label>
         <input type="text" id="deceased-name" name="deceased-name" placeholder="The name of the deceased being transported">
         <label for="deceased-location">Location of Deceased:</label>
-        <input type="text" id="deceased-location" name="deceased-location" placeholder="Pickup location, e.g., Hospital, Residence, Nursing Home, Airport" >
+        <input type="text" id="deceased-location" name="deceased-location" placeholder="Pickup location, e.g., Hospital, Residence, Nursing Home, Airport">
         <label for="deceased-address">Address of Deceased:</label>
-        <input type="text" id="deceased-address" name="deceased-address" placeholder="Full address for pickup" >
+        <input type="text" id="deceased-address" name="deceased-address" placeholder="Full address for pickup">
         <label for="death-date">Date of Death:</label>
-        <input type="text" id="death-date" name="death-date" placeholder="Date deceased died" >
+        <input type="text" id="death-date" name="death-date" placeholder="Date deceased died">
         <label for="weight">Body Size or Weight (lbs/kg):</label>
-        <input type="text" id="weight" name="weight" placeholder="Relevant for type of equipment and personnel needed" >
-        <label for="obstacles-precautions">Obstacles/Precautions with Deceased:</label>
-        <input type="text" id="obstacles-precautions" name="obstacles-precautions" placeholder="Indicate any obstacles or precautions with deceased (e.g., upstairs, body condition) " >
-        <label for="poc">Point of Contact/Next of Kin with Deceased:</label>
-        <input type="text" id="poc" name="poc" placeholder="Contact person at the destination for verification" >
-        <label>Critical Case:</label>
-        <input type="checkbox" id="critical" name="critical" value="Yes" class="checkbox"> 
-        <label>Biohazard:</label>
-        <input type="checkbox" id="biohazard" name="biohazard" value="Yes" class="checkbox"> 
-        <label>Veteran:</label>
-        <input type="checkbox" id="veteran" name="veteran" value="Yes" class="checkbox"> 
+        <input type="text" id="weight" name="weight" placeholder="Relevant for type of equipment and personnel needed">
         <label for="notes">Notes:</label>
-        <textarea id="notes" name="notes" class="notes"placeholder="Additional critical instructions (e.g., biohazard concerns, parking restrictions)"></textarea>
+        <textarea id="notes" name="notes" class="notes" placeholder="Additional critical instructions (e.g., biohazard concerns, parking restrictions)"></textarea>
       </div>
 
-      <!-- Add Signature Section -->
-      <div class="section">
+      <!-- Signatures -->
+      <div class="section page-break">
         <h2>Signatures</h2>
-
-      <!-- Requester's Signature -->
-      <label for="requester-signature">Requester's Signature:</label>
-      <input type="text" id="requester-signature" name="requester-signature" placeholder="Requester signs here" readonly style="border-bottom: 1px solid #ccc; background-color: #f9f9f9;">
-
-      <!-- Pickup Signature -->
-      <label for="pickup-signature">Pickup Signature:</label>
-      <input type="text" id="pickup-signature" name="pickup-signature" placeholder="Pickup location representative signs here" readonly style="border-bottom: 1px solid #ccc; background-color: #f9f9f9;">
+        <label for="requester-signature">Requester's Signature:</label>
+        <input type="text" id="requester-signature" name="requester-signature" readonly placeholder="Requester signs here" style="border-bottom: 1px solid #ccc; background-color: #f9f9f9;">
+        <label for="pickup-signature">Pickup Signature:</label>
+        <input type="text" id="pickup-signature" name="pickup-signature" readonly placeholder="Pickup location representative signs here" style="border-bottom: 1px solid #ccc; background-color: #f9f9f9;">
       </div>
-
 
       <!-- Submit Button -->
       <button type="button" class="exclude-from-pdf" onclick="generatePDF()">Download PDF</button>
