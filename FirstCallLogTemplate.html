@@ -166,7 +166,7 @@ async function generatePDF() {
     const imgWidth = 190; // Fit within A4 width
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+    pdf.addImage(imgData, 'PNG', 5, 5, imgWidth, imgHeight);
     pdf.save('First_Call_Log.pdf');
   });
 }
