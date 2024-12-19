@@ -8,7 +8,7 @@
     /* General Styles */
     body {
       font-family: 'Arial', sans-serif;
-      font-size: 10px;
+      font-size: 10px; /* Small font size for compactness */
       margin: 0;
       padding: 0;
       background-color: #f9f9f9;
@@ -19,7 +19,7 @@
       text-align: center;
       color: #0056b3;
       margin: 5px 0;
-      font-size: 14px;
+      font-size: 14px; /* Smaller font size for the title */
     }
 
     .form-container {
@@ -39,7 +39,7 @@
     .section-title {
       font-weight: bold;
       margin-bottom: 5px;
-      font-size: 12px;
+      font-size: 12px; /* Compact section headers */
       color: #0056b3;
       text-decoration: underline;
     }
@@ -161,15 +161,6 @@
       const { jsPDF } = window.jspdf;
       const pdfContent = document.getElementById("pdf-content");
 
-      // Convert input fields to plain text for the PDF
-      const inputs = pdfContent.querySelectorAll("input, textarea");
-      inputs.forEach((input) => {
-        const parent = input.parentNode;
-        const span = document.createElement("span");
-        span.textContent = input.value || "-";
-        parent.replaceChild(span, input);
-      });
-
       // Generate PDF
       html2canvas(pdfContent, { scale: 2, useCORS: true }).then((canvas) => {
         const pdf = new jsPDF({
@@ -188,6 +179,7 @@
   </script>
 </body>
 </html>
+
 
 
 
