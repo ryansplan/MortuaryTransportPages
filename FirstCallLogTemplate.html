@@ -189,20 +189,22 @@
     `;
   } else if (locationType === "nursing-home") {
     additionalFields.innerHTML = `
-      <label for="nursing-home-address">${window.dynamicTexts.address}:</label>
+      <label for="nursing-home-address">${window.dynamicTexts.address}</label>
       <input type="text" id="nursing-home-address" placeholder="${window.dynamicTexts.enter_address}"><br>
     `;
   } else if (locationType === "body-donation-facility") {
     additionalFields.innerHTML = `
       <label for="donation-facility">${window.dynamicTexts.body_donation_facility}:</label>
       <input type="text" id="donation-facility" placeholder="${window.dynamicTexts.enter_facility_name}"><br>
-      <label for="donation-address">${window.dynamicTexts.donation_address}:</label>
+      <label for="donation-address">${window.dynamicTexts.donation_address}</label>
       <input type="text" id="donation-address" placeholder="${window.dynamicTexts.enter_donation_address}"><br>
     `;
   } else if (locationType === "airport") {
     additionalFields.innerHTML = `
       <label for="airport-name">${window.dynamicTexts.airport_name}:</label>
       <input type="text" id="airport-name" placeholder="${window.dynamicTexts.enter_airport_name}"><br>
+      <label for="airport-address">${window.dynamicTexts.address}</label>
+      <input type="text" id="airport-address" placeholder="${window.dynamicTexts.enter_address}"><br>
       <label for="airport-terminal">${window.dynamicTexts.terminal_or_gate}:</label>
       <input type="text" id="airport-terminal" placeholder="${window.dynamicTexts.enter_terminal_or_gate}"><br>
     `;
@@ -210,6 +212,8 @@
     additionalFields.innerHTML = `
       <label for="other-location">${window.dynamicTexts.describe_location}:</label>
       <input type="text" id="other-location" placeholder="${window.dynamicTexts.enter_location_details}"><br>
+      <label for="other-address">${window.dynamicTexts.address}</label>
+      <input type="text" id="other-address" placeholder="${window.dynamicTexts.enter_address}"><br>
     `;
   }
 }
