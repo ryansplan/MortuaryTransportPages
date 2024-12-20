@@ -175,10 +175,10 @@
     `;
   } else if (locationType === "hospital") {
     additionalFields.innerHTML = `
-      <label for="hospital-address">${window.dynamicTexts.address}</label>
-      <input type="text" id="hospital-address" placeholder="${window.dynamicTexts.enter_address}"><br>
-      <label for="hospital-room">${window.dynamicTexts.hospital_room}</label>
-      <input type="text" id="hospital-room" placeholder="${window.dynamicTexts.enter_room_number}"><br>
+     <label for="hospital-address">${window.dynamicTexts.address}</label>
+     <input type="text" id="hospital-address" placeholder="${window.dynamicTexts.enter_address}"><br>
+     <label for="hospital-room">${window.dynamicTexts.hospital_room}</label>
+     <input type="text" id="hospital-room" placeholder="${window.dynamicTexts.enter_room_number}"><br>
     `;
   } else if (locationType === "nursing-home") {
     additionalFields.innerHTML = `
@@ -187,6 +187,8 @@
     `;
   } else if (locationType === "airport") {
     additionalFields.innerHTML = `
+      <label for="airport-address">${window.dynamicTexts.address}</label>
+      <input type="text" id="airport-address" placeholder="${window.dynamicTexts.enter_address}"><br>
       <label for="airport-name">${window.dynamicTexts.airport_name}</label>
       <input type="text" id="airport-name" placeholder="${window.dynamicTexts.enter_airport_name}"><br>
       <label for="airport-terminal">${window.dynamicTexts.terminal_or_gate}</label>
