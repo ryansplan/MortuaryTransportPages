@@ -190,7 +190,7 @@
         <label for="airport-terminal">Terminal/Gate:</label>
         <input type="text" id="airport-terminal" placeholder="Enter terminal or gate"><br>
       `;
-    if (locationType === "body-donation") {
+    } else if (locationType === "body-donation") {
       additionalFields.innerHTML = `
         <label for="donation-facility">Donation Facility Name:</label>
         <input type="text" id="donation-facility" placeholder="Enter facility name"><br>
@@ -207,7 +207,6 @@
         <label for="special-instructions">Special Instructions:</label>
         <textarea id="special-instructions" placeholder="Enter any special handling instructions"></textarea><br>
       `;
-    }
 
     } else if (locationType === "other") {
       additionalFields.innerHTML = `
