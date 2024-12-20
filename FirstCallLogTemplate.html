@@ -243,10 +243,8 @@
         console.log("Loaded translations:", translations);
   
         const texts = translations[language];
-        console.log("Texts for language:", language, texts);
-  
         if (!texts) {
-          console.error("No translations found for the selected language.");
+          console.error("No translations found for the selected language:", language);
           return;
         }
   
@@ -264,12 +262,12 @@
         // Update dropdown options dynamically
         const callTypeSelect = document.getElementById("call-type");
         callTypeSelect.innerHTML = `
-        <option value="" disabled selected>${texts.select_call_type}</option>
-        <option value="transport">${texts.transport}</option>
-        <option value="emergency-transport">${texts.emergency_transport}</option>
-        <option value="body-donation">${texts.body_donation}</option>
-        <option value="family-shuttle">${texts.family_shuttle}</option>
-        <option value="flower-delivery">${texts.flower_delivery}</option>
+          <option value="" disabled selected>${texts.select_call_type}</option>
+          <option value="transport">${texts.transport}</option>
+          <option value="emergency-transport">${texts.emergency_transport}</option>
+          <option value="body-donation">${texts.body_donation}</option>
+          <option value="family-shuttle">${texts.family_shuttle}</option>
+          <option value="flower-delivery">${texts.flower_delivery}</option>
         `;
   
         // Update deceased details
@@ -298,7 +296,7 @@
         document.querySelector("label[for='requester-signature']").textContent = texts.requester_signature;
         document.querySelector("label[for='pickup-signature']").textContent = texts.pickup_signature;
       } catch (error) {
-        console.error("Error loading translations:", error);
+        console.error("Error loading translations. Check the file path and JSON structure:", error);
       }
     }
   
@@ -309,8 +307,10 @@
     });
   
     // Load default language (English)
-    loadTranslations("en");
-  </script>
+    document.addEventListener("DOMContentLoaded", () => {
+      loadTranslations("en"); // Load default language
+    });
+  </script>  
   
 </body>
   
