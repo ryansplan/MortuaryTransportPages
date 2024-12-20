@@ -23,6 +23,7 @@
     "residence_floor": "Floor",
     "upstairs": "Upstairs",
     "downstairs": "Downstairs",
+    "not_applicable": "Not Applicable",
     "further_obstacles_with_deceased": "Further Obstacles with Deceased",
     "describe_obstacles": "Describe any obstacles (e.g., narrow stairs, dogs on the premises)",
     "enter_address": "Enter in address",
