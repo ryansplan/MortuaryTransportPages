@@ -162,7 +162,7 @@
   <script>
    async function loadTranslations(language) {
   try {
-    const response = await fetch("/path/to/translations.json");
+    const response = await fetch("./pdf_form_translations.json?v=1.0");
     const translations = await response.json();
     window.dynamicTexts = translations[language] || {};
   } catch (error) {
