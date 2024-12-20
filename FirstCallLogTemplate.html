@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>First Call Log - test test</title>
+  <title>First Call Log - Test</title>
   <style>
     /* General Styles */
     body {
       font-family: 'Arial', sans-serif;
-      font-size: 10px; /* Small font size for compactness */
+      font-size: 10px;
       margin: 0;
       padding: 0;
       background-color: #f9f9f9;
@@ -19,7 +19,7 @@
       text-align: center;
       color: #0056b3;
       margin: 5px 0;
-      font-size: 14px; /* Smaller font size for the title */
+      font-size: 14px;
     }
 
     .form-container {
@@ -39,7 +39,7 @@
     .section-title {
       font-weight: bold;
       margin-bottom: 5px;
-      font-size: 12px; /* Compact section headers */
+      font-size: 12px;
       color: #0056b3;
       text-decoration: underline;
     }
@@ -60,19 +60,11 @@
       margin-bottom: 5px;
     }
 
-    .signature-field {
-      margin-top: 10px;
-    }
-
     .signature-field input {
       width: 100%;
       border: none;
       border-bottom: 1px solid #ccc;
       background-color: transparent;
-    }
-
-    .signature-field input[readonly] {
-      cursor: default;
     }
 
     button {
@@ -93,139 +85,57 @@
   </style>
 </head>
 <body>
-  <h1>First Call Transport Log - test</h1>
+  <h1>First Call Transport Log - Test</h1>
   <div class="form-container" id="pdf-content">
-
-     <!-- Language Selector -->
-     <select id="language-selector">
+    <!-- Language Selector -->
+    <select id="language-selector">
       <option value="en" selected>English</option>
       <option value="es">Español</option>
-      <!-- Add more languages as needed -->
     </select>
 
+    <!-- Caller Information -->
+    <div class="section">
+      <div class="section-title">Organization/Caller Information</div>
+      <label for="funeral-home">Organization:</label>
+      <input type="text" id="funeral-home" placeholder="Name of organization requesting transport"><br>
 
-  <!-- Caller Information -->
-  <div class="section">
-  <div class="section-title organization-title">Organization/Caller Information - test</div>
-  <label for="funeral-home">Organization:</label>
-  <input type="text" id="funeral-home" placeholder="Name of organization requesting transport"><br>
+      <label for="funeral-home-address">Address:</label>
+      <input type="text" id="funeral-home-address" placeholder="Enter organization's address"><br>
 
-  <label for="funeral-home-address">Address:</label>
-  <input type="text" id="funeral-home-address" placeholder="Enter organization's address"><br>
+      <label for="contact-number">Contact Number:</label>
+      <input type="tel" id="contact-number" placeholder="Enter organization's contact number"><br>
 
-  <label for="contact-number">Contact Number:</label>
-  <input type="tel" id="contact-number" placeholder="Enter organization's contact number"><br>
+      <label for="date-of-call">Date of Call:</label>
+      <input type="date" id="date-of-call"><br>
 
-  <label for="date-of-call">Date of Call:</label>
-  <input type="date" id="date-of-call"><br>
+      <label for="call-time">Call Time:</label>
+      <input type="time" id="call-time"><br>
 
-  <label for="call-time">Call Time:</label>
-  <input type="time" id="call-time"><br>
+      <label for="callers-name">Caller's Name:</label>
+      <input type="text" id="callers-name" placeholder="Enter caller's name"><br>
 
-  <label for="callers-name">Caller's Name:</label>
-  <input type="text" id="callers-name" placeholder="Enter caller's name"><br>
-
-  <label for="call-type">Call Type:</label>
-  <select id="call-type"></select>
-  </div>
-
+      <label for="call-type">Call Type:</label>
+      <select id="call-type"></select>
+    </div>
 
     <!-- Deceased Details -->
     <div class="section">
-      <div class="section-title deceased-details-title">Deceased Details</div>
+      <div class="section-title">Deceased Details</div>
       <label for="deceased-name">Name:</label>
       <input type="text" id="deceased-name" placeholder="Enter deceased's name"><br>
 
-    <!-- Deceased Location -->
-<label for="deceased-location">Deceased's Location:</label>
-<select id="deceased-location" onchange="handleLocationChange()">
-  <option value="" disabled selected>Select location type</option>
-  <option value="residence">Residence</option>
-  <option value="hospital">Hospital</option>
-  <option value="nursing-home">Nursing Home</option>
-  <option value="body-donation-facility">Body Donation Facility</option>
-  <option value="airport">Airport</option>
-  <option value="other">Other</option>
-</select><br>
-
-<div id="additional-fields" style="margin-top: 10px;"></div>
-
-<script>
-
-function handleLocationChange() {
-  const locationType = document.getElementById("deceased-location").value;
-  const additionalFields = document.getElementById("additional-fields");
-
-  // Clear previous fields
-  additionalFields.innerHTML = "";
-
-  // Define reusable address field
-  const addressFieldHTML = `
-    <label for="location-address">${window.dynamicTexts.address}</label>
-    <input type="text" id="location-address" placeholder="${window.dynamicTexts.enter_address}"><br>
-  `;
-
-  if (locationType === "residence") {
-    additionalFields.innerHTML = `
-      ${addressFieldHTML}
-      <label for="residence-floor">${window.dynamicTexts.residence_floor}</label>
-      <select id="residence-floor">
-        <option value="" disabled selected>${window.dynamicTexts.select_location_type}</option>
-        <option value="upstairs">${window.dynamicTexts.upstairs}</option>
-        <option value="downstairs">${window.dynamicTexts.downstairs}</option>
+      <label for="deceased-location">Deceased's Location:</label>
+      <select id="deceased-location" onchange="handleLocationChange()">
+        <option value="" disabled selected>Select location type</option>
+        <option value="residence">Residence</option>
+        <option value="hospital">Hospital</option>
+        <option value="nursing-home">Nursing Home</option>
+        <option value="body-donation-facility">Body Donation Facility</option>
+        <option value="airport">Airport</option>
+        <option value="other">Other</option>
       </select><br>
-      
-      <label for="obstacles">${window.dynamicTexts.further_obstacles_with_deceased}</label>
-      <textarea id="obstacles" placeholder="${window.dynamicTexts.describe_obstacles}"></textarea><br>
-    `;
-  } else if (locationType === "hospital") {
-    additionalFields.innerHTML = `
-      ${addressFieldHTML}
-      <label for="hospital-room">${window.dynamicTexts.hospital_room}</label>
-      <input type="text" id="hospital-room" placeholder="${window.dynamicTexts.enter_room_number}"><br>
-    `;
-  } else if (locationType === "nursing-home") {
-    additionalFields.innerHTML = `
-      ${addressFieldHTML}
-    `;
-  } else if (locationType === "airport") {
-    additionalFields.innerHTML = `
-      <label for="airport-address">${window.dynamicTexts.airport_address}</label>
-      <input type="text" id="airport-address" placeholder="${window.dynamicTexts.enter_address}"><br>
-      <label for="airport-name">${window.dynamicTexts.airport_name}</label>
-      <input type="text" id="airport-name" placeholder="${window.dynamicTexts.enter_airport_name}"><br>
-      <label for="airport-terminal">${window.dynamicTexts.terminal_or_gate}</label>
-      <input type="text" id="airport-terminal" placeholder="${window.dynamicTexts.enter_terminal_or_gate}"><br>
-    `;
-  } else if (locationType === "body-donation-facility") {
-    additionalFields.innerHTML = `
-      <label for="donation-address">${window.dynamicTexts.donation_address}</label>
-      <input type="text" id="donation-address" placeholder="${window.dynamicTexts.enter_donation_address}"><br>
-      <label for="donation-facility">${window.dynamicTexts.body_donation_facility}</label>
-      <input type="text" id="donation-facility" placeholder="${window.dynamicTexts.enter_facility_name}"><br>
-    `;
-  } else if (locationType === "other") {
-    additionalFields.innerHTML = `
-      <label for="other-location">${window.dynamicTexts.describe_location}</label>
-      <input type="text" id="other-location" placeholder="${window.dynamicTexts.enter_location_details}"><br>
-    `;
-  }
-}
 
-
-
-
-</script>
-
-
-      <label for="death-date">Date of Death:</label>
-      <input type="text" id="death-date" placeholder="Enter date of death"><br>
-
-      <label for="weight">Weight:</label>
-      <input type="text" id="weight" placeholder="Enter deceased's weight or size"><br>
-
-      <label for="notes">Notes:</label>
-      <textarea id="notes" placeholder="Enter additional notes such as potential parking issues"></textarea><br>
+      <div id="additional-fields" style="margin-top: 10px;"></div>
     </div>
 
     <!-- Signatures -->
@@ -240,93 +150,39 @@ function handleLocationChange() {
   </div>
 
   <button onclick="generatePDF()">Download PDF</button>
-  
+
   <script>
-    // Load translations dynamically
     async function loadTranslations(language) {
       try {
         const response = await fetch("/MortuaryTransportPages/pdf_form_translations.json");
         const translations = await response.json();
-  
-        const texts = translations[language];
-        if (!texts) {
-          console.error("No translations found for the selected language:", language);
-          return;
-        }
-
-        // Store translations globally
-        window.dynamicTexts = texts;
-  
-        // Update elements with translations
-        document.querySelector("h1").textContent = texts.header_title;
-        document.querySelector(".organization-title").textContent = texts.organization_title;
-        document.querySelector("label[for='funeral-home']").textContent = texts.funeral_home;
-        document.querySelector("label[for='funeral-home-address']").textContent = texts.address;
-        document.querySelector("label[for='contact-number']").textContent = texts.contact_number;
-        document.querySelector("label[for='date-of-call']").textContent = texts.date_of_call;
-        document.querySelector("label[for='call-time']").textContent = texts.call_time;
-        document.querySelector("label[for='callers-name']").textContent = texts.callers_name;
-        document.querySelector("label[for='call-type']").textContent = texts.call_type;
-  
-        // Update dropdown options dynamically
-        const callTypeSelect = document.getElementById("call-type");
-        callTypeSelect.innerHTML = `
-          <option value="" disabled selected>${texts.select_call_type}</option>
-          <option value="transport">${texts.transport}</option>
-          <option value="emergency-transport">${texts.emergency_transport}</option>
-          <option value="body-donation">${texts.body_donation}</option>
-          <option value="family-shuttle">${texts.family_shuttle}</option>
-          <option value="flower-delivery">${texts.flower_delivery}</option>
-        `;
-  
-        // Update deceased details
-        document.querySelector(".deceased-details-title").textContent = texts.deceased_details_title;
-        document.querySelector("label[for='deceased-name']").textContent = texts.deceased_name;
-        document.querySelector("label[for='deceased-location']").textContent = texts.deceased_location;
-  
-        // Update location dropdown
-        const locationSelect = document.getElementById("deceased-location");
-        locationSelect.innerHTML = `
-          <option value="" disabled selected>${texts.select_location_type}</option>
-          <option value="residence">${texts.residence}</option>
-          <option value="hospital">${texts.hospital}</option>
-          <option value="nursing-home">${texts.nursing_home}</option>
-          <option value="airport">${texts.airport}</option>
-          <option value="body-donation">${texts.body_donation}</option>
-          <option value="other">${texts.other}</option>
-        `;
-  
-        document.querySelector("label[for='death-date']").textContent = texts.death_date;
-        document.querySelector("label[for='weight']").textContent = texts.weight;
-        document.querySelector("label[for='notes']").textContent = texts.notes;
-  
-        // Update signature section
-        document.querySelector(".signatures-title").textContent = texts.signatures_title;
-        document.querySelector("label[for='requester-signature']").textContent = texts.requester_signature;
-        document.querySelector("label[for='pickup-signature']").textContent = texts.pickup_signature;
-  
-        console.log(`Translations for ${language} applied.`);
+        window.dynamicTexts = translations[language] || {};
       } catch (error) {
-        console.error("Error loading translations. Check the file path and JSON structure:", error);
+        console.error("Error loading translations:", error);
       }
     }
-  
-    // Listen for language changes
-    document.getElementById("language-selector").addEventListener("change", function () {
-  loadTranslations(this.value).then(() => {
-    // Refresh the additional fields to reflect the new language
-    handleLocationChange();
-  });
-});
-  
-    // Load default language (English)
-    document.addEventListener("DOMContentLoaded", () => {
-      loadTranslations("en");
+
+    function handleLocationChange() {
+      const locationType = document.getElementById("deceased-location").value;
+      const additionalFields = document.getElementById("additional-fields");
+
+      additionalFields.innerHTML = "";
+
+      if (locationType === "residence") {
+        additionalFields.innerHTML = `
+          <label for="residence-floor">Floor:</label>
+          <select id="residence-floor">
+            <option value="upstairs">Upstairs</option>
+            <option value="downstairs">Downstairs</option>
+          </select><br>
+        `;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      await loadTranslations("en");
     });
   </script>
-  
-</body>
-  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
@@ -334,24 +190,16 @@ function handleLocationChange() {
       const { jsPDF } = window.jspdf;
       const pdfContent = document.getElementById("pdf-content");
 
-      html2canvas(pdfContent, { scale: 2, useCORS: true }).then((canvas) => {
-        const pdf = new jsPDF({
-          unit: "mm",
-          format: "a4",
-        });
-
+      html2canvas(pdfContent, { scale: 2 }).then((canvas) => {
+        const pdf = new jsPDF();
         const imgData = canvas.toDataURL("image/png");
-        const imgWidth = 190; // Fit within A4 width
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-        pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+        pdf.addImage(imgData, "PNG", 10, 10, 190, (canvas.height * 190) / canvas.width);
         pdf.save("First_Call_Log.pdf");
       });
     }
   </script>
 </body>
 </html>
-
 
 
 
