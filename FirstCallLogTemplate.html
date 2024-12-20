@@ -170,6 +170,8 @@
 
   if (locationType === "residence") {
     additionalFields.innerHTML = `
+       <label for="residence-address">${window.dynamicTexts.donation_address}:</label>
+      <input type="text" id="residence-address" placeholder="${window.dynamicTexts.enter_address}"><br>
       <label for="residence-floor">${window.dynamicTexts.residence_floor}:</label>
       <select id="residence-floor">
         <option value="upstairs">${window.dynamicTexts.upstairs}</option>
