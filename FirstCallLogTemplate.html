@@ -240,7 +240,6 @@
       try {
         const response = await fetch("/MortuaryTransportPages/pdf_form_translations.json");
         const translations = await response.json();
-        console.log("Loaded translations:", translations);
   
         const texts = translations[language];
         if (!texts) {
@@ -295,6 +294,8 @@
         document.querySelector(".signatures-title").textContent = texts.signatures_title;
         document.querySelector("label[for='requester-signature']").textContent = texts.requester_signature;
         document.querySelector("label[for='pickup-signature']").textContent = texts.pickup_signature;
+  
+        console.log(`Translations for ${language} applied.`);
       } catch (error) {
         console.error("Error loading translations. Check the file path and JSON structure:", error);
       }
@@ -302,15 +303,14 @@
   
     // Listen for language changes
     document.getElementById("language-selector").addEventListener("change", function () {
-      console.log("Language changed to:", this.value);
       loadTranslations(this.value);
     });
   
     // Load default language (English)
     document.addEventListener("DOMContentLoaded", () => {
-      loadTranslations("en"); // Load default language
+      loadTranslations("en");
     });
-  </script>  
+  </script>
   
 </body>
   
