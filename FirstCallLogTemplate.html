@@ -138,10 +138,12 @@
       <div id="additional-fields" style="margin-top: 10px;"></div>
 
       <label for="biohazard" style="display: inline-block; width: auto;">
-        <input type="checkbox" id="biohazard"> <span id="biohazard-label">${window.dynamicTexts.biohazard}</span>
+        <input type="checkbox" id="biohazard">
+        <span id="biohazard-label"></span>
       </label>
       <label for="veteran" style="display: inline-block; width: auto; margin-left: 15px;">
-        <input type="checkbox" id="veteran"> <span id="veteran-label">${window.dynamicTexts.veteran}</span>
+        <input type="checkbox" id="veteran">
+        <span id="veteran-label"></span>
       </label>
     </div>
     
@@ -165,6 +167,14 @@
     const response = await fetch("./pdf_form_translations.json?v=1.0");
     const translations = await response.json();
     window.dynamicTexts = translations[language] || {};
+
+ // Set the checkbox labels dynamically
+    document.getElementById("biohazard-label").textContent =
+    window.dynamicTexts.biohazard || "Biohazard";
+    document.getElementById("veteran-label").textContent =
+    window.dynamicTexts.veteran || "Veteran";
+
+
   } catch (error) {
     console.error("Error loading translations:", error);
   }
@@ -201,21 +211,21 @@ function handleLocationChange() {
     `;
   } else if (locationType === "nursing-home") {
     additionalFields.innerHTML = `
-      <label for="nursing-home-address">${window.dynamicTexts.address || "Address"}:</label>
+      <label for="nursing-home-address">${window.dynamicTexts.address || "Address"}</label>
       <input type="text" id="nursing-home-address" placeholder="${window.dynamicTexts.enter_address || "Enter address"}"><br>
     `;
   } else if (locationType === "body-donation-facility") {
     additionalFields.innerHTML = `
-      <label for="donation-facility">${window.dynamicTexts.body_donation_facility || "Body Donation Facility"}:</label>
+      <label for="donation-facility">${window.dynamicTexts.body_donation_facility || "Body Donation Facility"}</label>
       <input type="text" id="donation-facility" placeholder="${window.dynamicTexts.enter_facility_name || "Enter facility name"}"><br>
-      <label for="donation-address">${window.dynamicTexts.donation_address || "Donation Address"}:</label>
+      <label for="donation-address">${window.dynamicTexts.donation_address || "Donation Address"}</label>
       <input type="text" id="donation-address" placeholder="${window.dynamicTexts.enter_donation_address || "Enter donation address"}"><br>
     `;
   } else if (locationType === "airport") {
     additionalFields.innerHTML = `
       <label for="airport-name">${window.dynamicTexts.airport_name || "Name of Airport"}:</label>
       <input type="text" id="airport-name" placeholder="${window.dynamicTexts.enter_airport_name || "Enter airport name"}"><br>
-      <label for="airport-address">${window.dynamicTexts.address || "Address"}:</label>
+      <label for="airport-address">${window.dynamicTexts.address || "Address"}</label>
       <input type="text" id="airport-address" placeholder="${window.dynamicTexts.enter_address || "Enter address"}"><br>
       <label for="airport-terminal">${window.dynamicTexts.terminal_or_gate || "Terminal or Gate"}:</label>
       <input type="text" id="airport-terminal" placeholder="${window.dynamicTexts.enter_terminal_or_gate || "Enter terminal or gate"}"><br>
@@ -224,7 +234,7 @@ function handleLocationChange() {
     additionalFields.innerHTML = `
       <label for="other-location">${window.dynamicTexts.describe_location || "Describe Location"}:</label>
       <input type="text" id="other-location" placeholder="${window.dynamicTexts.enter_location_details || "Enter location details"}"><br>
-      <label for="other-address">${window.dynamicTexts.address || "Address"}:</label>
+      <label for="other-address">${window.dynamicTexts.address || "Address"}</label>
       <input type="text" id="other-address" placeholder="${window.dynamicTexts.enter_address || "Enter address"}"><br>
     `;
   }
