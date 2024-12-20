@@ -104,42 +104,35 @@
     </select>
 
 
-    <!-- Caller Information -->
-    <div class="section">
-      <div class="section-title">Organization/Caller Information</div>
-      <label for="funeral-home">Organization:</label>
-      <input type="text" id="funeral-home" placeholder="Name of organization requesting transport"><br>
+  <!-- Caller Information -->
+  <div class="section">
+  <div class="section-title organization-title">Organization/Caller Information</div>
+  <label for="funeral-home">Organization:</label>
+  <input type="text" id="funeral-home" placeholder="Name of organization requesting transport"><br>
 
-      <label for="funeral-home-address">Address:</label>
-      <input type="text" id="funeral-home-address" placeholder="Enter organization's address"><br>
+  <label for="funeral-home-address">Address:</label>
+  <input type="text" id="funeral-home-address" placeholder="Enter organization's address"><br>
 
-      <label for="contact-number">Contact Number:</label>
-      <input type="tel" id="contact-number" placeholder="Enter organization's contact number"><br>
+  <label for="contact-number">Contact Number:</label>
+  <input type="tel" id="contact-number" placeholder="Enter organization's contact number"><br>
 
-      <label for="date-of-call">Date of Call:</label>
-      <input type="date" id="date-of-call"><br>
+  <label for="date-of-call">Date of Call:</label>
+  <input type="date" id="date-of-call"><br>
 
-      <label for="call-time">Call Time:</label>
-      <input type="time" id="call-time"><br>
+  <label for="call-time">Call Time:</label>
+  <input type="time" id="call-time"><br>
 
-      <label for="callers-name">Caller's Name:</label>
-      <input type="text" id="callers-name" placeholder="Enter caller's name"><br>
+  <label for="callers-name">Caller's Name:</label>
+  <input type="text" id="callers-name" placeholder="Enter caller's name"><br>
 
-      <label for="call-type">Call Type:</label>
-      <select id="call-type">
-      <option value="" disabled selected>Select call type</option>
-      <option value="transport">Transport</option>
-      <option value="emergency-transport">Emergency Transport</option>
-      <option value="body-donation">Body Donation</option>
-      <option value="family-shuttle">Family Shuttle</option>
-      <option value="flower-delivery">Flower Delivery</option>
-      </select><br>
+  <label for="call-type">Call Type:</label>
+  <select id="call-type"></select>
+  </div>
 
-    </div>
 
     <!-- Deceased Details -->
     <div class="section">
-      <div class="section-title">Deceased Details</div>
+      <div class="section-title deceased-details-title">Deceased Details</div>
       <label for="deceased-name">Name:</label>
       <input type="text" id="deceased-name" placeholder="Enter deceased's name"><br>
 
@@ -268,15 +261,15 @@
         document.querySelector("label[for='callers-name']").textContent = texts.callers_name;
         document.querySelector("label[for='call-type']").textContent = texts.call_type;
   
-        // Update dropdown options
+        // Update dropdown options dynamically
         const callTypeSelect = document.getElementById("call-type");
         callTypeSelect.innerHTML = `
-          <option value="" disabled selected>${texts.select_call_type}</option>
-          <option value="transport">${texts.transport}</option>
-          <option value="emergency-transport">${texts.emergency_transport}</option>
-          <option value="body-donation">${texts.body_donation}</option>
-          <option value="family-shuttle">${texts.family_shuttle}</option>
-          <option value="flower-delivery">${texts.flower_delivery}</option>
+        <option value="" disabled selected>${texts.select_call_type}</option>
+        <option value="transport">${texts.transport}</option>
+        <option value="emergency-transport">${texts.emergency_transport}</option>
+        <option value="body-donation">${texts.body_donation}</option>
+        <option value="family-shuttle">${texts.family_shuttle}</option>
+        <option value="flower-delivery">${texts.flower_delivery}</option>
         `;
   
         // Update deceased details
