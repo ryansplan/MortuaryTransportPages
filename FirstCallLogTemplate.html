@@ -243,69 +243,82 @@
   
   <script>
     // Load translations dynamically
-  async function loadTranslations(language) {
-    const response = await fetch("/MortuaryTransportPages/pdf_form_translations.json");
-    const translations = await response.json();
-
-    const texts = translations[language];
-
-    document.querySelector("h1").textContent = texts.header_title;
-    document.querySelector(".organization-title").textContent = texts.organization_title;
-    document.querySelector("label[for='funeral-home']").textContent = texts.funeral_home;
-    document.querySelector("label[for='funeral-home-address']").textContent = texts.address;
-    document.querySelector("label[for='contact-number']").textContent = texts.contact_number;
-    document.querySelector("label[for='date-of-call']").textContent = texts.date_of_call;
-    document.querySelector("label[for='call-time']").textContent = texts.call_time;
-    document.querySelector("label[for='callers-name']").textContent = texts.callers_name;
-    document.querySelector("label[for='call-type']").textContent = texts.call_type;
-
-    // Update dropdown
-    const callTypeSelect = document.getElementById("call-type");
-    callTypeSelect.innerHTML = `
-      <option value="" disabled selected>${texts.select_call_type}</option>
-      <option value="transport">${texts.transport}</option>
-      <option value="emergency-transport">${texts.emergency_transport}</option>
-      <option value="body-donation">${texts.body_donation}</option>
-      <option value="family-shuttle">${texts.family_shuttle}</option>
-      <option value="flower-delivery">${texts.flower_delivery}</option>
-    `;
-
-    // Update deceased details section
-    document.querySelector(".deceased-details-title").textContent = texts.deceased_details_title;
-    document.querySelector("label[for='deceased-name']").textContent = texts.deceased_name;
-    document.querySelector("label[for='deceased-location']").textContent = texts.deceased_location;
-
-    // Update location dropdown
-    const locationSelect = document.getElementById("deceased-location");
-    locationSelect.innerHTML = `
-      <option value="" disabled selected>${texts.select_location_type}</option>
-      <option value="residence">${texts.residence}</option>
-      <option value="hospital">${texts.hospital}</option>
-      <option value="nursing-home">${texts.nursing_home}</option>
-      <option value="airport">${texts.airport}</option>
-      <option value="body-donation">${texts.body_donation}</option>
-      <option value="other">${texts.other}</option>
-    `;
-
-    document.querySelector("label[for='death-date']").textContent = texts.death_date;
-    document.querySelector("label[for='weight']").textContent = texts.weight;
-    document.querySelector("label[for='notes']").textContent = texts.notes;
-
-    // Update signature section
-    document.querySelector(".signatures-title").textContent = texts.signatures_title;
-    document.querySelector("label[for='requester-signature']").textContent = texts.requester_signature;
-    document.querySelector("label[for='pickup-signature']").textContent = texts.pickup_signature;
-  }
-
-  // Listen for language change
-  document.getElementById("language-selector").addEventListener("change", function () {
-    loadTranslations(this.value);
-  });
-
-  // Load default language (e.g., English)
-  loadTranslations("en");
-
-</script>
+    async function loadTranslations(language) {
+      try {
+        const response = await fetch("/MortuaryTransportPages/pdf_form_translations.json");
+        const translations = await response.json();
+        console.log("Loaded translations:", translations);
+  
+        const texts = translations[language];
+        console.log("Texts for language:", language, texts);
+  
+        if (!texts) {
+          console.error("No translations found for the selected language.");
+          return;
+        }
+  
+        // Update elements with translations
+        document.querySelector("h1").textContent = texts.header_title;
+        document.querySelector(".organization-title").textContent = texts.organization_title;
+        document.querySelector("label[for='funeral-home']").textContent = texts.funeral_home;
+        document.querySelector("label[for='funeral-home-address']").textContent = texts.address;
+        document.querySelector("label[for='contact-number']").textContent = texts.contact_number;
+        document.querySelector("label[for='date-of-call']").textContent = texts.date_of_call;
+        document.querySelector("label[for='call-time']").textContent = texts.call_time;
+        document.querySelector("label[for='callers-name']").textContent = texts.callers_name;
+        document.querySelector("label[for='call-type']").textContent = texts.call_type;
+  
+        // Update dropdown options
+        const callTypeSelect = document.getElementById("call-type");
+        callTypeSelect.innerHTML = `
+          <option value="" disabled selected>${texts.select_call_type}</option>
+          <option value="transport">${texts.transport}</option>
+          <option value="emergency-transport">${texts.emergency_transport}</option>
+          <option value="body-donation">${texts.body_donation}</option>
+          <option value="family-shuttle">${texts.family_shuttle}</option>
+          <option value="flower-delivery">${texts.flower_delivery}</option>
+        `;
+  
+        // Update deceased details
+        document.querySelector(".deceased-details-title").textContent = texts.deceased_details_title;
+        document.querySelector("label[for='deceased-name']").textContent = texts.deceased_name;
+        document.querySelector("label[for='deceased-location']").textContent = texts.deceased_location;
+  
+        // Update location dropdown
+        const locationSelect = document.getElementById("deceased-location");
+        locationSelect.innerHTML = `
+          <option value="" disabled selected>${texts.select_location_type}</option>
+          <option value="residence">${texts.residence}</option>
+          <option value="hospital">${texts.hospital}</option>
+          <option value="nursing-home">${texts.nursing_home}</option>
+          <option value="airport">${texts.airport}</option>
+          <option value="body-donation">${texts.body_donation}</option>
+          <option value="other">${texts.other}</option>
+        `;
+  
+        document.querySelector("label[for='death-date']").textContent = texts.death_date;
+        document.querySelector("label[for='weight']").textContent = texts.weight;
+        document.querySelector("label[for='notes']").textContent = texts.notes;
+  
+        // Update signature section
+        document.querySelector(".signatures-title").textContent = texts.signatures_title;
+        document.querySelector("label[for='requester-signature']").textContent = texts.requester_signature;
+        document.querySelector("label[for='pickup-signature']").textContent = texts.pickup_signature;
+      } catch (error) {
+        console.error("Error loading translations:", error);
+      }
+    }
+  
+    // Listen for language changes
+    document.getElementById("language-selector").addEventListener("change", function () {
+      console.log("Language changed to:", this.value);
+      loadTranslations(this.value);
+    });
+  
+    // Load default language (English)
+    loadTranslations("en");
+  </script>
+  
 </body>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
