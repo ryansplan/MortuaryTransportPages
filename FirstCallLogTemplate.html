@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>First Call Log - Test</title>
+  <title>First Call Log - Fixed Version</title>
   <style>
-    /* General Styles */
     body {
       font-family: 'Arial', sans-serif;
       font-size: 10px;
@@ -14,14 +13,11 @@
       background-color: #f9f9f9;
       color: #333;
     }
-
     h1 {
       text-align: center;
       color: #0056b3;
-      margin: 5px 0;
       font-size: 14px;
     }
-
     .form-container {
       width: 100%;
       max-width: 600px;
@@ -31,26 +27,21 @@
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-
     .section {
       margin-bottom: 10px;
     }
-
     .section-title {
       font-weight: bold;
       margin-bottom: 5px;
       font-size: 12px;
       color: #0056b3;
-      text-decoration: underline;
     }
-
     label {
       font-weight: bold;
       display: inline-block;
       width: 40%;
     }
-
-    input, textarea {
+    input, textarea, select {
       display: inline-block;
       width: 55%;
       border: 1px solid #ccc;
@@ -59,35 +50,24 @@
       font-size: 10px;
       margin-bottom: 5px;
     }
-
-    .signature-field input {
-      width: 100%;
-      border: none;
-      border-bottom: 1px solid #ccc;
-      background-color: transparent;
-    }
-
     button {
       background-color: #0056b3;
-      color: #fff;
+      color: white;
       border: none;
       padding: 8px 15px;
       border-radius: 5px;
       font-size: 12px;
       cursor: pointer;
-      display: block;
       margin: 10px auto;
     }
-
     button:hover {
       background-color: #003f7f;
     }
   </style>
 </head>
 <body>
-  <h1>First Call Transport Log - Test</h1>
+  <h1>First Call Transport Log</h1>
   <div class="form-container" id="pdf-content">
-    <!-- Language Selector -->
     <select id="language-selector">
       <option value="en" selected>English</option>
       <option value="es">Español</option>
@@ -97,23 +77,11 @@
     <div class="section">
       <div class="section-title">Organization/Caller Information</div>
       <label for="funeral-home">Organization:</label>
-      <input type="text" id="funeral-home" placeholder="Name of organization requesting transport"><br>
-
+      <input type="text" id="funeral-home"><br>
       <label for="funeral-home-address">Address:</label>
-      <input type="text" id="funeral-home-address" placeholder="Enter organization's address"><br>
-
+      <input type="text" id="funeral-home-address"><br>
       <label for="contact-number">Contact Number:</label>
-      <input type="tel" id="contact-number" placeholder="Enter organization's contact number"><br>
-
-      <label for="date-of-call">Date of Call:</label>
-      <input type="date" id="date-of-call"><br>
-
-      <label for="call-time">Call Time:</label>
-      <input type="time" id="call-time"><br>
-
-      <label for="callers-name">Caller's Name:</label>
-      <input type="text" id="callers-name" placeholder="Enter caller's name"><br>
-
+      <input type="tel" id="contact-number"><br>
       <label for="call-type">Call Type:</label>
       <select id="call-type"></select>
     </div>
@@ -121,57 +89,47 @@
     <!-- Deceased Details -->
     <div class="section">
       <div class="section-title">Deceased Details</div>
-      <label for="deceased-name">Name:</label>
-      <input type="text" id="deceased-name" placeholder="Enter deceased's name"><br>
-
       <label for="deceased-location">Deceased's Location:</label>
-      <select id="deceased-location" onchange="handleLocationChange()">
-        <option value="" disabled selected>Select location type</option>
-        <option value="residence">Residence</option>
-        <option value="hospital">Hospital</option>
-        <option value="nursing-home">Nursing Home</option>
-        <option value="body-donation-facility">Body Donation Facility</option>
-        <option value="airport">Airport</option>
-        <option value="other">Other</option>
-      </select><br>
-
-      <div id="additional-fields" style="margin-top: 10px;"></div>
-    </div>
-
-    <!-- Signatures -->
-    <div class="section">
-      <div class="section-title">Signatures</div>
-      <label for="requester-signature">Requester's Signature:</label>
-      <input type="text" id="requester-signature" placeholder="Requester signs here"><br>
-
-      <label for="pickup-signature">Pickup Signature:</label>
-      <input type="text" id="pickup-signature" placeholder="Pickup representative signs here"><br>
+      <select id="deceased-location"></select><br>
+      <div id="additional-fields"></div>
     </div>
   </div>
 
-  <button onclick="generatePDF()">Download PDF</button>
-
   <script>
+    const translations = {};
     async function loadTranslations(language) {
-      try {
-        const response = await fetch("/MortuaryTransportPages/pdf_form_translations.json");
-        const translations = await response.json();
-        window.dynamicTexts = translations[language] || {};
-      } catch (error) {
-        console.error("Error loading translations:", error);
-      }
+      const response = await fetch('./pdf_form_translations.json');
+      const data = await response.json();
+      translations[language] = data[language];
+      return data[language];
+    }
+
+    async function updateTranslations(language) {
+      const texts = translations[language] || await loadTranslations(language);
+      document.querySelector("h1").textContent = texts.header_title;
+      document.querySelector("label[for='funeral-home']").textContent = texts.funeral_home;
+      document.querySelector("label[for='funeral-home-address']").textContent = texts.address;
+      document.querySelector("label[for='contact-number']").textContent = texts.contact_number;
+      populateDropdown("call-type", texts.call_types);
+      populateDropdown("deceased-location", texts.deceased_locations);
+    }
+
+    function populateDropdown(id, options) {
+      const dropdown = document.getElementById(id);
+      dropdown.innerHTML = options.map(opt => `<option value="${opt.value}">${opt.label}</option>`).join('');
     }
 
     function handleLocationChange() {
       const locationType = document.getElementById("deceased-location").value;
       const additionalFields = document.getElementById("additional-fields");
-
-      additionalFields.innerHTML = "";
-
-      if (locationType === "residence") {
+      additionalFields.innerHTML = '';
+      if (locationType === 'residence') {
         additionalFields.innerHTML = `
-          <label for="residence-floor">Floor:</label>
-          <select id="residence-floor">
+          <label for="residence-address">Residence Address:</label>
+          <input type="text" id="residence-address"><br>
+          <label for="floor">Floor:</label>
+          <select id="floor">
+            <option value="ground">Ground</option>
             <option value="upstairs">Upstairs</option>
             <option value="downstairs">Downstairs</option>
           </select><br>
@@ -179,27 +137,19 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", async () => {
-      await loadTranslations("en");
+    document.getElementById("language-selector").addEventListener("change", (e) => {
+      updateTranslations(e.target.value);
     });
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script>
-    async function generatePDF() {
-      const { jsPDF } = window.jspdf;
-      const pdfContent = document.getElementById("pdf-content");
 
-      html2canvas(pdfContent, { scale: 2 }).then((canvas) => {
-        const pdf = new jsPDF();
-        const imgData = canvas.toDataURL("image/png");
-        pdf.addImage(imgData, "PNG", 10, 10, 190, (canvas.height * 190) / canvas.width);
-        pdf.save("First_Call_Log.pdf");
-      });
-    }
+    document.getElementById("deceased-location").addEventListener("change", handleLocationChange);
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      await updateTranslations("en");
+    });
   </script>
 </body>
 </html>
+
 
 
 
