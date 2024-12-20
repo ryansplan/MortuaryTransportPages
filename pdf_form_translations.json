@@ -74,6 +74,7 @@
     "residence_floor": "Piso",
     "upstairs": "Arriba",
     "downstairs": "Abajo",
+    "not_applicable": "No aplica",
     "further_obstacles_with_deceased": "Obstáculos adicionales con el fallecido",
     "describe_obstacles": "Describa cualquier obstáculo (por ejemplo, escaleras estrechas, perros en el lugar)",
     "hospital": "Hospital",
