@@ -170,7 +170,7 @@
 
   if (locationType === "residence") {
     additionalFields.innerHTML = `
-      <label for="residence-address">${window.dynamicTexts.address}:</label>
+      <label for="residence-address">${window.dynamicTexts.address}</label>
       <input type="text" id="residence-address" placeholder="${window.dynamicTexts.enter_address}"><br>
       <label for="residence-floor">${window.dynamicTexts.residence_floor}:</label>
       <select id="residence-floor">
@@ -182,6 +182,8 @@
     `;
   } else if (locationType === "hospital") {
     additionalFields.innerHTML = `
+      <label for="hospital-address">${window.dynamicTexts.address}</label>
+      <input type="text" id="hospital-address" placeholder="${window.dynamicTexts.enter_address}"><br>
       <label for="hospital-room">${window.dynamicTexts.hospital_room}:</label>
       <input type="text" id="hospital-room" placeholder="${window.dynamicTexts.enter_room_number}"><br>
     `;
