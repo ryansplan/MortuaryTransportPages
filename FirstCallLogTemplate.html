@@ -151,7 +151,7 @@
 <div id="additional-fields" style="margin-top: 10px;"></div>
 
 <script>
-  function handleLocationChange() {
+function handleLocationChange() {
   const locationType = document.getElementById("deceased-location").value;
   const additionalFields = document.getElementById("additional-fields");
 
@@ -196,6 +196,7 @@
       <input type="text" id="airport-terminal" placeholder="${window.dynamicTexts.enter_terminal_or_gate}"><br>
     `;
   } else if (locationType === "body-donation-facility") {
+    // Reuse address and enter_address dynamically for Body Donation
     additionalFields.innerHTML = `
       ${addressFieldHTML}
       <label for="donation-facility">${window.dynamicTexts.body_donation_facility}</label>
@@ -208,6 +209,7 @@
     `;
   }
 }
+
 
 </script>
 
