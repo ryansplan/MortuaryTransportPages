@@ -158,7 +158,7 @@ function handleLocationChange() {
   // Clear previous fields
   additionalFields.innerHTML = "";
 
-  // Define reusable HTML structure for address fields
+  // Define reusable address field
   const addressFieldHTML = `
     <label for="location-address">${window.dynamicTexts.address}</label>
     <input type="text" id="location-address" placeholder="${window.dynamicTexts.enter_address}"><br>
@@ -189,18 +189,19 @@ function handleLocationChange() {
     `;
   } else if (locationType === "airport") {
     additionalFields.innerHTML = `
-      ${addressFieldHTML}
+      <label for="airport-address">${window.dynamicTexts.airport_address}</label>
+      <input type="text" id="airport-address" placeholder="${window.dynamicTexts.enter_address}"><br>
       <label for="airport-name">${window.dynamicTexts.airport_name}</label>
       <input type="text" id="airport-name" placeholder="${window.dynamicTexts.enter_airport_name}"><br>
       <label for="airport-terminal">${window.dynamicTexts.terminal_or_gate}</label>
       <input type="text" id="airport-terminal" placeholder="${window.dynamicTexts.enter_terminal_or_gate}"><br>
     `;
   } else if (locationType === "body-donation-facility") {
-    // Reuse address and enter_address dynamically for Body Donation
     additionalFields.innerHTML = `
-      ${addressFieldHTML}
+      <label for="donation-address">${window.dynamicTexts.donation_address}</label>
+      <input type="text" id="donation-address" placeholder="${window.dynamicTexts.enter_donation_address}"><br>
       <label for="donation-facility">${window.dynamicTexts.body_donation_facility}</label>
-      <input type="text" id="body-donation-facility" placeholder="${window.dynamicTexts.enter_facility_name}"><br>
+      <input type="text" id="donation-facility" placeholder="${window.dynamicTexts.enter_facility_name}"><br>
     `;
   } else if (locationType === "other") {
     additionalFields.innerHTML = `
@@ -209,6 +210,7 @@ function handleLocationChange() {
     `;
   }
 }
+
 
 
 </script>
