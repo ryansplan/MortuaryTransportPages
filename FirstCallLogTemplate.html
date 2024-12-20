@@ -199,7 +199,7 @@
         <label for="airport-terminal">Terminal/Gate:</label>
         <input type="text" id="airport-terminal" placeholder="Enter terminal or gate"><br>
       `;
-    } else if (locationType === "body-donation") {
+    } else if (locationType === "body-donation-facility") {
       additionalFields.innerHTML = `
         <label for="donation-facility">Donation Facility Name:</label>
         <input type="text" id="donation-facility" placeholder="Enter facility name"><br>
@@ -244,7 +244,7 @@
   <script>
     // Load translations dynamically
   async function loadTranslations(language) {
-    const response = await fetch("src/translations/pdf_form_translations.json");
+    const response = await fetch("/src/translations/pdf_form_translations.json");
     const translations = await response.json();
 
     const texts = translations[language];
