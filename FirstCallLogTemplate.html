@@ -161,33 +161,55 @@
         console.error("Error loading translations:", error);
       }
     }
-
     function handleLocationChange() {
-      const locationType = document.getElementById("deceased-location").value;
-      const additionalFields = document.getElementById("additional-fields");
+  const locationType = document.getElementById("deceased-location").value;
+  const additionalFields = document.getElementById("additional-fields");
 
-      additionalFields.innerHTML = "";
+  // Clear previous fields
+  additionalFields.innerHTML = "";
 
-      if (locationType === "residence") {
-        additionalFields.innerHTML = `
-          <label for="residence-floor">Floor:</label>
-          <select id="residence-floor">
-            <option value="upstairs">Upstairs</option>
-            <option value="downstairs">Downstairs</option>
-          </select><br>
-        `;
-      } else if (locationType === "hospital") {
-        additionalFields.innerHTML = `
-          <label for="hospital-room">Room Number:</label>
-          <input type="text" id="hospital-room" placeholder="Enter room number"><br>
-        `;
-      } else if (locationType === "other") {
-        additionalFields.innerHTML = `
-          <label for="other-location">Describe Location:</label>
-          <input type="text" id="other-location" placeholder="Enter location details"><br>
-        `;
-      }
-    }
+  if (locationType === "residence") {
+    additionalFields.innerHTML = `
+      <label for="residence-floor">${window.dynamicTexts.residence_floor}:</label>
+      <select id="residence-floor">
+        <option value="upstairs">${window.dynamicTexts.upstairs}</option>
+        <option value="downstairs">${window.dynamicTexts.downstairs}</option>
+      </select><br>
+      <label for="obstacles">${window.dynamicTexts.further_obstacles_with_deceased}:</label>
+      <textarea id="obstacles" placeholder="${window.dynamicTexts.describe_obstacles}"></textarea><br>
+    `;
+  } else if (locationType === "hospital") {
+    additionalFields.innerHTML = `
+      <label for="hospital-room">${window.dynamicTexts.hospital_room}:</label>
+      <input type="text" id="hospital-room" placeholder="${window.dynamicTexts.enter_room_number}"><br>
+    `;
+  } else if (locationType === "nursing-home") {
+    additionalFields.innerHTML = `
+      <label for="nursing-home-address">${window.dynamicTexts.address}:</label>
+      <input type="text" id="nursing-home-address" placeholder="${window.dynamicTexts.enter_address}"><br>
+    `;
+  } else if (locationType === "body-donation-facility") {
+    additionalFields.innerHTML = `
+      <label for="donation-facility">${window.dynamicTexts.body_donation_facility}:</label>
+      <input type="text" id="donation-facility" placeholder="${window.dynamicTexts.enter_facility_name}"><br>
+      <label for="donation-address">${window.dynamicTexts.donation_address}:</label>
+      <input type="text" id="donation-address" placeholder="${window.dynamicTexts.enter_donation_address}"><br>
+    `;
+  } else if (locationType === "airport") {
+    additionalFields.innerHTML = `
+      <label for="airport-name">${window.dynamicTexts.airport_name}:</label>
+      <input type="text" id="airport-name" placeholder="${window.dynamicTexts.enter_airport_name}"><br>
+      <label for="airport-terminal">${window.dynamicTexts.terminal_or_gate}:</label>
+      <input type="text" id="airport-terminal" placeholder="${window.dynamicTexts.enter_terminal_or_gate}"><br>
+    `;
+  } else if (locationType === "other") {
+    additionalFields.innerHTML = `
+      <label for="other-location">${window.dynamicTexts.describe_location}:</label>
+      <input type="text" id="other-location" placeholder="${window.dynamicTexts.enter_location_details}"><br>
+    `;
+  }
+}
+
 
     function populateDropdowns() {
       const callTypeSelect = document.getElementById("call-type");
