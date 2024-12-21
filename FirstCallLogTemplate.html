@@ -190,7 +190,8 @@
     </div>
   </div>
 
-  <button onclick="generatePDF()">Download PDF</button>
+    <!-- Updated Download PDF Button -->
+    <button id="download-pdf-btn" onclick="generatePDF()">Download PDF</button>
 
   <script>
   async function loadTranslations(language) {
@@ -327,6 +328,7 @@ document.getElementById("language-selector").addEventListener("change", async fu
     // Update signature labels
     document.querySelector("label[for='pickup-signature']").textContent = window.dynamicTexts.pickup_signature || "Pickup Representative's Signature:";
     document.querySelector("label[for='drop-off-signature']").textContent = window.dynamicTexts.drop_off_signature || "Drop-off Representative's Signature:";
+
 
     // Refresh additional fields
     handleLocationChange();
