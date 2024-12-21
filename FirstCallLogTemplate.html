@@ -316,15 +316,14 @@
     <option value="other">${window.dynamicTexts.other || "Other"}</option>
     `;
 
-    
-
+  
     // Update checkbox labels
     document.getElementById("biohazard-label").textContent = window.dynamicTexts.biohazard || "Biohazard";
     document.getElementById("veteran-label").textContent = window.dynamicTexts.veteran || "Veteran";
 
-    // Update signatures
-    document.querySelector("label[for='drop-off-signature']").textContent = window.dynamicTexts.drop_off_signature;
-    document.querySelector("label[for='pickup-signature']").textContent = window.dynamicTexts.pickup_signature;
+      // Update signature labels
+    document.querySelector("label[for='pickup-signature']").textContent = window.dynamicTexts.pickup_signature || "Pickup Representative's Signature:";
+    document.querySelector("label[for='drop-off-signature']").textContent = window.dynamicTexts.drop_off_signature || "Drop-off Signature:";
 
     // Refresh additional fields
     handleLocationChange();
