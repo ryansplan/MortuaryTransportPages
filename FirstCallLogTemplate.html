@@ -274,6 +274,9 @@
     // Update text for all translatable elements
     document.querySelector("h1").textContent = window.dynamicTexts.header_title;
     document.querySelector(".section-title").textContent = window.dynamicTexts.organization_title;
+    document.querySelectorAll(".section-title")[1].textContent = window.dynamicTexts.deceased_details_title || "Deceased Details";
+    document.querySelectorAll(".section-title")[2].textContent = window.dynamicTexts.signatures_title || "Signatures";
+
 
     // Update form labels
     document.querySelector("label[for='funeral-home']").textContent = window.dynamicTexts.funeral_home;
