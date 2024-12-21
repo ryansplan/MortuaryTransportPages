@@ -304,6 +304,20 @@
     document.querySelector("label[for='death-date']").textContent = window.dynamicTexts.death_date;
     document.querySelector("label[for='deceased-location']").textContent = window.dynamicTexts.deceased_location;
 
+    // Update Deceased's Location dropdown options
+    const locationTypeSelect = document.getElementById("deceased-location");
+    locationTypeSelect.innerHTML = `
+    <option value="" disabled selected>${window.dynamicTexts.select_location_type || "Select location type"}</option>
+    <option value="residence">${window.dynamicTexts.residence || "Residence"}</option>
+    <option value="hospital">${window.dynamicTexts.hospital || "Hospital"}</option>
+    <option value="nursing-home">${window.dynamicTexts.nursing_home || "Nursing Home"}</option>
+    <option value="body-donation-facility">${window.dynamicTexts.body_donation_facility || "Body Donation Facility"}</option>
+    <option value="airport">${window.dynamicTexts.airport || "Airport"}</option>
+    <option value="other">${window.dynamicTexts.other || "Other"}</option>
+    `;
+
+    
+
     // Update checkbox labels
     document.getElementById("biohazard-label").textContent = window.dynamicTexts.biohazard || "Biohazard";
     document.getElementById("veteran-label").textContent = window.dynamicTexts.veteran || "Veteran";
