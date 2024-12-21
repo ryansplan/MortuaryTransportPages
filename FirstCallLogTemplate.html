@@ -62,18 +62,17 @@
 
     .checkbox-group {
      display: flex;
-     gap: 15px;
+     gap: 10px; /* Reduce the space between the checkboxes */
      align-items: center;
     }
-    
+
     .checkbox-container {
      display: flex;
-     width: auto;
      align-items: center;
-     padding: 5px 10px;
+     gap: 5px; /* Space between the checkbox and the label */
+     padding: 5px;
      border-radius: 5px;
      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-     gap: 5px; /* Space between checkbox and label */
     }
 
     .checkbox-container input[type="checkbox"]:checked + span {
@@ -84,7 +83,7 @@
     }
 
     .checkbox-container span {
-      white-space: nowrap;
+     white-space: nowrap;
     }
 
     .signature-field input {
@@ -168,15 +167,16 @@
 
       <div id="additional-fields" style="margin-top: 10px;"></div>
 
-      <label for="biohazard" class="checkbox-container">
-        <input type="checkbox" id="biohazard">
-        <span id="biohazard-label"></span>
-      </label>
-      <label for="veteran" class="checkbox-container" style="margin-left: 15px;">
-        <input type="checkbox" id="veteran">
-        <span id="veteran-label"></span>
-      </label>
-    </div>
+      <div class="checkbox-group">
+        <label for="biohazard" class="checkbox-container">
+          <input type="checkbox" id="biohazard">
+          <span>Biohazard</span>
+        </label>
+        <label for="veteran" class="checkbox-container">
+          <input type="checkbox" id="veteran">
+          <span>Veteran</span>
+        </label>
+      </div>
     
 
     <!-- Signatures -->
