@@ -60,23 +60,31 @@
       margin-bottom: 5px;
     }
 
+    .checkbox-group {
+     display: flex;
+     gap: 15px;
+     align-items: center;
+    }
+    
     .checkbox-container {
-     display: inline-block;
+     display: flex;
      width: auto;
+     align-items: center;
      padding: 5px 10px;
      border-radius: 5px;
      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+     gap: 5px; /* Space between checkbox and label */
     }
 
-  .checkbox-container input[type="checkbox"]:checked + span {
-    background-color: #ffd700; /* Highlight color (Gold) */
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-    padding: 2px 5px; /* Add slight padding for better visibility */
-    border-radius: 5px;
+    .checkbox-container input[type="checkbox"]:checked + span {
+     background-color: #ffd700; /* Highlight color (Gold) */
+     box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+     padding: 2px 5px; /* Add slight padding for better visibility */
+     border-radius: 5px;
     }
 
-  .checkbox-container span {
-    transition: all 0.3s ease;
+    .checkbox-container span {
+      white-space: nowrap;
     }
 
     .signature-field input {
