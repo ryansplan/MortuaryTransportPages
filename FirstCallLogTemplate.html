@@ -287,15 +287,15 @@
     document.querySelector("label[for='callers-name']").textContent = window.dynamicTexts.callers_name;
     document.querySelector("label[for='call-type']").textContent = window.dynamicTexts.call_type;
 
-    // Update dropdown options
+    // Update Call Type dropdown options
     const callTypeSelect = document.getElementById("call-type");
     callTypeSelect.innerHTML = `
-      <option value="" disabled selected>${window.dynamicTexts.select_call_type}</option>
-      <option value="transport">${window.dynamicTexts.transport}</option>
-      <option value="emergency-transport">${window.dynamicTexts.emergency_transport}</option>
-      <option value="body-donation">${window.dynamicTexts.body_donation}</option>
-      <option value="family-shuttle">${window.dynamicTexts.family_shuttle}</option>
-      <option value="flower-delivery">${window.dynamicTexts.flower_delivery}</option>
+    <option value="" disabled selected>${window.dynamicTexts.select_call_type || "Select call type"}</option>
+    <option value="transport">${window.dynamicTexts.transport || "Transport"}</option>
+    <option value="emergency-transport">${window.dynamicTexts.emergency_transport || "Emergency Transport"}</option>
+    <option value="body-donation">${window.dynamicTexts.body_donation || "Body Donation"}</option>
+    <option value="family-shuttle">${window.dynamicTexts.family_shuttle || "Family Shuttle"}</option>
+    <option value="flower-delivery">${window.dynamicTexts.flower_delivery || "Flower Delivery"}</option>
     `;
 
     // Update deceased details
