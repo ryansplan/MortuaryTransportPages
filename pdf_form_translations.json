@@ -49,7 +49,7 @@
     "veteran": "Veteran",
     "notes": "Notes:",
     "signatures_title": "Signatures",
-    "requester_signature": "Requester's Signature:",
+    "requester_signature": "Drop-off Signature:",
     "pickup_signature": "Pickup Representative's Signature:"
   },
   "es": {
@@ -102,7 +102,7 @@
     "biohazard": "Peligro Biológico",
     "veteran": "Veterano",
     "signatures_title": "Firmas",
-    "requester_signature": "Firma del solicitante:",
+    "requester_signature": "Firma de entrega:",
     "pickup_signature": "Firma de la persona que recoge:"
   }
 }
