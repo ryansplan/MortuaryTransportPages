@@ -302,10 +302,10 @@ document.getElementById("language-selector").addEventListener("change", async fu
     document.querySelector("label[for='call-type']").textContent = window.dynamicTexts.call_type;
 
    // Update placeholders
-   document.getElementById("funeral-home").placeholder = window.dynamicTexts.placeholder_organization || "Name of organization requesting transport";
-   document.getElementById("funeral-home-address").placeholder = window.dynamicTexts.placeholder_address || "Enter organization's address";
-   document.getElementById("contact-number").placeholder = window.dynamicTexts.placeholder_contact_number || "Enter organization's contact number";
-   document.getElementById("callers-name").placeholder = window.dynamicTexts.placeholder_callers_name || "Enter caller's name";
+   document.getElementById("funeral-home").placeholder = window.dynamicTexts.placeholder_organization;
+   document.getElementById("funeral-home-address").placeholder = window.dynamicTexts.placeholder_address;
+   document.getElementById("contact-number").placeholder = window.dynamicTexts.placeholder_contact_number;
+   document.getElementById("callers-name").placeholder = window.dynamicTexts.placeholder_callers_name;
 
 
     // Call populateDropdowns to refresh dropdown values
