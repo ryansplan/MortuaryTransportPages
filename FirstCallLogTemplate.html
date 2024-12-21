@@ -343,28 +343,29 @@ document.getElementById("language-selector").addEventListener("change", async fu
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script>
+ 
+ <script>
     async function generatePDF() {
-      const { jsPDF } = window.jspdf;
-      const pdfContent = document.getElementById("pdf-content");
+    const { jsPDF } = window.jspdf;
+    const pdfContent = document.getElementById("pdf-content");
+    const downloadButton = document.getElementById("download-pdf-btn");
 
-      // Hide the button
+    // Hide the button
     downloadButton.style.display = "none";
 
     // Generate the PDF
-      html2canvas(pdfContent, { scale: 2 }).then((canvas) => {
+    html2canvas(pdfContent, { scale: 2 }).then((canvas) => {
         const pdf = new jsPDF();
         const imgData = canvas.toDataURL("image/png");
         pdf.addImage(imgData, "PNG", 10, 10, 190, (canvas.height * 190) / canvas.width);
 
+        // Show the button again
+        downloadButton.style.display = "block";
 
-      // Show the button again
-      downloadButton.style.display = "block";
-
-      // Save PDF
+        // Save the PDF
         pdf.save("First_Call_Log.pdf");
-      });
-    }
+    });
+}
   </script>
 </body>
 </html>
