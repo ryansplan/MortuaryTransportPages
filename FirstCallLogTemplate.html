@@ -199,11 +199,13 @@
       const translations = await response.json();
       window.dynamicTexts = translations[language] || {};
 
-      // Set the checkbox labels dynamically
+      // Update checkbox labels dynamically
       document.getElementById("biohazard-label").textContent =
-        window.dynamicTexts.biohazard || "Biohazard";
+      window.dynamicTexts.biohazard || "Biohazard";
       document.getElementById("veteran-label").textContent =
-        window.dynamicTexts.veteran || "Veteran";
+      window.dynamicTexts.veteran || "Veteran";
+
+
     } catch (error) {
       console.error("Error loading translations:", error);
     }
