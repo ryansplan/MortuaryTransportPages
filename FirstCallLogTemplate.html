@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>First Call Log - test</title>
+  <title>First Call Log</title>
   <style>
     /* General Styles */
     body {
@@ -185,101 +185,115 @@
   <button onclick="generatePDF()">Download PDF</button>
 
   <script>
-   async function loadTranslations(language) {
-  try {
-    const response = await fetch("./pdf_form_translations.json?v=1.0");
-    const translations = await response.json();
-    window.dynamicTexts = translations[language] || {};
+  async function loadTranslations(language) {
+    try {
+      const response = await fetch("./pdf_form_translations.json?v=1.0");
+      const translations = await response.json();
+      window.dynamicTexts = translations[language] || {};
 
-  // Set the checkbox labels dynamically
-    document.getElementById("biohazard-label").textContent =
-    window.dynamicTexts.biohazard || "Biohazard";
-    document.getElementById("veteran-label").textContent =
-    window.dynamicTexts.veteran || "Veteran";
-
-
-  } catch (error) {
-    console.error("Error loading translations:", error);
-  }
-}
-
-function handleLocationChange() {
-  const locationType = document.getElementById("deceased-location").value;
-  console.log("Selected Location Type:", locationType);
-  console.log("Dynamic Texts Object:", window.dynamicTexts);
-
-  const additionalFields = document.getElementById("additional-fields");
-  additionalFields.innerHTML = ""; // Clear previous fields
-
-  // Handle each location type
-  if (locationType === "residence") {
-    additionalFields.innerHTML = `
-      <label for="residence-address">${window.dynamicTexts.address || "Address"}:</label>
-      <input type="text" id="residence-address" placeholder="${window.dynamicTexts.enter_address || "Enter address"}"><br>
-      <label for="residence-floor">${window.dynamicTexts.residence_floor || "Floor"}:</label>
-      <select id="residence-floor">
-        <option value="upstairs">${window.dynamicTexts.upstairs || "Upstairs"}</option>
-        <option value="downstairs">${window.dynamicTexts.downstairs || "Downstairs"}</option>
-        <option value="not-applicable">${window.dynamicTexts.not_applicable || "Not Applicable"}</option>
-      </select><br>
-      <label for="obstacles">${window.dynamicTexts.further_obstacles_with_deceased || "Further Obstacles"}:</label>
-      <textarea id="obstacles" placeholder="${window.dynamicTexts.describe_obstacles || "Describe obstacles"}"></textarea><br>
-    `;
-  } else if (locationType === "hospital") {
-    additionalFields.innerHTML = `
-      <label for="hospital-address">${window.dynamicTexts.address || "Address"}:</label>
-      <input type="text" id="hospital-address" placeholder="${window.dynamicTexts.enter_address || "Enter address"}"><br>
-      <label for="hospital-room">${window.dynamicTexts.hospital_room || "Room Number"}:</label>
-      <input type="text" id="hospital-room" placeholder="${window.dynamicTexts.enter_room_number || "Enter room number"}"><br>
-    `;
-  } else if (locationType === "nursing-home") {
-    additionalFields.innerHTML = `
-      <label for="nursing-home-address">${window.dynamicTexts.address || "Address"}</label>
-      <input type="text" id="nursing-home-address" placeholder="${window.dynamicTexts.enter_address || "Enter address"}"><br>
-    `;
-  } else if (locationType === "body-donation-facility") {
-    additionalFields.innerHTML = `
-      <label for="donation-facility">${window.dynamicTexts.body_donation_facility || "Body Donation Facility"}</label>
-      <input type="text" id="donation-facility" placeholder="${window.dynamicTexts.enter_facility_name || "Enter facility name"}"><br>
-      <label for="donation-address">${window.dynamicTexts.donation_address || "Donation Address"}</label>
-      <input type="text" id="donation-address" placeholder="${window.dynamicTexts.enter_donation_address || "Enter donation address"}"><br>
-    `;
-  } else if (locationType === "airport") {
-    additionalFields.innerHTML = `
-      <label for="airport-name">${window.dynamicTexts.airport_name || "Name of Airport"}:</label>
-      <input type="text" id="airport-name" placeholder="${window.dynamicTexts.enter_airport_name || "Enter airport name"}"><br>
-      <label for="airport-address">${window.dynamicTexts.address || "Address"}</label>
-      <input type="text" id="airport-address" placeholder="${window.dynamicTexts.enter_address || "Enter address"}"><br>
-      <label for="airport-terminal">${window.dynamicTexts.terminal_or_gate || "Terminal or Gate"}:</label>
-      <input type="text" id="airport-terminal" placeholder="${window.dynamicTexts.enter_terminal_or_gate || "Enter terminal or gate"}"><br>
-    `;
-  } else if (locationType === "other") {
-    additionalFields.innerHTML = `
-      <label for="other-location">${window.dynamicTexts.describe_location || "Describe Location"}:</label>
-      <input type="text" id="other-location" placeholder="${window.dynamicTexts.enter_location_details || "Enter location details"}"><br>
-      <label for="other-address">${window.dynamicTexts.address || "Address"}</label>
-      <input type="text" id="other-address" placeholder="${window.dynamicTexts.enter_address || "Enter address"}"><br>
-    `;
-  }
-}
-
-
-    function populateDropdowns() {
-      const callTypeSelect = document.getElementById("call-type");
-      callTypeSelect.innerHTML = `
-        <option value="" disabled selected>Select Call Type</option>
-        <option value="transport">Transport</option>
-        <option value="emergency-transport">Emergency Transport</option>
-        <option value="body-donation">Body Donation</option>
-        <option value="family-shuttle">Family Shuttle</option>
-        <option value="flower-delivery">Flower Delivery</option>
-      `;
+      // Set the checkbox labels dynamically
+      document.getElementById("biohazard-label").textContent =
+        window.dynamicTexts.biohazard || "Biohazard";
+      document.getElementById("veteran-label").textContent =
+        window.dynamicTexts.veteran || "Veteran";
+    } catch (error) {
+      console.error("Error loading translations:", error);
     }
+  }
 
-    document.addEventListener("DOMContentLoaded", async () => {
-      await loadTranslations("en");
-      populateDropdowns();
-    });
+  function handleLocationChange() {
+    const locationType = document.getElementById("deceased-location").value;
+    const additionalFields = document.getElementById("additional-fields");
+    additionalFields.innerHTML = ""; // Clear previous fields
+
+    // Handle each location type
+    if (locationType === "residence") {
+      additionalFields.innerHTML = `
+        <label for="residence-address">${window.dynamicTexts.address || "Address"}:</label>
+        <input type="text" id="residence-address" placeholder="${window.dynamicTexts.enter_address || "Enter address"}"><br>
+        <label for="residence-floor">${window.dynamicTexts.residence_floor || "Floor"}:</label>
+        <select id="residence-floor">
+          <option value="upstairs">${window.dynamicTexts.upstairs || "Upstairs"}</option>
+          <option value="downstairs">${window.dynamicTexts.downstairs || "Downstairs"}</option>
+          <option value="not-applicable">${window.dynamicTexts.not_applicable || "Not Applicable"}</option>
+        </select><br>
+        <label for="obstacles">${window.dynamicTexts.further_obstacles_with_deceased || "Further Obstacles"}:</label>
+        <textarea id="obstacles" placeholder="${window.dynamicTexts.describe_obstacles || "Describe obstacles"}"></textarea><br>
+      `;
+    } else if (locationType === "hospital") {
+      additionalFields.innerHTML = `
+        <label for="hospital-address">${window.dynamicTexts.address || "Address"}:</label>
+        <input type="text" id="hospital-address" placeholder="${window.dynamicTexts.enter_address || "Enter address"}"><br>
+        <label for="hospital-room">${window.dynamicTexts.hospital_room || "Room Number"}:</label>
+        <input type="text" id="hospital-room" placeholder="${window.dynamicTexts.enter_room_number || "Enter room number"}"><br>
+      `;
+    } // Add other location types as needed...
+  }
+
+  function populateDropdowns() {
+    const callTypeSelect = document.getElementById("call-type");
+    callTypeSelect.innerHTML = `
+      <option value="" disabled selected>Select Call Type</option>
+      <option value="transport">Transport</option>
+      <option value="emergency-transport">Emergency Transport</option>
+      <option value="body-donation">Body Donation</option>
+      <option value="family-shuttle">Family Shuttle</option>
+      <option value="flower-delivery">Flower Delivery</option>
+    `;
+  }
+
+  document.getElementById("language-selector").addEventListener("change", async function () {
+    const selectedLanguage = this.value; // Get selected language
+    await loadTranslations(selectedLanguage); // Load translations
+
+    // Update text for all translatable elements
+    document.querySelector("h1").textContent = window.dynamicTexts.header_title;
+    document.querySelector(".section-title").textContent = window.dynamicTexts.organization_title;
+
+    // Update form labels
+    document.querySelector("label[for='funeral-home']").textContent = window.dynamicTexts.funeral_home;
+    document.querySelector("label[for='funeral-home-address']").textContent = window.dynamicTexts.address;
+    document.querySelector("label[for='contact-number']").textContent = window.dynamicTexts.contact_number;
+    document.querySelector("label[for='date-of-call']").textContent = window.dynamicTexts.date_of_call;
+    document.querySelector("label[for='call-time']").textContent = window.dynamicTexts.call_time;
+    document.querySelector("label[for='callers-name']").textContent = window.dynamicTexts.callers_name;
+    document.querySelector("label[for='call-type']").textContent = window.dynamicTexts.call_type;
+
+    // Update dropdown options
+    const callTypeSelect = document.getElementById("call-type");
+    callTypeSelect.innerHTML = `
+      <option value="" disabled selected>${window.dynamicTexts.select_call_type}</option>
+      <option value="transport">${window.dynamicTexts.transport}</option>
+      <option value="emergency-transport">${window.dynamicTexts.emergency_transport}</option>
+      <option value="body-donation">${window.dynamicTexts.body_donation}</option>
+      <option value="family-shuttle">${window.dynamicTexts.family_shuttle}</option>
+      <option value="flower-delivery">${window.dynamicTexts.flower_delivery}</option>
+    `;
+
+    // Update deceased details
+    document.querySelector("label[for='deceased-name']").textContent = window.dynamicTexts.deceased_name;
+    document.querySelector("label[for='weight']").textContent = window.dynamicTexts.weight;
+    document.querySelector("label[for='death-date']").textContent = window.dynamicTexts.death_date;
+    document.querySelector("label[for='deceased-location']").textContent = window.dynamicTexts.deceased_location;
+
+    // Update checkbox labels
+    document.getElementById("biohazard-label").textContent = window.dynamicTexts.biohazard || "Biohazard";
+    document.getElementById("veteran-label").textContent = window.dynamicTexts.veteran || "Veteran";
+
+    // Update signatures
+    document.querySelector("label[for='requester-signature']").textContent = window.dynamicTexts.requester_signature;
+    document.querySelector("label[for='pickup-signature']").textContent = window.dynamicTexts.pickup_signature;
+
+    // Refresh additional fields
+    handleLocationChange();
+  });
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    await loadTranslations("en");
+    populateDropdowns();
+  });
+</script>
+
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
