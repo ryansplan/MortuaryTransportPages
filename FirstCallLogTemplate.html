@@ -185,8 +185,8 @@
       <label for="pickup-signature">Pickup Signature:</label>
       <input type="text" id="pickup-signature" placeholder=""><br>
 
-      <label for="requester-signature">Drop-off Signature:</label>
-      <input type="text" id="requester-signature" placeholder=""><br>
+      <label for="drop-off-signature">Drop-off Signature:</label>
+      <input type="text" id="drop-off-signature" placeholder=""><br>
     </div>
   </div>
 
@@ -323,7 +323,7 @@
     document.getElementById("veteran-label").textContent = window.dynamicTexts.veteran || "Veteran";
 
     // Update signatures
-    document.querySelector("label[for='requester-signature']").textContent = window.dynamicTexts.requester_signature;
+    document.querySelector("label[for='drop-off-signature']").textContent = window.dynamicTexts.dropoff_signature;
     document.querySelector("label[for='pickup-signature']").textContent = window.dynamicTexts.pickup_signature;
 
     // Refresh additional fields
