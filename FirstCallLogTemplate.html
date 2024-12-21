@@ -200,8 +200,6 @@
       const translations = await response.json();
       window.dynamicTexts = translations[language] || {};
       console.log("Loaded translations:", window.dynamicTexts); // Debugging
-      } catch (error) {
-      console.error("Error loading translations:", error);
 
       // Update checkbox labels dynamically
       document.getElementById("biohazard-label").textContent =
