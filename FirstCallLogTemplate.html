@@ -158,7 +158,7 @@
       <select id="deceased-location" onchange="handleLocationChange()">
         <option value="" disabled selected>Select location type</option>
         <option value="residence">Residence</option>
-        <option value="hospital">Hospital</option>
+        <option value="hospital">Hospital/Morgue</option>
         <option value="nursing-home">Nursing Home</option>
         <option value="body-donation-facility">Body Donation Facility</option>
         <option value="airport">Airport</option>
@@ -331,7 +331,7 @@ document.getElementById("language-selector").addEventListener("change", async fu
     locationTypeSelect.innerHTML = `
     <option value="" disabled selected>${window.dynamicTexts.select_location_type || "Select location type"}</option>
     <option value="residence">${window.dynamicTexts.residence || "Residence"}</option>
-    <option value="hospital">${window.dynamicTexts.hospital || "Hospital"}</option>
+    <option value="hospital">${window.dynamicTexts.hospital || "Hospital/Morgue"}</option>
     <option value="nursing-home">${window.dynamicTexts.nursing_home || "Nursing Home"}</option>
     <option value="body-donation-facility">${window.dynamicTexts.body_donation_facility || "Body Donation Facility"}</option>
     <option value="airport">${window.dynamicTexts.airport || "Airport"}</option>
