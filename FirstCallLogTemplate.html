@@ -60,6 +60,25 @@
       margin-bottom: 5px;
     }
 
+    .checkbox-container {
+     display: inline-block;
+     width: auto;
+     padding: 5px 10px;
+     border-radius: 5px;
+     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+  .checkbox-container input[type="checkbox"]:checked + span {
+    background-color: #ffd700; /* Highlight color (Gold) */
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    padding: 2px 5px; /* Add slight padding for better visibility */
+    border-radius: 5px;
+    }
+
+  .checkbox-container span {
+    transition: all 0.3s ease;
+    }
+
     .signature-field input {
       width: 100%;
       border: none;
@@ -141,11 +160,11 @@
 
       <div id="additional-fields" style="margin-top: 10px;"></div>
 
-      <label for="biohazard" style="display: inline-block; width: auto;">
+      <label for="biohazard" class="checkbox-container">
         <input type="checkbox" id="biohazard">
         <span id="biohazard-label"></span>
       </label>
-      <label for="veteran" style="display: inline-block; width: auto; margin-left: 15px;">
+      <label for="veteran" class="checkbox-container" style="margin-left: 15px;">
         <input type="checkbox" id="veteran">
         <span id="veteran-label"></span>
       </label>
@@ -172,7 +191,7 @@
     const translations = await response.json();
     window.dynamicTexts = translations[language] || {};
 
- // Set the checkbox labels dynamically
+  // Set the checkbox labels dynamically
     document.getElementById("biohazard-label").textContent =
     window.dynamicTexts.biohazard || "Biohazard";
     document.getElementById("veteran-label").textContent =
