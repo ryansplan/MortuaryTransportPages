@@ -348,10 +348,20 @@ document.getElementById("language-selector").addEventListener("change", async fu
       const { jsPDF } = window.jspdf;
       const pdfContent = document.getElementById("pdf-content");
 
+      // Hide the button
+    downloadButton.style.display = "none";
+
+    // Generate the PDF
       html2canvas(pdfContent, { scale: 2 }).then((canvas) => {
         const pdf = new jsPDF();
         const imgData = canvas.toDataURL("image/png");
         pdf.addImage(imgData, "PNG", 10, 10, 190, (canvas.height * 190) / canvas.width);
+
+
+      // Show the button again
+      downloadButton.style.display = "block";
+
+      // Save PDF
         pdf.save("First_Call_Log.pdf");
       });
     }
