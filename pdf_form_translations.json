@@ -1,7 +1,7 @@
 {
   "en": {
     "header_title": "First Call Transport Log",
-    "organization_title": "Organization/Caller Information",
+    "organization_title": "Transport Deceased To:",
     "funeral_home": "Organization:",
     "placeholder_organization": "Name of organization requesting transport",
     "address": "Address:",
@@ -58,7 +58,7 @@
   },
   "es": {
     "header_title": "Registro de Primera Llamada",
-    "organization_title": "Información de la Organización/Persona que Llama",
+    "organization_title": "Transportar al fallecido a:",
     "funeral_home": "Organización:",
     "placeholder_organization": "Nombre de la organización solicitante de transporte",
     "address": "Dirección:",
