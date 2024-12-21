@@ -1,3 +1,5 @@
+
+
 {
   "en": {
     "header_title": "First Call Transport Log",
@@ -19,8 +21,11 @@
     "body_donation": "Body Donation",
     "family_shuttle": "Family Shuttle",
     "flower_delivery": "Flower Delivery",
-    "deceased_details_title": "Deceased Details",
+    "deceased_details_title": "Deceased Details:",
     "deceased_name": "Name:",
+    "placeholder_deceased_name": "Name of deceased",
+    "placeholder_weight": "Enter weight or body size", 
+    "placeholder_death_date": "Enter date of death (or approximate)",
     "deceased_location": "Deceased's Location:",
     "select_location_type": "Select location type",
     "residence": "Residence",
@@ -76,8 +81,11 @@
     "body_donation": "Donación de cuerpo",
     "family_shuttle": "Transporte familiar",
     "flower_delivery": "Entrega de flores",
-    "deceased_details_title": "Detalles del Fallecido",
+    "deceased_details_title": "Detalles del Fallecido:",
     "deceased_name": "Nombre:",
+    "placeholder_deceased_name": "Nombre del fallecido",
+    "placeholder_weight": "Ingrese el peso o tamaño del cuerpo",
+    "placeholder_death_date": "Ingrese la fecha de fallecimiento (o aproximada)",
     "deceased_location": "Ubicación del fallecido:",
     "select_location_type": "Seleccione el tipo de ubicación",
     "residence": "Residencia",
