@@ -410,6 +410,12 @@ document.getElementById("language-selector").addEventListener("change", async fu
         const imgData = canvas.toDataURL("image/png");
         pdf.addImage(imgData, "PNG", 10, 10, 190, (canvas.height * 190) / canvas.width);
 
+        // Add the title to the upper-right corner
+        const titleText = document.getElementById("small-title").textContent;
+            pdf.setFont("helvetica", "bold");
+            pdf.setFontSize(10); // Adjust size for title
+            pdf.text(titleText, 190, 10, { align: "right" }); // Positioned top-right
+
         // Show the button again
         downloadButton.style.display = "block";
 
