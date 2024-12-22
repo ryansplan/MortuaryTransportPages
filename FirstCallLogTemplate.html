@@ -93,6 +93,15 @@
       background-color: transparent;
     }
 
+    #small-title {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 8px; /* Adjust size to be small */
+      color: #0056b3; /* Match the theme color */
+      text-transform: uppercase;
+    }
+
     button {
       background-color: #0056b3;
       color: #fff;
@@ -111,8 +120,10 @@
   </style>
 </head>
 <body>
+  <div id="small-title">First Call Log</div>
   <h1>First Call Transport Log</h1>
   <div class="form-container" id="pdf-content">
+
     <!-- Language Selector -->
     <select id="language-selector">
       <option value="en" selected>English</option>
@@ -199,6 +210,11 @@
       const response = await fetch("./pdf_form_translations.json?v=1.0");
       const translations = await response.json();
       window.dynamicTexts = translations[language] || {};
+
+      // Update small title text
+      document.getElementById("small-title").textContent = 
+      window.dynamicTexts.small_title || "First Call Log";
+
       console.log("Loaded translations:", window.dynamicTexts); // Debugging
 
       // Update checkbox labels dynamically
@@ -285,6 +301,10 @@ function populateDropdowns() {
 document.getElementById("language-selector").addEventListener("change", async function () {
     const selectedLanguage = this.value; // Get selected language
     await loadTranslations(selectedLanguage); // Load translations
+
+    // Refresh content translations, including small title
+    document.getElementById("small-title").textContent = 
+    window.dynamicTexts.small_title || "First Call Log";
 
     // Update text for all translatable elements
     document.querySelector("h1").textContent = window.dynamicTexts.header_title;
