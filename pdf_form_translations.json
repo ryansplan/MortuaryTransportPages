@@ -61,7 +61,8 @@
     "notes": "Notes:",
     "signatures_title": "Signatures",
     "drop_off_signature": "Drop-off Representative's Signature:",
-    "pickup_signature": "Pickup Representative's Signature:"
+    "pickup_signature": "Pickup Representative's Signature:",
+    "download_pdf_button": "Download PDF"
   },
   "es": {
     "header_title": "Registro de Primera Llamada",
@@ -123,7 +124,8 @@
     "veteran": "Veterano",
     "signatures_title": "Firmas",
     "drop_off_signature": "Firma del representante que entrega:",
-    "pickup_signature": "Firma de la persona que recoge:"
+    "pickup_signature": "Firma de la persona que recoge:",
+    "download_pdf_button": "Descargar PDF"
   }
 }
 

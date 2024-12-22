@@ -215,6 +215,10 @@
       document.getElementById("small-title").textContent = 
       window.dynamicTexts.small_title || "First Call Log";
 
+       // Update "Download PDF" button text
+       document.getElementById("download-pdf-btn").innerText =
+        window.dynamicTexts.download_pdf_button || "Download PDF";
+
       console.log("Loaded translations:", window.dynamicTexts); // Debugging
 
       // Update checkbox labels dynamically
@@ -302,9 +306,12 @@ document.getElementById("language-selector").addEventListener("change", async fu
     const selectedLanguage = this.value; // Get selected language
     await loadTranslations(selectedLanguage); // Load translations
 
-    // Refresh content translations, including small title
+    // Refresh content translations, including small title and PDF button
     document.getElementById("small-title").textContent = 
     window.dynamicTexts.small_title || "First Call Log";
+
+    document.getElementById("download-pdf-btn").innerText =
+    window.dynamicTexts.download_pdf_button || "Download PDF";
 
     // Update text for all translatable elements
     document.querySelector("h1").textContent = window.dynamicTexts.header_title;
@@ -384,6 +391,9 @@ document.getElementById("language-selector").addEventListener("change", async fu
     document.getElementById("weight").placeholder = window.dynamicTexts.placeholder_weight || "Enter weight or body size";
     document.getElementById("death-date").placeholder = window.dynamicTexts.placeholder_death_date || "Enter date of death (or approximate)";
     
+ // Update placeholders for default language (English)
+    document.getElementById("download-pdf-btn").innerText =
+      window.dynamicTexts.download_pdf_button || "Download PDF";
 
     populateDropdowns(); // Populate dropdowns when the page loads
 
