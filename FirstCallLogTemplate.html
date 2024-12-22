@@ -179,6 +179,10 @@
       <div id="additional-fields" style="margin-top: 10px;"></div>
 
       <div class="checkbox-group">
+        <label for="critical" class="checkbox-container">
+          <input type="checkbox" id="critical">
+          <span id="critical-label">Critical</span>
+        </label>
         <label for="biohazard" class="checkbox-container">
           <input type="checkbox" id="biohazard">
           <span id="biohazard-label">Biohazard</span>
@@ -222,6 +226,8 @@
       console.log("Loaded translations:", window.dynamicTexts); // Debugging
 
       // Update checkbox labels dynamically
+      document.getElementById("critical-label").textContent =
+      window.dynamicTexts.critical || "Critical";
       document.getElementById("biohazard-label").textContent =
       window.dynamicTexts.biohazard || "Biohazard";
       document.getElementById("veteran-label").textContent =
@@ -366,6 +372,7 @@ document.getElementById("language-selector").addEventListener("change", async fu
     `;
 
     // Update checkbox labels
+    document.getElementById("critical-label").textContent = window.dynamicTexts.critical || "Critical";
     document.getElementById("biohazard-label").textContent = window.dynamicTexts.biohazard || "Biohazard";
     document.getElementById("veteran-label").textContent = window.dynamicTexts.veteran || "Veteran";
 
