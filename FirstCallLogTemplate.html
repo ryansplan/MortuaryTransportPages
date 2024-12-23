@@ -161,6 +161,8 @@
       <input type="text" id="weight" placeholder="Enter deceased's weight or size"><br>
       <label for="death-date">Date of Death:</label>
       <input type="text" id="death-date" placeholder="Enter deceased's date of death (or approximate)"><br>
+      <label for="poc">Point of Contact:</label>
+      <input type="text" id="poc" placeholder="Enter point of contact with deceased"><br>
 
       <label for="deceased-location">Deceased's Location:</label>
       <select id="deceased-location" onchange="handleLocationChange()">
@@ -206,7 +208,7 @@
     <button id="download-pdf-btn" onclick="generatePDF()">Download PDF</button>
 
   <script>
-    
+
   // Function to load translations
   async function loadTranslations(language) {
     try {
@@ -331,6 +333,8 @@ document.getElementById("language-selector").addEventListener("change", async fu
   document.getElementById("deceased-name").placeholder = window.dynamicTexts.placeholder_deceased_name || "Name of deceased";
   document.getElementById("weight").placeholder = window.dynamicTexts.placeholder_weight || "Enter weight or body size";
   document.getElementById("death-date").placeholder = window.dynamicTexts.placeholder_death_date || "Enter date of death (or approximate)";
+  document.getElementById("poc").placeholder = window.dynamicTexts.placeholder_poc || "Enter point of contact with deceased";
+
 
   // Refresh dropdown options for Deceased's Location
   const locationTypeSelect = document.getElementById("deceased-location");
@@ -379,6 +383,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   updatePlaceholder("deceased-name", "placeholder_deceased_name", "Name of deceased");
   updatePlaceholder("weight", "placeholder_weight", "Enter weight or body size");
   updatePlaceholder("death-date", "placeholder_death_date", "Enter date of death (or approximate)");
+  updatePlaceholder("poc", "placeholder_poc", "Enter point of contact with deceased");
 
   // Update labels
   updateLabel("funeral-home", "funeral_home", "Organization:");
@@ -389,6 +394,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   updateLabel("deceased-name", "deceased_name", "Name:");
   updateLabel("weight", "weight", "Weight:");
   updateLabel("death-date", "death_date", "Date of Death:");
+  updateLabel("poc", "poc", "Enter point of contact with deceased:");
   updateLabel("deceased-location", "deceased_location", "Deceased's Location:");
 
   // Update dropdown options for Deceased's Location
@@ -440,6 +446,7 @@ document.getElementById("language-selector").addEventListener("change", async fu
   updatePlaceholder("deceased-name", "placeholder_deceased_name", "Name of deceased");
   updatePlaceholder("weight", "placeholder_weight", "Enter weight or body size");
   updatePlaceholder("death-date", "placeholder_death_date", "Enter date of death (or approximate)");
+  updatePlaceholder("poc", "placeholder_poc", "Enter point of contact with deceased");
 
   // Update labels
   updateLabel("funeral-home", "funeral_home", "Organization:");
@@ -450,6 +457,7 @@ document.getElementById("language-selector").addEventListener("change", async fu
   updateLabel("deceased-name", "deceased_name", "Name:");
   updateLabel("weight", "weight", "Weight:");
   updateLabel("death-date", "death_date", "Date of Death:");
+  updateLabel("poc", "poc", "Point of Contact:");
   updateLabel("deceased-location", "deceased_location", "Deceased's Location:");
 
   // Update dropdown options for Deceased's Location
