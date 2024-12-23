@@ -341,6 +341,7 @@ document.getElementById("language-selector").addEventListener("change", async fu
   document.getElementById("download-pdf-btn").innerText = window.dynamicTexts.download_pdf_button || "Download PDF";
 
   document.querySelector("h1").textContent = window.dynamicTexts.header_title;
+  document.querySelectorAll(".section-title")[0].textContent = window.dynamicTexts.organization_title || "Transport Deceased To:";
   document.querySelectorAll(".section-title")[1].textContent = window.dynamicTexts.deceased_details_title || "Deceased Details";
   document.querySelectorAll(".section-title")[2].textContent = window.dynamicTexts.signatures_title || "Signatures";
 
