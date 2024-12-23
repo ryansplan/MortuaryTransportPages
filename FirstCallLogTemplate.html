@@ -210,20 +210,6 @@
     <button id="download-pdf-btn" onclick="generatePDF()">Download PDF</button>
 
   <script>
-  function validateAndFormatTime(input) {
-    const timeRegex = /^(1[0-2]|0?[1-9]):([0-5][0-9])\s?(AM|PM)$/i; // Matches HH:MM AM/PM format
-    if (!input) return "";
-    const match = input.match(timeRegex);
-    if (match) {
-        const hours = match[1];
-        const minutes = match[2];
-        const period = match[3].toUpperCase();
-        return `${hours}:${minutes} ${period}`; // Properly formatted time
-    }
-    alert("Invalid time format. Please use HH:MM AM/PM.");
-    return "";
-}
-
   // load translations 
   async function loadTranslations(language) {
     try {
@@ -428,6 +414,22 @@ document.getElementById("language-selector").addEventListener("change", async fu
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
  
  <script>
+// Function to validate and format the time to AM/PM
+function validateAndFormatTime(input) {
+    const timeRegex = /^(1[0-2]|0?[1-9]):([0-5][0-9])\s?(AM|PM)$/i; // Matches HH:MM AM/PM format
+    if (!input) return "";
+    const match = input.match(timeRegex);
+    if (match) {
+      const hours = match[1];
+      const minutes = match[2];
+      const period = match[3].toUpperCase();
+      return `${hours}:${minutes} ${period}`; // Properly formatted time
+    }
+    alert("Invalid time format. Please use HH:MM AM/PM.");
+    return "";
+  }
+
+// Function to generate PDF
  async function generatePDF() {
   const { jsPDF } = window.jspdf;
   const pdfContent = document.getElementById("pdf-content");
@@ -436,10 +438,13 @@ document.getElementById("language-selector").addEventListener("change", async fu
   // Hide the button during PDF generation
   downloadButton.style.display = "none";
 
-  // Retrieve and format the call time
-  const callTimeInput = document.getElementById("call-time").value.trim();
-  const formattedCallTime = validateAndFormatTime(callTimeInput); // Validate and format
-  if (!formattedCallTime) return; // Stop if the format is invalid
+  // Retrieve and validate the call time
+  const callTimeInput = document.getElementById("call-time");
+  const formattedCallTime = validateAndFormatTime(callTimeInput.value.trim()); // Format time to AM/PM
+  if (!formattedCallTime) return; // Stop if invalid
+
+   // Update the DOM with the formatted time (for PDF rendering)
+   callTimeInput.value = formattedCallTime;
 
   // Generate the PDF
   html2canvas(pdfContent, { scale: 2 }).then((canvas) => {
