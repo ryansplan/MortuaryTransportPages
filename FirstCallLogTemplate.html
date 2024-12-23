@@ -210,6 +210,16 @@
     <button id="download-pdf-btn" onclick="generatePDF()">Download PDF</button>
 
   <script>
+  // Utility function for formatting time to AM/PM
+  function formatTimeToAMPM(time) {
+    if (!time) return ""; // Handle empty input gracefully
+    const [hours, minutes] = time.split(":");
+    const period = +hours >= 12 ? "PM" : "AM";
+    const hours12 = +hours % 12 || 12; // Convert to 12-hour format
+    return `${hours12}:${minutes} ${period}`;
+  }
+
+  // load translations 
   async function loadTranslations(language) {
     try {
       const response = await fetch("./pdf_form_translations.json?v=1.0");
@@ -404,21 +414,7 @@ document.getElementById("language-selector").addEventListener("change", async fu
       window.dynamicTexts.download_pdf_button || "Download PDF";
 
     populateDropdowns(); // Populate dropdowns when the page loads
-
-     // Add event listener for time format conversion in the web display
-     const callTimeInput = document.getElementById("call-time");
-    callTimeInput.addEventListener("change", () => {
-      const timeValue = callTimeInput.value; // e.g., "21:34"
-      if (timeValue) {
-        const [hours, minutes] = timeValue.split(":");
-        const period = +hours >= 12 ? "PM" : "AM";
-        const hours12 = +hours % 12 || 12; // Convert to 12-hour format
-        const formattedTime = `${hours12}:${minutes} ${period}`; // e.g., "9:34 PM"
-        // Display the formatted time in the input field
-        callTimeInput.setAttribute("data-formatted", formattedTime);
-      }
     });
-  });
 
 </script>
 
@@ -436,8 +432,8 @@ document.getElementById("language-selector").addEventListener("change", async fu
   downloadButton.style.display = "none";
 
   // Retrieve and format the call time
-    const callTimeInput = document.getElementById("call-time");
-    const formattedCallTime = callTimeInput.getAttribute("data-formatted") || callTimeInput.value;
+  const callTimeInput = document.getElementById("call-time").value; // e.g., "21:34"
+  const formattedCallTime = formatTimeToAMPM(callTimeInput); // Convert to AM/PM
 
   // Generate the PDF
   html2canvas(pdfContent, { scale: 2 }).then((canvas) => {
