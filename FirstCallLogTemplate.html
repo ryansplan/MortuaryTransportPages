@@ -416,9 +416,6 @@ document.getElementById("language-selector").addEventListener("change", async fu
   // Hide the button during PDF generation
   downloadButton.style.display = "none";
 
-   // Update the DOM with the formatted time (for PDF rendering)
-   callTimeInput.value = formattedCallTime;
-
   // Generate the PDF
   html2canvas(pdfContent, { scale: 2 }).then((canvas) => {
     const pdf = new jsPDF();
