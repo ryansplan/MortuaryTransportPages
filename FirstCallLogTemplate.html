@@ -323,19 +323,6 @@
 }
 
 
-function populateDropdowns() {
-  // Populate the Call Type dropdown
-  const callTypeSelect = document.getElementById("call-type");
-  callTypeSelect.innerHTML = `
-    <option value="" disabled selected>${window.dynamicTexts.select_call_type || "Select call type"}</option>
-    <option value="transport">${window.dynamicTexts.transport || "Transport"}</option>
-    <option value="emergency-transport">${window.dynamicTexts.emergency_transport || "Emergency Transport"}</option>
-    <option value="body-donation">${window.dynamicTexts.body_donation || "Body Donation"}</option>
-    <option value="family-shuttle">${window.dynamicTexts.family_shuttle || "Family Shuttle"}</option>
-    <option value="flower-delivery">${window.dynamicTexts.flower_delivery || "Flower Delivery"}</option>
-  `;
-}
-
 document.getElementById("language-selector").addEventListener("change", async function () {
   const selectedLanguage = this.value; // Get the selected language
   await loadTranslations(selectedLanguage); // Load translations
