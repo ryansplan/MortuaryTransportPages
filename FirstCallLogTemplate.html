@@ -430,17 +430,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   updateLabel("deceased-name", "deceased_name", "Name:");
   updateLabel("weight", "weight", "Weight:");
   updateLabel("death-date", "death_date", "Date of Death:");
+  updateLabel("deceased-location", "deceased_location", "Deceased's Location:");
 
   // Update dropdown options for Deceased's Location
   const locationTypeSelect = document.getElementById("deceased-location");
   locationTypeSelect.innerHTML = `
-  <option value="" disabled selected>${window.dynamicTexts.select_location_type || "Select location type"}</option>
-  <option value="residence">${window.dynamicTexts.residence || "Residence"}</option>
-  <option value="hospital">${window.dynamicTexts.hospital || "Hospital/Morgue"}</option>
-  <option value="nursing-home">${window.dynamicTexts.nursing_home || "Nursing Home"}</option>
-  <option value="body-donation-facility">${window.dynamicTexts.body_donation_facility || "Body Donation Facility"}</option>
-  <option value="airport">${window.dynamicTexts.airport || "Airport"}</option>
-  <option value="other">${window.dynamicTexts.other || "Other"}</option>
+    <option value="" disabled selected>${window.dynamicTexts.select_location_type || "Select location type"}</option>
+    <option value="residence">${window.dynamicTexts.residence || "Residence"}</option>
+    <option value="hospital">${window.dynamicTexts.hospital || "Hospital/Morgue"}</option>
+    <option value="nursing-home">${window.dynamicTexts.nursing_home || "Nursing Home"}</option>
+    <option value="body-donation-facility">${window.dynamicTexts.body_donation_facility || "Body Donation Facility"}</option>
+    <option value="airport">${window.dynamicTexts.airport || "Airport"}</option>
+    <option value="other">${window.dynamicTexts.other || "Other"}</option>
   `;
 
   // Update checkbox labels
@@ -448,13 +449,62 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("biohazard-label").textContent = window.dynamicTexts.biohazard || "Biohazard";
   document.getElementById("veteran-label").textContent = window.dynamicTexts.veteran || "Veteran";
 
-   // Update signature labels
+  // Update signature labels
   updateLabel("pickup-signature", "pickup_signature", "Pickup Representative's Signature:");
   updateLabel("drop-off-signature", "drop_off_signature", "Drop-off Representative's Signature:");
 
   // Populate dropdowns
   populateDropdowns();
 });
+
+document.getElementById("language-selector").addEventListener("change", async function () {
+  const selectedLanguage = this.value;
+  await loadTranslations(selectedLanguage);
+
+  // Update placeholders
+  updatePlaceholder("funeral-home", "placeholder_organization", "Name of organization requesting transport");
+  updatePlaceholder("funeral-home-address", "placeholder_address", "Enter organization's address");
+  updatePlaceholder("contact-number", "placeholder_contact_number", "Enter organization's contact number");
+  updatePlaceholder("call-time", "placeholder_call_time", "Enter time (e.g., 9:30 AM)");
+  updatePlaceholder("deceased-name", "placeholder_deceased_name", "Name of deceased");
+  updatePlaceholder("weight", "placeholder_weight", "Enter weight or body size");
+  updatePlaceholder("death-date", "placeholder_death_date", "Enter date of death (or approximate)");
+
+  // Update labels
+  updateLabel("funeral-home", "funeral_home", "Organization:");
+  updateLabel("funeral-home-address", "address", "Address:");
+  updateLabel("contact-number", "contact_number", "Contact Number:");
+  updateLabel("call-time", "call_time", "Call Time:");
+  updateLabel("deceased-name", "deceased_name", "Name:");
+  updateLabel("weight", "weight", "Weight:");
+  updateLabel("death-date", "death_date", "Date of Death:");
+  updateLabel("deceased-location", "deceased_location", "Deceased's Location:");
+
+  // Update dropdown options for Deceased's Location
+  const locationTypeSelect = document.getElementById("deceased-location");
+  locationTypeSelect.innerHTML = `
+    <option value="" disabled selected>${window.dynamicTexts.select_location_type || "Select location type"}</option>
+    <option value="residence">${window.dynamicTexts.residence || "Residence"}</option>
+    <option value="hospital">${window.dynamicTexts.hospital || "Hospital/Morgue"}</option>
+    <option value="nursing-home">${window.dynamicTexts.nursing_home || "Nursing Home"}</option>
+    <option value="body-donation-facility">${window.dynamicTexts.body_donation_facility || "Body Donation Facility"}</option>
+    <option value="airport">${window.dynamicTexts.airport || "Airport"}</option>
+    <option value="other">${window.dynamicTexts.other || "Other"}</option>
+  `;
+
+  // Update checkbox labels
+  document.getElementById("critical-label").textContent = window.dynamicTexts.critical || "Critical";
+  document.getElementById("biohazard-label").textContent = window.dynamicTexts.biohazard || "Biohazard";
+  document.getElementById("veteran-label").textContent = window.dynamicTexts.veteran || "Veteran";
+
+  // Update signature labels
+  updateLabel("pickup-signature", "pickup_signature", "Pickup Representative's Signature:");
+  updateLabel("drop-off-signature", "drop_off_signature", "Drop-off Representative's Signature:");
+
+  // Populate dropdowns
+  populateDropdowns();
+});
+
 
 document.getElementById("language-selector").addEventListener("change", async function () {
   const selectedLanguage = this.value;
