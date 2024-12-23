@@ -440,7 +440,7 @@ document.getElementById("language-selector").addEventListener("change", async fu
 
     // Overlay the formatted time inside the "Call Time" text box
     const callTimePositionX = 120; // Adjust to align with the text box
-    const callTimePositionY = 50; // Adjust to match the box height
+    const callTimePositionY = 10; // Adjust to match the box height
     pdf.setFont("helvetica", "normal");
     pdf.setFontSize(10); // Adjust the font size to fit
     pdf.text(formattedCallTime, callTimePositionX, callTimePositionY);
