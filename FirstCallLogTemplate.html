@@ -147,7 +147,7 @@
       <input type="date" id="date-of-call"><br>
 
       <label for="call-time">Call Time:</label>
-      <input type="time" id="call-time"><br>
+      <input type="text" id="call-time" placeholder="Enter time (e.g., 9:30 AM)">
 
       <label for="callers-name">Caller's Name:</label>
       <input type="text" id="callers-name" placeholder="Enter caller's name"><br>
@@ -210,14 +210,19 @@
     <button id="download-pdf-btn" onclick="generatePDF()">Download PDF</button>
 
   <script>
-  // Utility function for formatting time to AM/PM
-  function formatTimeToAMPM(time) {
-    if (!time) return ""; // Handle empty input gracefully
-    const [hours, minutes] = time.split(":");
-    const period = +hours >= 12 ? "PM" : "AM";
-    const hours12 = +hours % 12 || 12; // Convert to 12-hour format
-    return `${hours12}:${minutes} ${period}`;
-  }
+  function validateAndFormatTime(input) {
+    const timeRegex = /^(1[0-2]|0?[1-9]):([0-5][0-9])\s?(AM|PM)$/i; // Matches HH:MM AM/PM format
+    if (!input) return "";
+    const match = input.match(timeRegex);
+    if (match) {
+        const hours = match[1];
+        const minutes = match[2];
+        const period = match[3].toUpperCase();
+        return `${hours}:${minutes} ${period}`; // Properly formatted time
+    }
+    alert("Invalid time format. Please use HH:MM AM/PM.");
+    return "";
+}
 
   // load translations 
   async function loadTranslations(language) {
@@ -432,8 +437,9 @@ document.getElementById("language-selector").addEventListener("change", async fu
   downloadButton.style.display = "none";
 
   // Retrieve and format the call time
-  const callTimeInput = document.getElementById("call-time").value; // e.g., "21:34"
-  const formattedCallTime = formatTimeToAMPM(callTimeInput); // Convert to AM/PM
+  const callTimeInput = document.getElementById("call-time").value.trim();
+  const formattedCallTime = validateAndFormatTime(callTimeInput); // Validate and format
+  if (!formattedCallTime) return; // Stop if the format is invalid
 
   // Generate the PDF
   html2canvas(pdfContent, { scale: 2 }).then((canvas) => {
