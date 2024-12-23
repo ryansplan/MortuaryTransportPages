@@ -206,37 +206,7 @@
     <button id="download-pdf-btn" onclick="generatePDF()">Download PDF</button>
 
   <script>
-  // load translations 
-  async function loadTranslations(language) {
-    try {
-      const response = await fetch("./pdf_form_translations.json?v=1.0");
-      const translations = await response.json();
-      window.dynamicTexts = translations[language] || {};
-
-      // Update small title text
-      document.getElementById("small-title").textContent = 
-      window.dynamicTexts.small_title || "First Call Log";
-
-       // Update "Download PDF" button text
-       document.getElementById("download-pdf-btn").innerText =
-        window.dynamicTexts.download_pdf_button || "Download PDF";
-
-      console.log("Loaded translations:", window.dynamicTexts); // Debugging
-
-      // Update checkbox labels dynamically
-      document.getElementById("critical-label").textContent =
-      window.dynamicTexts.critical || "Critical";
-      document.getElementById("biohazard-label").textContent =
-      window.dynamicTexts.biohazard || "Biohazard";
-      document.getElementById("veteran-label").textContent =
-      window.dynamicTexts.veteran || "Veteran";
-
-
-    } catch (error) {
-      console.error("Error loading translations:", error);
-    }
-  }
-
+    
   // Function to load translations
   async function loadTranslations(language) {
     try {
