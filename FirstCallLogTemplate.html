@@ -422,6 +422,16 @@ document.getElementById("language-selector").addEventListener("change", async fu
     // Hide the button
     downloadButton.style.display = "none";
 
+     // Retrieve and format the call time
+     const callTimeInput = document.getElementById("call-time").value; // e.g., "21:10"
+    let formattedCallTime = callTimeInput;
+    if (callTimeInput) {
+        const [hours, minutes] = callTimeInput.split(":");
+        const period = +hours >= 12 ? "PM" : "AM";
+        const hours12 = +hours % 12 || 12; // Convert to 12-hour format
+        formattedCallTime = `${hours12}:${minutes} ${period}`; // e.g., "9:10 PM"
+    }
+
     // Generate the PDF
     html2canvas(pdfContent, { scale: 2 }).then((canvas) => {
         const pdf = new jsPDF();
