@@ -234,6 +234,34 @@
     }
   }
 
+  // Function to load translations
+  async function loadTranslations(language) {
+    try {
+      const response = await fetch("./pdf_form_translations.json?v=1.0");
+      const translations = await response.json();
+      window.dynamicTexts = translations[language] || {};
+      console.log("Loaded translations:", window.dynamicTexts);
+    } catch (error) {
+      console.error("Error loading translations:", error);
+    }
+  }
+
+  // Helper function to update placeholders
+  function updatePlaceholder(id, translationKey, defaultText) {
+    const element = document.getElementById(id);
+    if (element) {
+      element.placeholder = window.dynamicTexts[translationKey] || defaultText;
+    }
+  }
+
+  // Helper function to update labels
+  function updateLabel(forId, translationKey, defaultText) {
+    const label = document.querySelector(`label[for='${forId}']`);
+    if (label) {
+      label.textContent = window.dynamicTexts[translationKey] || defaultText;
+    }
+  }
+
   function handleLocationChange() {
   const locationType = document.getElementById("deceased-location").value;
   const additionalFields = document.getElementById("additional-fields");
@@ -382,24 +410,61 @@ document.getElementById("language-selector").addEventListener("change", async fu
 });
 
 
-    document.addEventListener("DOMContentLoaded", async () => {
-    await loadTranslations("en");
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadTranslations("en");
 
-   // Update placeholders for default language (English)
-   document.getElementById("funeral-home").placeholder = window.dynamicTexts.placeholder_organization || "Name of organization requesting transport";
-   document.getElementById("funeral-home-address").placeholder = window.dynamicTexts.placeholder_address || "Enter organization's address";
-   document.getElementById("contact-number").placeholder = window.dynamicTexts.placeholder_contact_number || "Enter organization's contact number";
-   document.getElementById("call-time").placeholder = window.dynamicTexts.placeholder_call_time || "Enter time (e.g., 9:30 AM)";
-   document.getElementById("deceased-name").placeholder = window.dynamicTexts.placeholder_deceased_name || "Name of deceased";
-   document.getElementById("weight").placeholder = window.dynamicTexts.placeholder_weight || "Enter weight or body size";
-   document.getElementById("death-date").placeholder = window.dynamicTexts.placeholder_death_date || "Enter date of death (or approximate)";
+  // Update placeholders
+  updatePlaceholder("funeral-home", "placeholder_organization", "Name of organization requesting transport");
+  updatePlaceholder("funeral-home-address", "placeholder_address", "Enter organization's address");
+  updatePlaceholder("contact-number", "placeholder_contact_number", "Enter organization's contact number");
+  updatePlaceholder("call-time", "placeholder_call_time", "Enter time (e.g., 9:30 AM)");
+  updatePlaceholder("deceased-name", "placeholder_deceased_name", "Name of deceased");
+  updatePlaceholder("weight", "placeholder_weight", "Enter weight or body size");
+  updatePlaceholder("death-date", "placeholder_death_date", "Enter date of death (or approximate)");
+
+  // Update labels
+  updateLabel("funeral-home", "funeral_home", "Organization:");
+  updateLabel("funeral-home-address", "address", "Address:");
+  updateLabel("contact-number", "contact_number", "Contact Number:");
+  updateLabel("call-time", "call_time", "Call Time:");
+  updateLabel("deceased-name", "deceased_name", "Name:");
+  updateLabel("weight", "weight", "Weight:");
+  updateLabel("death-date", "death_date", "Date of Death:");
+
+  // Populate dropdowns
+  populateDropdowns();
+});
+
+document.getElementById("language-selector").addEventListener("change", async function () {
+  const selectedLanguage = this.value;
+  await loadTranslations(selectedLanguage);
+
+  // Update placeholders
+  updatePlaceholder("funeral-home", "placeholder_organization", "Name of organization requesting transport");
+  updatePlaceholder("funeral-home-address", "placeholder_address", "Enter organization's address");
+  updatePlaceholder("contact-number", "placeholder_contact_number", "Enter organization's contact number");
+  updatePlaceholder("call-time", "placeholder_call_time", "Enter time (e.g., 9:30 AM)");
+  updatePlaceholder("deceased-name", "placeholder_deceased_name", "Name of deceased");
+  updatePlaceholder("weight", "placeholder_weight", "Enter weight or body size");
+  updatePlaceholder("death-date", "placeholder_death_date", "Enter date of death (or approximate)");
+
+  // Update labels
+  updateLabel("funeral-home", "funeral_home", "Organization:");
+  updateLabel("funeral-home-address", "address", "Address:");
+  updateLabel("contact-number", "contact_number", "Contact Number:");
+  updateLabel("call-time", "call_time", "Call Time:");
+  updateLabel("deceased-name", "deceased_name", "Name:");
+  updateLabel("weight", "weight", "Weight:");
+  updateLabel("death-date", "death_date", "Date of Death:");
+
+  // Populate dropdowns
+  populateDropdowns();
+});
 
  // Update placeholders for default language (English)
     document.getElementById("download-pdf-btn").innerText =
       window.dynamicTexts.download_pdf_button || "Download PDF";
 
-    populateDropdowns(); // Populate dropdowns when the page loads
-    });
 
 </script>
 
