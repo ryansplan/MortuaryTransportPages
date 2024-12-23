@@ -414,47 +414,43 @@ document.getElementById("language-selector").addEventListener("change", async fu
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
  
  <script>
-  async function generatePDF() {
-    const { jsPDF } = window.jspdf;
-    const pdfContent = document.getElementById("pdf-content");
-    const downloadButton = document.getElementById("download-pdf-btn");
+ async function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const pdfContent = document.getElementById("pdf-content");
+  const downloadButton = document.getElementById("download-pdf-btn");
 
-    // Hide the button
-    downloadButton.style.display = "none";
+  // Hide the button during PDF generation
+  downloadButton.style.display = "none";
 
-    // Retrieve and format the call time
-    const callTimeInput = document.getElementById("call-time").value; // e.g., "21:10"
-    let formattedCallTime = callTimeInput;
-    if (callTimeInput) {
-        const [hours, minutes] = callTimeInput.split(":");
-        const period = +hours >= 12 ? "PM" : "AM";
-        const hours12 = +hours % 12 || 12; // Convert to 12-hour format
-        formattedCallTime = `${hours12}:${minutes} ${period}`; // e.g., "9:10 PM"
-    }
+  // Retrieve and format the call time
+  const callTimeInput = document.getElementById("call-time").value; // e.g., "21:34"
+  let formattedCallTime = callTimeInput;
+  if (callTimeInput) {
+    const [hours, minutes] = callTimeInput.split(":");
+    const period = +hours >= 12 ? "PM" : "AM";
+    const hours12 = +hours % 12 || 12; // Convert to 12-hour format
+    formattedCallTime = `${hours12}:${minutes} ${period}`; // e.g., "9:34 PM"
+  }
 
-        // Generate the PDF
-        html2canvas(pdfContent, { scale: 2 }).then((canvas) => {
-        const pdf = new jsPDF();
-        const imgData = canvas.toDataURL("image/png");
-        pdf.addImage(imgData, "PNG", 10, 10, 190, (canvas.height * 190) / canvas.width);
+  // Generate the PDF
+  html2canvas(pdfContent, { scale: 2 }).then((canvas) => {
+    const pdf = new jsPDF();
+    const imgData = canvas.toDataURL("image/png");
+    pdf.addImage(imgData, "PNG", 10, 10, 190, (canvas.height * 190) / canvas.width);
 
-        // Add the title to the upper-right corner
-        const titleText = document.getElementById("small-title").textContent;
-        pdf.setFont("helvetica", "bold");
-        pdf.setFontSize(10); // Adjust size for title
-        pdf.text(titleText, 190, 10, { align: "right" }); // Positioned top-right
+    // Overlay the formatted time inside the "Call Time" text box
+    const callTimePositionX = 120; // Adjust to align with the text box
+    const callTimePositionY = 50; // Adjust to match the box height
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(10); // Adjust the font size to fit
+    pdf.text(formattedCallTime, callTimePositionX, callTimePositionY);
 
-        // Add the formatted time to the PDF
-        pdf.setFont("helvetica", "normal");
-        pdf.setFontSize(12); // Set appropriate font size for content
-        pdf.text(`Call Time: ${formattedCallTime}`, 10, 40); // Adjust position as needed
+    // Show the button again after generation
+    downloadButton.style.display = "block";
 
-        // Show the button again
-        downloadButton.style.display = "block";
-
-        // Save the PDF
-        pdf.save("First_Call_Log.pdf");
-    });
+    // Save the PDF
+    pdf.save("First_Call_Log.pdf");
+  });
 }
   </script>
 </body>
