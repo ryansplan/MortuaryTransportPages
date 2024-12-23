@@ -414,7 +414,7 @@ document.getElementById("language-selector").addEventListener("change", async fu
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
  
  <script>
-    async function generatePDF() {
+  async function generatePDF() {
     const { jsPDF } = window.jspdf;
     const pdfContent = document.getElementById("pdf-content");
     const downloadButton = document.getElementById("download-pdf-btn");
@@ -422,8 +422,8 @@ document.getElementById("language-selector").addEventListener("change", async fu
     // Hide the button
     downloadButton.style.display = "none";
 
-     // Retrieve and format the call time
-     const callTimeInput = document.getElementById("call-time").value; // e.g., "21:10"
+    // Retrieve and format the call time
+    const callTimeInput = document.getElementById("call-time").value; // e.g., "21:10"
     let formattedCallTime = callTimeInput;
     if (callTimeInput) {
         const [hours, minutes] = callTimeInput.split(":");
@@ -432,21 +432,22 @@ document.getElementById("language-selector").addEventListener("change", async fu
         formattedCallTime = `${hours12}:${minutes} ${period}`; // e.g., "9:10 PM"
     }
 
-    // Generate the PDF
-    html2canvas(pdfContent, { scale: 2 }).then((canvas) => {
+        // Generate the PDF
+        html2canvas(pdfContent, { scale: 2 }).then((canvas) => {
         const pdf = new jsPDF();
         const imgData = canvas.toDataURL("image/png");
         pdf.addImage(imgData, "PNG", 10, 10, 190, (canvas.height * 190) / canvas.width);
 
         // Add the title to the upper-right corner
         const titleText = document.getElementById("small-title").textContent;
-            pdf.setFont("helvetica", "bold");
-            pdf.setFontSize(10); // Adjust size for title
-            pdf.text(titleText, 190, 10, { align: "right" }); // Positioned top-right
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(10); // Adjust size for title
+        pdf.text(titleText, 190, 10, { align: "right" }); // Positioned top-right
 
-
-        // Optionally add the formatted time to the PDF
-        pdf.text(`Call Time: ${formattedCallTime}`, 10, 280); // Adjust position as needed
+        // Add the formatted time to the PDF
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(12); // Set appropriate font size for content
+        pdf.text(`Call Time: ${formattedCallTime}`, 10, 60); // Adjust position as needed
 
         // Show the button again
         downloadButton.style.display = "block";
