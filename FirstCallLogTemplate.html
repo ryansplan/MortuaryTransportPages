@@ -146,8 +146,21 @@
       <label for="date-of-call">Date of Call:</label>
       <input type="date" id="date-of-call"><br>
 
-      <label for="call-time">Call Time:</label>
-      <input type="text" id="call-time" placeholder="Enter time (e.g., 9:30 AM)">
+      <!-- Call Time Section -->
+    <label for="call-time-hours">Call Time:</label>
+    <select id="call-time-hours">
+    <option value="" disabled selected>HH</option>
+      ${Array.from({ length: 12 }, (_, i) => `<option value="${i + 1}">${i + 1}</option>`).join('')}
+      </select>
+      :
+      <select id="call-time-minutes">
+      <option value="" disabled selected>MM</option>
+      ${Array.from({ length: 60 }, (_, i) => `<option value="${i < 10 ? '0' + i : i}">${i < 10 ? '0' + i : i}</option>`).join('')}
+      </select>
+      <select id="call-time-period">
+      <option value="AM">AM</option>
+      <option value="PM">PM</option>
+      </select>
 
       <label for="callers-name">Caller's Name:</label>
       <input type="text" id="callers-name" placeholder="Enter caller's name"><br>
@@ -415,19 +428,25 @@ document.getElementById("language-selector").addEventListener("change", async fu
  
  <script>
 // Function to validate and format the time to AM/PM
-function validateAndFormatTime(input) {
-    const timeRegex = /^(1[0-2]|0?[1-9]):([0-5][0-9])\s?(AM|PM)$/i; // Matches HH:MM AM/PM format
-    if (!input) return "";
-    const match = input.match(timeRegex);
-    if (match) {
-      const hours = match[1];
-      const minutes = match[2];
-      const period = match[3].toUpperCase();
-      return `${hours}:${minutes} ${period}`; // Properly formatted time
-    }
-    alert("Invalid time format. Please use HH:MM AM/PM.");
+function getFormattedTime() {
+  const hoursDropdown = document.getElementById("call-time-hours");
+  const minutesDropdown = document.getElementById("call-time-minutes");
+  const periodDropdown = document.getElementById("call-time-period");
+
+  // Get selected values
+  const hours = hoursDropdown.value;
+  const minutes = minutesDropdown.value;
+  const period = periodDropdown.value;
+
+  // Ensure all fields are selected
+  if (!hours || !minutes || !period) {
+    alert("Please select a valid time (HH:MM AM/PM).");
     return "";
   }
+
+  // Return the formatted time
+  return `${hours}:${minutes} ${period}`;
+}
 
 // Function to generate PDF
  async function generatePDF() {
@@ -435,12 +454,15 @@ function validateAndFormatTime(input) {
   const pdfContent = document.getElementById("pdf-content");
   const downloadButton = document.getElementById("download-pdf-btn");
 
+  // Update the DOM with the formatted time
+  const timeDisplayElement = document.getElementById("call-time-display");
+  timeDisplayElement.textContent = formattedCallTime; // Update visible content for PDF rendering
+
   // Hide the button during PDF generation
   downloadButton.style.display = "none";
 
-  // Retrieve and validate the call time
-  const callTimeInput = document.getElementById("call-time");
-  const formattedCallTime = validateAndFormatTime(callTimeInput.value.trim()); // Format time to AM/PM
+   // Get formatted time
+   const formattedCallTime = getFormattedTime();
   if (!formattedCallTime) return; // Stop if invalid
 
    // Update the DOM with the formatted time (for PDF rendering)
