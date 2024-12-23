@@ -149,6 +149,9 @@
       <label for="call-time">Call Time:</label>
       <input type="text" id="call-time" placeholder="Enter time (e.g., 9:30 AM)">
 
+      <label for="call-time">Caller's Name:</label>
+      <input type="text" id="callers-name" placeholder="Enter caller's name">
+
     <!-- Deceased Details -->
     <div class="section">
       <div class="section-title">Deceased Details</div>
@@ -351,12 +354,15 @@ document.getElementById("language-selector").addEventListener("change", async fu
   document.querySelector("label[for='contact-number']").textContent = window.dynamicTexts.contact_number;
   document.querySelector("label[for='date-of-call']").textContent = window.dynamicTexts.date_of_call;
   document.querySelector("label[for='call-time']").textContent = window.dynamicTexts.call_time;
+  document.querySelector("label[for='callers-name']").textContent = window.dynamicTexts.callers_name;
 
   // Update placeholders for static inputs
   document.getElementById("funeral-home").placeholder = window.dynamicTexts.placeholder_organization || "Name of organization requesting transport";
   document.getElementById("funeral-home-address").placeholder = window.dynamicTexts.placeholder_address || "Enter organization's address";
   document.getElementById("contact-number").placeholder = window.dynamicTexts.placeholder_contact_number || "Enter organization's contact number";
   document.getElementById("call-time").placeholder = window.dynamicTexts.placeholder_call_time || "Enter time (e.g., 9:30 AM)";
+  document.getElementById("callers-name").placeholder = window.dynamicTexts.placeholder_callers_name || "Enter caller's name";
+
 
   // Update deceased details
   document.querySelector("label[for='deceased-name']").textContent = window.dynamicTexts.deceased_name;
