@@ -333,57 +333,44 @@ function populateDropdowns() {
 }
 
 document.getElementById("language-selector").addEventListener("change", async function () {
-    const selectedLanguage = this.value; // Get selected language
-    await loadTranslations(selectedLanguage); // Load translations
+  const selectedLanguage = this.value; // Get the selected language
+  await loadTranslations(selectedLanguage); // Load translations
 
-    // Refresh content translations, including small title and PDF button
-    document.getElementById("small-title").textContent = window.dynamicTexts.small_title || "First Call Log";
-    document.getElementById("download-pdf-btn").innerText = window.dynamicTexts.download_pdf_button || "Download PDF";
+  // Refresh static translations
+  document.getElementById("small-title").textContent = window.dynamicTexts.small_title || "First Call Log";
+  document.getElementById("download-pdf-btn").innerText = window.dynamicTexts.download_pdf_button || "Download PDF";
 
-    // Update text for all translatable elements
-    document.querySelector("h1").textContent = window.dynamicTexts.header_title;
-    document.querySelector(".section-title").textContent = window.dynamicTexts.organization_title;
-    document.querySelectorAll(".section-title")[1].textContent = window.dynamicTexts.deceased_details_title || "Deceased Details";
-    document.querySelectorAll(".section-title")[2].textContent = window.dynamicTexts.signatures_title || "Signatures";
+  document.querySelector("h1").textContent = window.dynamicTexts.header_title;
+  document.querySelectorAll(".section-title")[1].textContent = window.dynamicTexts.deceased_details_title || "Deceased Details";
+  document.querySelectorAll(".section-title")[2].textContent = window.dynamicTexts.signatures_title || "Signatures";
 
-    // Update form labels
-    document.querySelector("label[for='funeral-home']").textContent = window.dynamicTexts.funeral_home;
-    document.querySelector("label[for='funeral-home-address']").textContent = window.dynamicTexts.address;
-    document.querySelector("label[for='contact-number']").textContent = window.dynamicTexts.contact_number;
-    document.querySelector("label[for='date-of-call']").textContent = window.dynamicTexts.date_of_call;
-    document.querySelector("label[for='call-time']").textContent = window.dynamicTexts.call_time;
-    document.querySelector("label[for='callers-name']").textContent = window.dynamicTexts.callers_name;
-    document.querySelector("label[for='call-type']").textContent = window.dynamicTexts.call_type;
+  // Update form labels
+  document.querySelector("label[for='funeral-home']").textContent = window.dynamicTexts.funeral_home;
+  document.querySelector("label[for='funeral-home-address']").textContent = window.dynamicTexts.address;
+  document.querySelector("label[for='contact-number']").textContent = window.dynamicTexts.contact_number;
+  document.querySelector("label[for='date-of-call']").textContent = window.dynamicTexts.date_of_call;
+  document.querySelector("label[for='call-time']").textContent = window.dynamicTexts.call_time;
 
-  // Update Organization placeholders
-    document.getElementById("funeral-home").placeholder = window.dynamicTexts.placeholder_organization || "Name of organization requesting transport";
-    document.getElementById("funeral-home-address").placeholder = window.dynamicTexts.placeholder_address || "Enter organization's address";
-    document.getElementById("contact-number").placeholder = window.dynamicTexts.placeholder_contact_number || "Enter organization's contact number";
-    document.getElementById("callers-name").placeholder = window.dynamicTexts.placeholder_callers_name || "Enter caller's name";
-    document.getElementById("call-time").placeholder = window.dynamicTexts.placeholder_call_time || "Enter time (e.g., 9:30 AM)";
+  // Update placeholders for static inputs
+  document.getElementById("funeral-home").placeholder = window.dynamicTexts.placeholder_organization || "Name of organization requesting transport";
+  document.getElementById("funeral-home-address").placeholder = window.dynamicTexts.placeholder_address || "Enter organization's address";
+  document.getElementById("contact-number").placeholder = window.dynamicTexts.placeholder_contact_number || "Enter organization's contact number";
+  document.getElementById("call-time").placeholder = window.dynamicTexts.placeholder_call_time || "Enter time (e.g., 9:30 AM)";
 
-    console.log("Translations loaded for language:", window.dynamicTexts);
+  // Update deceased details
+  document.querySelector("label[for='deceased-name']").textContent = window.dynamicTexts.deceased_name;
+  document.querySelector("label[for='weight']").textContent = window.dynamicTexts.weight;
+  document.querySelector("label[for='death-date']").textContent = window.dynamicTexts.death_date;
+  document.querySelector("label[for='deceased-location']").textContent = window.dynamicTexts.deceased_location;
 
+  // Update placeholders for deceased details
+  document.getElementById("deceased-name").placeholder = window.dynamicTexts.placeholder_deceased_name || "Name of deceased";
+  document.getElementById("weight").placeholder = window.dynamicTexts.placeholder_weight || "Enter weight or body size";
+  document.getElementById("death-date").placeholder = window.dynamicTexts.placeholder_death_date || "Enter date of death (or approximate)";
 
-    // Call populateDropdowns to refresh dropdown values
-    populateDropdowns();
-
-    // Update deceased details
-    document.querySelector("label[for='deceased-name']").textContent = window.dynamicTexts.deceased_name;
-    document.querySelector("label[for='weight']").textContent = window.dynamicTexts.weight;
-    document.querySelector("label[for='death-date']").textContent = window.dynamicTexts.death_date;
-    document.querySelector("label[for='deceased-location']").textContent = window.dynamicTexts.deceased_location;
-
-
-    // Update deceased placeholders
-    document.getElementById("deceased-name").placeholder = window.dynamicTexts.placeholder_deceased_name || "Name of deceased";
-    document.getElementById("weight").placeholder = window.dynamicTexts.placeholder_weight || "Enter weight or body size";
-    document.getElementById("death-date").placeholder = window.dynamicTexts.placeholder_death_date || "Enter date of death (or approximate)";
-    
-
-    // Update Deceased's Location dropdown options
-    const locationTypeSelect = document.getElementById("deceased-location");
-    locationTypeSelect.innerHTML = `
+  // Refresh dropdown options for Deceased's Location
+  const locationTypeSelect = document.getElementById("deceased-location");
+  locationTypeSelect.innerHTML = `
     <option value="" disabled selected>${window.dynamicTexts.select_location_type || "Select location type"}</option>
     <option value="residence">${window.dynamicTexts.residence || "Residence"}</option>
     <option value="hospital">${window.dynamicTexts.hospital || "Hospital/Morgue"}</option>
@@ -391,20 +378,19 @@ document.getElementById("language-selector").addEventListener("change", async fu
     <option value="body-donation-facility">${window.dynamicTexts.body_donation_facility || "Body Donation Facility"}</option>
     <option value="airport">${window.dynamicTexts.airport || "Airport"}</option>
     <option value="other">${window.dynamicTexts.other || "Other"}</option>
-    `;
-    
-    // Update checkbox labels
-    document.getElementById("critical-label").textContent = window.dynamicTexts.critical || "Critical";
-    document.getElementById("biohazard-label").textContent = window.dynamicTexts.biohazard || "Biohazard";
-    document.getElementById("veteran-label").textContent = window.dynamicTexts.veteran || "Veteran";
+  `;
 
-    // Update signature labels
-    document.querySelector("label[for='pickup-signature']").textContent = window.dynamicTexts.pickup_signature || "Pickup Representative's Signature:";
-    document.querySelector("label[for='drop-off-signature']").textContent = window.dynamicTexts.drop_off_signature || "Drop-off Representative's Signature:";
+  // Update checkbox labels
+  document.getElementById("critical-label").textContent = window.dynamicTexts.critical || "Critical";
+  document.getElementById("biohazard-label").textContent = window.dynamicTexts.biohazard || "Biohazard";
+  document.getElementById("veteran-label").textContent = window.dynamicTexts.veteran || "Veteran";
 
+  // Update signature labels
+  document.querySelector("label[for='pickup-signature']").textContent = window.dynamicTexts.pickup_signature || "Pickup Representative's Signature:";
+  document.querySelector("label[for='drop-off-signature']").textContent = window.dynamicTexts.drop_off_signature || "Drop-off Representative's Signature:";
 
-    // Refresh additional fields
-    handleLocationChange();
+  // Refresh dynamic fields in the "Deceased's Location" section
+  handleLocationChange(); // Call this to regenerate the dynamic fields with updated translations
 });
 
 
