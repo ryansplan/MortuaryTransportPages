@@ -388,6 +388,17 @@ document.getElementById("language-selector").addEventListener("change", async fu
     <option value="other">${window.dynamicTexts.other || "Other"}</option>
   `;
 
+  // Refresh floor dropdown options
+  const floorSelect = document.getElementById("residence-floor");
+  if (floorSelect) {
+  floorSelect.innerHTML = `
+    <option value="upstairs">${window.dynamicTexts.upstairs || "Upstairs"}</option>
+    <option value="downstairs">${window.dynamicTexts.downstairs || "Downstairs"}</option>
+    <option value="ground_floor">${window.dynamicTexts.ground_floor || "Ground Floor"}</option>
+    <option value="not-applicable">${window.dynamicTexts.not_applicable || "Not Applicable"}</option>
+    `;
+  }
+
   // Update checkbox labels
   document.getElementById("critical-label").textContent = window.dynamicTexts.critical || "Critical";
   document.getElementById("biohazard-label").textContent = window.dynamicTexts.biohazard || "Biohazard";
@@ -438,6 +449,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     <option value="other">${window.dynamicTexts.other || "Other"}</option>
   `;
 
+  // Refresh floor dropdown options
+  const floorSelect = document.getElementById("residence-floor");
+  if (floorSelect) {
+  floorSelect.innerHTML = `
+    <option value="upstairs">${window.dynamicTexts.upstairs || "Upstairs"}</option>
+    <option value="downstairs">${window.dynamicTexts.downstairs || "Downstairs"}</option>
+    <option value="ground_floor">${window.dynamicTexts.ground_floor || "Ground Floor"}</option>
+    <option value="not-applicable">${window.dynamicTexts.not_applicable || "Not Applicable"}</option>
+    `;
+  }
+
   // Update checkbox labels
   document.getElementById("critical-label").textContent = window.dynamicTexts.critical || "Critical";
   document.getElementById("biohazard-label").textContent = window.dynamicTexts.biohazard || "Biohazard";
@@ -487,6 +509,17 @@ document.getElementById("language-selector").addEventListener("change", async fu
     <option value="airport">${window.dynamicTexts.airport || "Airport"}</option>
     <option value="other">${window.dynamicTexts.other || "Other"}</option>
   `;
+
+  // Refresh floor dropdown options
+  const floorSelect = document.getElementById("residence-floor");
+  if (floorSelect) {
+  floorSelect.innerHTML = `
+    <option value="upstairs">${window.dynamicTexts.upstairs || "Upstairs"}</option>
+    <option value="downstairs">${window.dynamicTexts.downstairs || "Downstairs"}</option>
+    <option value="ground_floor">${window.dynamicTexts.ground_floor || "Ground Floor"}</option>
+    <option value="not-applicable">${window.dynamicTexts.not_applicable || "Not Applicable"}</option>
+    `;
+  }
 
   // Update checkbox labels
   document.getElementById("critical-label").textContent = window.dynamicTexts.critical || "Critical";
