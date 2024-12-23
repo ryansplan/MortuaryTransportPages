@@ -444,6 +444,10 @@ document.getElementById("language-selector").addEventListener("change", async fu
             pdf.setFontSize(10); // Adjust size for title
             pdf.text(titleText, 190, 10, { align: "right" }); // Positioned top-right
 
+
+        // Optionally add the formatted time to the PDF
+        pdf.text(`Call Time: ${formattedCallTime}`, 10, 280); // Adjust position as needed
+
         // Show the button again
         downloadButton.style.display = "block";
 
