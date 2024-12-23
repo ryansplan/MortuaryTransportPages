@@ -438,6 +438,12 @@ document.getElementById("language-selector").addEventListener("change", async fu
     const imgData = canvas.toDataURL("image/png");
     pdf.addImage(imgData, "PNG", 10, 10, 190, (canvas.height * 190) / canvas.width);
 
+    // Add the title to the upper-right corner
+    const titleText = document.getElementById("small-title").textContent;
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(10); // Adjust size for title
+        pdf.text(titleText, 190, 10, { align: "right" }); // Positioned top-right
+
     // Overlay the formatted time inside the "Call Time" text box
     const callTimePositionX = 105; // Adjust to align with the text box
     const callTimePositionY = 66; // Adjust to match the box height
