@@ -366,7 +366,7 @@ document.getElementById("language-selector").addEventListener("change", async fu
     <option value="airport">${window.dynamicTexts.airport || "Airport"}</option>
     <option value="other">${window.dynamicTexts.other || "Other"}</option>
     `;
-
+    
     // Update checkbox labels
     document.getElementById("critical-label").textContent = window.dynamicTexts.critical || "Critical";
     document.getElementById("biohazard-label").textContent = window.dynamicTexts.biohazard || "Biohazard";
@@ -386,15 +386,14 @@ document.getElementById("language-selector").addEventListener("change", async fu
     await loadTranslations("en");
 
    // Update placeholders for default language (English)
-    document.getElementById("funeral-home").placeholder = window.dynamicTexts.placeholder_organization || "Name of organization requesting transport";
-    document.getElementById("funeral-home-address").placeholder = window.dynamicTexts.placeholder_address || "Enter organization's address";
-    document.getElementById("contact-number").placeholder = window.dynamicTexts.placeholder_contact_number || "Enter organization's contact number";
-    document.getElementById("callers-name").placeholder = window.dynamicTexts.placeholder_callers_name || "Enter caller's name";
-    document.getElementById("call-time").placeholder = window.dynamicTexts.placeholder_call_time || "Enter time (e.g., 9:30 AM)";
-    document.getElementById("deceased-name").placeholder = window.dynamicTexts.placeholder_deceased_name || "Name of deceased";
-    document.getElementById("weight").placeholder = window.dynamicTexts.placeholder_weight || "Enter weight or body size";
-    document.getElementById("death-date").placeholder = window.dynamicTexts.placeholder_death_date || "Enter date of death (or approximate)";
-    
+   document.getElementById("funeral-home").placeholder = window.dynamicTexts.placeholder_organization || "Name of organization requesting transport";
+   document.getElementById("funeral-home-address").placeholder = window.dynamicTexts.placeholder_address || "Enter organization's address";
+   document.getElementById("contact-number").placeholder = window.dynamicTexts.placeholder_contact_number || "Enter organization's contact number";
+   document.getElementById("call-time").placeholder = window.dynamicTexts.placeholder_call_time || "Enter time (e.g., 9:30 AM)";
+   document.getElementById("deceased-name").placeholder = window.dynamicTexts.placeholder_deceased_name || "Name of deceased";
+   document.getElementById("weight").placeholder = window.dynamicTexts.placeholder_weight || "Enter weight or body size";
+   document.getElementById("death-date").placeholder = window.dynamicTexts.placeholder_death_date || "Enter date of death (or approximate)";
+
  // Update placeholders for default language (English)
     document.getElementById("download-pdf-btn").innerText =
       window.dynamicTexts.download_pdf_button || "Download PDF";
