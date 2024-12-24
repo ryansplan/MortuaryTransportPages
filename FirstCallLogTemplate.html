@@ -539,6 +539,19 @@ document.getElementById("language-selector").addEventListener("change", async fu
     pdf.save("First_Call_Log.pdf");
   });
 }
+
+// Event listener to close the keyboard on mobile when clicking outside inputs
+document.addEventListener("click", function (event) {
+  if (
+    document.activeElement &&
+    (document.activeElement.tagName === "INPUT" ||
+      document.activeElement.tagName === "TEXTAREA")
+  ) {
+    if (!event.target.closest("input, textarea")) {
+      document.activeElement.blur();
+    }
+  }
+});
   </script>
 </body>
 </html>
