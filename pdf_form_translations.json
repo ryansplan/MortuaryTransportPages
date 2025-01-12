@@ -143,7 +143,7 @@
     "placeholder_deceased_name": "Nom du défunt",
     "placeholder_weight": "Entrez le poids ou la taille",
     "placeholder_death_date": "Entrez la date de décès (ou approximative)",
-    "poc": "Point de Contact:",
+    "poc": "Point de Contact :",
     "placeholder_poc": "Entrez le point de contact avec le défunt",
     "deceased_location": "Emplacement du Défunt :",
     "select_location_type": "Sélectionnez le type d'emplacement",
